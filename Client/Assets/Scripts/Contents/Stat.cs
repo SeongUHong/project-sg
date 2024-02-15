@@ -17,9 +17,15 @@ public class Stat : MonoBehaviour
     [SerializeField]
     protected float _moveSpeed;
     [SerializeField]
+    protected float _attackDistance;
+    [SerializeField]
     protected float _attackSpeed;
     [SerializeField]
     protected float _projectileSpeed;
+    [SerializeField]
+    protected float _attackGague;
+    [SerializeField]
+    protected float _maxAttackGague;
 
     public int Level { get { return _level; } set { _level = value; } }
     public int Hp { get { return _hp; } set { _hp = value; } }
@@ -27,9 +33,11 @@ public class Stat : MonoBehaviour
     public int Offence { get { return _offence; } set { _offence = value; } }
     public int Defence { get { return _defence; } set { _defence = value; } }
     public float MoveSpeed { get { return _moveSpeed; } set { _moveSpeed = value; } }
+    public float AttackDistance { get { return _attackDistance; } set { _attackDistance = value; } }
     public float AttackSpeed { get { return _attackSpeed; } set { _attackSpeed = value; } }
     public float ProjectileSpeed { get { return _projectileSpeed; } set { _projectileSpeed = value; } }
-
+    public float AttackGague { get { return _attackGague; } set { _attackGague = value; } }
+    public float MaxAttackGague { get { return _maxAttackGague; } set { _maxAttackGague = value; } }
     public void SetStat(data.Stat stat)
     {
         _level = stat.level;
@@ -40,6 +48,8 @@ public class Stat : MonoBehaviour
         _moveSpeed = stat.move_speed;
         _attackSpeed = stat.attack_speed;
         _projectileSpeed = stat.projectile_speed;
+        _attackGague = stat.attack_gauge;
+        _maxAttackGague = stat.attack_gauge;
     }
 
     public virtual bool OnAttacked(int pureDamage)
@@ -57,8 +67,26 @@ public class Stat : MonoBehaviour
         return true;
     }
 
+    public virtual bool AttackGagueDown()
+    {
+        _attackGague = (float)(_attackGague - 20.0);
+
+        return true;
+    }
+
+    public virtual bool AttackGagueUp()
+    {
+        if(_attackGague != 100)
+        {
+            _attackGague += Time.deltaTime * 10f;
+        }
+
+        return true;
+    }
+
+
     protected virtual void OnDead()
     {
-        gameObject.GetComponent<BaseController>().State = Define.State.Die;
+     
     }
 }

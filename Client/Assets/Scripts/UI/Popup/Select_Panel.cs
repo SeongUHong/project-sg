@@ -35,17 +35,21 @@ public class Select_Panel : UIBase
     {
         //플레이어 생성
         Conf.Main.ChosenShip = "Player1";
-        GameObject player = Managers.Game.InstantiatePlayer();
-
+        
         Awake();
+
+        SceneManagerEx scene = Managers.Scene;
+        scene.LoadScene(Define.Scenes.GameScene);
 
     }
     public void SelectCharacter2()
     {
         //플레이어 생성
         Conf.Main.ChosenShip = "Player2";
-        GameObject player = Managers.Game.InstantiatePlayer();
-
+        
         Awake();
+
+        SceneManagerEx scene = Managers.Scene;
+        scene.LoadScene(Define.Scenes.GameScene);
     }
 }

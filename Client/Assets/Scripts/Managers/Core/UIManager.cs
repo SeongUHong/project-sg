@@ -45,7 +45,7 @@ public class UIManager
         }
     }
 
-    //게임 내에 표시되는 UI 생성
+    //게임 내에 표시되는 UI 생성(플레이어 Hp바)
     public T MakeWorldUI<T>(Transform parentTransform = null, string name = null) where T : UIBase
     {
         if (string.IsNullOrEmpty(name))
@@ -53,20 +53,26 @@ public class UIManager
             name = typeof(T).Name;
         }
 
-        GameObject go = Managers.Resource.Instantiate($"UI/WorldSpace/{name}");
-
-        if (parentTransform != null)
-        {
-            go.transform.SetParent(parentTransform);
-        }
-
-        Canvas canvas = go.GetComponent<Canvas>();
-        canvas.renderMode = RenderMode.WorldSpace;
-        canvas.worldCamera = Camera.main;
+        GameObject go = Managers.Resource.Instantiate($"UI/HpBar/{name}");
 
         return Util.GetOrAddComponent<T>(go);
 
     }
+
+    //게임 내에 표시되는 UI 생성(에너미 Hp바)
+    public T MakeWorldUI_Enemy<T>(Transform parentTransform = null, string name = null) where T : UIBase
+    {
+        if (string.IsNullOrEmpty(name))
+        {
+            name = typeof(T).Name;
+        }
+
+        GameObject go = Managers.Resource.Instantiate($"UI/HpBar/{name}");
+
+        return Util.GetOrAddComponent<T>(go);
+
+    }
+
 
     //Scene UI를 실행
     public T ShowSceneUI<T>(Transform parentTransform = null, string name = null) where T : UIScene

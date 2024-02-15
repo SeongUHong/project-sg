@@ -34,8 +34,10 @@ public class Main_Panel : UIBase
     {
         
         SceneManagerEx scene = Managers.Scene;
-        scene.LoadScene(Define.Scenes.GameScene); // SceneManager의 LoadScene 함수를 사용하여! 현재 신 'GameScene'을 다시 불러오도록 시킨다.
+        scene.LoadScene(Define.Scenes.GameScene); // SceneManager의 LoadScene 함수를 사용하여! 현재 신 'SelectScene'을 다시 불러오도록 시킨다.
                                                         // 같은 신을 다시 불러오면 게임이 재시작 된다.
+        
+
 
 
     }

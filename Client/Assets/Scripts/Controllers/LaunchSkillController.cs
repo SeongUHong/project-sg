@@ -4,11 +4,13 @@ using UnityEngine;
 
 public class LaunchSkillController : MonoBehaviour
 {
+    private Rigidbody2D rd2d;
+
     //발사한 위치
-    Vector3 _startPos;
+    Vector2 _startPos;
 
     //방향
-    Vector3 _dir;
+    Vector2 _dir;
 
     //사거리
     float _distance;
@@ -23,33 +25,34 @@ public class LaunchSkillController : MonoBehaviour
     int[] _layers;
 
 
-    public void SetSkillStatus(Vector3 startPos, Vector3 dir, float distance, float speed, int damage, int[] layers)
+    public void SetSkillStatus(Vector2 startPos, Vector2 dir, float distance, float speed, int damage)
     {
         _startPos = startPos;
         _dir = dir;
         _distance = distance;
         _speed = speed;
         _damage = damage;
-        _layers = layers;
     }
 
     void Start()
     {
+        rd2d = GetComponent<Rigidbody2D>();
     }
 
     void Update()
     {
-        if (_distance < (_startPos - transform.position).magnitude)
-        {
-            Cleer();
-            Managers.Resource.Destroy(gameObject);
-        }
+
+        rd2d.velocity = rd2d.transform.up * _speed * Time.fixedDeltaTime;
+
+        rd2d.AddForce(rd2d.transform.up * _speed * Time.fixedDeltaTime);
+
+        rd2d.MovePosition(rd2d.position + _dir * Time.fixedDeltaTime * 2);
+
     }
 
-    public void StartLaunch()
+    void OnBecameInvisible() //화면밖으로 나가 보이지 않게 되면 호출이 된다.
     {
-        gameObject.transform.rotation = Quaternion.LookRotation(_dir);
-        gameObject.GetComponent<Rigidbody>().AddForce(_dir * _speed, ForceMode.VelocityChange);
+        Destroy(this.gameObject); //객체를 삭제한다.
     }
 
     void OnTriggerEnter(Collider other)
@@ -77,6 +80,6 @@ public class LaunchSkillController : MonoBehaviour
 
     void Cleer()
     {
-        gameObject.GetComponent<Rigidbody>().velocity = Vector3.zero;
+        gameObject.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
     }
 }

@@ -8,6 +8,7 @@ public class Define
     {
         Unknown,
         MainScene,
+        SelectScene,
         GameScene,
 
     }
@@ -46,7 +47,9 @@ public class Define
     public enum Skill
     {
         Launch,
-        Buff,
+        Burf,
+        fireballredbig,
+
     }
 
     public const float DESPAWN_DELAY_TIME = 1.0f;

@@ -27,6 +27,7 @@ public class GameManagerEx : ManagerBase
 
     public Main_Panel Main_Panel { get { return Managers.UI.MainSceneUI<Main_Panel>(); } }
     public Select_Panel Select_Panel { get { return Managers.UI.MakePopUp<Select_Panel>(); } }
+    
 
 
     //스폰 되는 지점
@@ -42,7 +43,6 @@ public class GameManagerEx : ManagerBase
         GameObject playerSpawnPos = GameObject.Find(Enum.GetName(typeof(Define.SceneLocateObject), Define.SceneLocateObject.PlayerSpawnSpot));
         if (playerSpawnPos == null)
         {
-            Debug.Log("Failed Load PlayerSpawnPos");
             return;
         }
         _playerSpawnPos = playerSpawnPos.transform.position;
@@ -51,7 +51,6 @@ public class GameManagerEx : ManagerBase
         GameObject enemySpawnSpot = GameObject.Find(Enum.GetName(typeof(Define.SceneLocateObject), Define.SceneLocateObject.EnemySpawnSpot));
         if (enemySpawnSpot == null)
         {
-            Debug.Log("Failed Load EnemySpawnSpot");
             return;
         }
         _enemySpawnPos = enemySpawnSpot.transform.position;
@@ -63,7 +62,9 @@ public class GameManagerEx : ManagerBase
     {
         GameObject player = null;
 
-        if (Conf.Main.ChosenShip == "Player1")
+
+        player = Managers.Resource.Instantiate("Characters/Player");
+        /*if (Conf.Main.ChosenShip == "Player1")
         {
             player = Managers.Resource.Instantiate("Characters/Player1");
             if (player == null)
@@ -81,7 +82,7 @@ public class GameManagerEx : ManagerBase
                 Debug.Log("Failed Load Player");
                 //return null;
             }
-        }
+        }*/
 
         
         _player = player;
@@ -89,6 +90,20 @@ public class GameManagerEx : ManagerBase
         player.transform.position = PlayerSpawnPos;
 
         return player;
+    }
+
+    public GameObject InstantiateEnemy()
+    {
+        GameObject enemy = null;
+
+
+        enemy = Managers.Resource.Instantiate("Characters/Enemy");
+
+        _enemy = enemy;
+
+        enemy.transform.position = EnemySpawnPos;
+
+        return enemy;
     }
 
     //캐릭터가 생성되는 위치를 반환

@@ -54,7 +54,6 @@ public class ResourceManager : ManagerBase
         //오브젝트 생성
         GameObject go = Object.Instantiate(original, parent);
         go.name = original.name;
-
         return go;
     }
 

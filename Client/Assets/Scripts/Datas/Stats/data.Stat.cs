@@ -18,10 +18,14 @@ namespace data
         public int defence;
         //이동속도
         public float move_speed;
+        //공격사거리
+        public float attack_distance;
         //공격속도
         public float attack_speed;
         //투사체 속도
         public float projectile_speed;
+        //어택 게이지
+        public float attack_gauge;
     }
 
     [Serializable]
