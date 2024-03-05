@@ -24,8 +24,9 @@ public class JoyStickHandler : MonoBehaviour, IDragHandler, IPointerDownHandler,
     {
 
         character = Managers.Game.Player;
-        
-        
+
+        //적 움직임 테스트용
+        //character = Managers.Game.Enemy;
 
         // 시작하면 charactor를 180도 오른쪽으로 회전
     }

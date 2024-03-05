@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public abstract class BaseController : MonoBehaviour
 {
@@ -12,14 +13,13 @@ public abstract class BaseController : MonoBehaviour
     protected Rigidbody2D _rig;
 
     //스텟
-    protected Stat _stat;
-
-
+    //protected Stat _stat;
 
     private void Start()
     {
 
         Init();
+        
     }
 
     public abstract void Init();
@@ -28,20 +28,8 @@ public abstract class BaseController : MonoBehaviour
     protected virtual void UpdateDie()
     {
 
-        StartCoroutine(Despwn());
 
     }
 
 
-    //사망시 일정시간 후 비활성화
-    protected virtual IEnumerator Despwn()
-    {
-        yield return new WaitForSeconds(Define.DESPAWN_DELAY_TIME);
-
-    }
-
-    protected virtual void OnEnable()
-    {
-
-    }
 }

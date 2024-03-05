@@ -27,6 +27,9 @@ public class GameManagerEx : ManagerBase
 
     public Main_Panel Main_Panel { get { return Managers.UI.MainSceneUI<Main_Panel>(); } }
     public Select_Panel Select_Panel { get { return Managers.UI.MakePopUp<Select_Panel>(); } }
+    public Result_Panel Result_Panel { get { return Managers.UI.MakePopUp<Result_Panel>();  } }
+
+    public CountDown CountDown { get { return Managers.UI.MakePopUp<CountDown>(); } }
     
 
 
@@ -102,6 +105,7 @@ public class GameManagerEx : ManagerBase
         _enemy = enemy;
 
         enemy.transform.position = EnemySpawnPos;
+
 
         return enemy;
     }

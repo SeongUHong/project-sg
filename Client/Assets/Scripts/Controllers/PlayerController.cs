@@ -7,6 +7,7 @@ public class PlayerController : BaseController
 
     //���� �̸�
     string SKILL_NAME = "fireballredbig";
+    //string SKILL_NAME = "Missile";
 
     //�÷��̾���Ʈ�ѷ� UI�� ����ִ� ������Ʈ
     UIScene _uiScene;
@@ -17,15 +18,11 @@ public class PlayerController : BaseController
     //스텟
     Stat _stat;
 
+    //애니메이터
+    Animator animator;
+
     public override void Init()
     {   
-
-        //������ٵ�
-        _rig = gameObject.GetComponent<Rigidbody2D>();
-        if (_rig == null)
-        {
-            Debug.Log("Can't Load Rigidbody Component");
-        }
 
         //���� �ʱ�ȭ
         _stat = gameObject.GetComponent<Stat>();
@@ -44,14 +41,17 @@ public class PlayerController : BaseController
         //��Ʈ�ѷ�UI �ʱ�ȭ
         _uiScene = Managers.UI.UIScene;
 
-        if (_uiScene == null || _uiScene.JoyStickHandler == null)
+        /*if (_uiScene == null || _uiScene.JoyStickHandler == null)
         {
             Debug.Log("Not Exist Player Controller UI");
-        }
+        }*/
 
         AddAction();
 
         flame = Managers.Game.Player.transform.GetChild(0).gameObject;
+
+        animator = GetComponent<Animator>();
+        animator.SetBool("expl", false);
 
     }
 
@@ -77,12 +77,14 @@ public class PlayerController : BaseController
     //���� ��Ÿ�� ���� ���� �÷��׸� false
     protected IEnumerator AttackCoolTime()
     {
-        yield return new WaitForSeconds(_stat.AttackSpeed);
+        //yield return new WaitForSeconds(_stat.AttackSpeed);
+        yield return new WaitForSeconds(5.0f);
+        
     }
 
     IEnumerator WaitForIt()
     {
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(0.2f);
         flame.SetActive(false);
     }
 
@@ -97,6 +99,35 @@ public class PlayerController : BaseController
                 Managers.Game.Player.transform.Find("ship2-flame").transform.up, _stat.AttackDistance, _stat.ProjectileSpeed, _stat.Offence, Define.Skill.Launch, Managers.Game.Player.transform);
 
         }
+
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        Debug.Log("On Trigger");
+        if (collision.GetComponent<Collider2D>().gameObject.layer == 10)
+        {
+
+            _stat.OnAttacked(100);
+            if (_stat.Hp <= 0)
+            {
+                Conf.Main.PLAYER_DEAD_FLAG = true;
+            }
+            if (Conf.Main.PLAYER_DEAD_FLAG && Managers.Game.Player != null)
+            {
+                animator.SetBool("expl", true);
+                Conf.Main._result.SetText();
+                
+                Conf.Main._result.Show();
+            }
+        }
+
+    }
+
+
+    void OnAttacked()
+    {
+
 
     }
 }
