@@ -42,6 +42,8 @@ public class Define
     {
         Player = 7,
         Enemy = 8,
+        Player_Bullet = 9,
+        Enemy_Buleet = 10,
     }
 
     public enum Skill
@@ -49,7 +51,8 @@ public class Define
         Launch,
         Burf,
         fireballredbig,
-
+        fireballbluebig,
+        Missile,
     }
 
     public const float DESPAWN_DELAY_TIME = 1.0f;

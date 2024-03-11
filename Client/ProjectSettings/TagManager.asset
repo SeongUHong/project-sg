@@ -3,7 +3,9 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Bullet
+  - Projectile
   layers:
   - Default
   - TransparentFX
@@ -14,8 +16,8 @@ TagManager:
   - map
   - Player
   - Enemy
-  - 
-  - 
+  - Player_Bullet
+  - Enemy_Bullet
   - 
   - 
   - 

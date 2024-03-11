@@ -55,6 +55,22 @@ public class LaunchSkillController : MonoBehaviour
         Destroy(this.gameObject); //객체를 삭제한다.
     }
 
+    private void OnTriggerEnter2D(Collider2D collision) //플레이어에 부딪히면 데미지를 주고 탄환파괴
+    {
+        Debug.Log("On Trigger");
+        if (this.gameObject.layer == 9 && collision.GetComponent<Collider2D>().gameObject.layer == 8)
+        {
+
+            Destroy(this.gameObject); //객체를 삭제한다
+        }
+        else if (this.gameObject.layer == 10 && collision.GetComponent<Collider2D>().gameObject.layer == 7)
+        {
+            Destroy(this.gameObject); //객체를 삭제한다
+
+        }
+
+    }
+
     void OnTriggerEnter(Collider other)
     {
         //대상 레이어가 아니면 리턴

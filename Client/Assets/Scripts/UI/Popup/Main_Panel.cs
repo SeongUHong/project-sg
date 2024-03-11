@@ -30,7 +30,7 @@ public class Main_Panel : UIBase
         transform.gameObject.SetActive(true);
     }
 
-    public void OnClick_Start() // '재도전' 버튼을 클릭하며 호출 되어질 함수
+    public void OnClick_Start() // 'Start' 버튼을 클릭하며 호출 되어질 함수
     {
         
         SceneManagerEx scene = Managers.Scene;

@@ -27,6 +27,9 @@ public class Stat : MonoBehaviour
     [SerializeField]
     protected float _maxAttackGague;
 
+    //폭발 애니메이터
+    Animator animator;
+
     public int Level { get { return _level; } set { _level = value; } }
     public int Hp { get { return _hp; } set { _hp = value; } }
     public int MaxHp { get { return _maxHp; } set { _maxHp = value; } }
@@ -52,19 +55,23 @@ public class Stat : MonoBehaviour
         _maxAttackGague = stat.attack_gauge;
     }
 
+    public void Update()
+    {
+        if (Hp <= 0 && this.gameObject.layer == 10)
+            Conf.Main.PLAYER_DEAD_FLAG = true;
+        else if (Hp <= 0 && this.gameObject.layer == 9)
+            Conf.Main.ENEMY_DEAD_FLAG = true;
+    }
+
     public virtual bool OnAttacked(int pureDamage)
     {
         int damage = Mathf.Max(0, pureDamage - Defence);
         if (Hp <= 0) return false;
         Hp -= damage;
-        if (Hp <= 0)
-        {
-            Hp = 0;
-            OnDead();
-        }
+        
 
 
-        return true;
+        return false;
     }
 
     public virtual bool AttackGagueDown()
@@ -84,9 +91,17 @@ public class Stat : MonoBehaviour
         return true;
     }
 
+    public virtual bool OnAttacked_AttackGagueDown()
+    {
+        if(_attackGague >= 0)
+        {
+            _attackGague = (float)(_attackGague - 10.0);
+        }
+        return true;
+    }
+
 
     protected virtual void OnDead()
     {
-     
     }
 }

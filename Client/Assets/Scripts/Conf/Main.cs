@@ -14,6 +14,9 @@ namespace Conf
         public static int CURRENT_SCENE = 1;
         public static string SCENE_NAME = "GameSceneStage";
         public static string ChosenShip = null;
+        public static bool PLAYER_DEAD_FLAG = false;
+        public static bool ENEMY_DEAD_FLAG = false;
+        public static Result_Panel _result;
     }
 
 }

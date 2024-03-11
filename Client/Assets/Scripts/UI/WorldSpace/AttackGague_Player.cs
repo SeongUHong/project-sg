@@ -41,12 +41,6 @@ public class AttackGague_Player : UIBase
             GetImage((int)Images.Gague_Fill).GetComponent<Image>().color = new Color(117 / 255f, 1, 84 / 255f);
 
         }
-        else if (_parent.gameObject.layer == (int)Define.Layer.Enemy)
-        {
-
-            GetImage((int)Images.Gague_Fill).GetComponent<Image>().color = new Color(84 / 255f, 153 / 255f, 1);
-
-        }
     }
 
     private void Update()
