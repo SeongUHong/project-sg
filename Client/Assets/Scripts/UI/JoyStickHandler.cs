@@ -34,7 +34,8 @@ public class JoyStickHandler : MonoBehaviour, IDragHandler, IPointerDownHandler,
 
     void Update()
     {
-        character.GetComponent<Rigidbody2D>().velocity = character.transform.up * speed;
+        if(character!= null)
+            character.GetComponent<Rigidbody2D>().velocity = character.transform.up * speed;
         // 캐릭터는 3의 속도로 계속 전진
     }
 
@@ -99,7 +100,7 @@ public class JoyStickHandler : MonoBehaviour, IDragHandler, IPointerDownHandler,
     {
         Vector3 originJoystickVec = character.transform.up;
         // character가 바라보고 있는 벡터
-
+        
         float angle = Vector3.Angle(currentJoystickVec, originJoystickVec);
         int sign = (Vector3.Cross(currentJoystickVec, originJoystickVec).z > 0) ? -1 : 1;
         // angle: 현재 바라보고 있는 벡터와, 조이스틱 방향 벡터 사이의 각도
@@ -125,5 +126,13 @@ public class JoyStickHandler : MonoBehaviour, IDragHandler, IPointerDownHandler,
             yield return new WaitForSeconds(0.01f); // 0.01초 대기
         }
         //character.transform.Rotate(0, 0, sign * mod); // 남은 각도 회전
+    }
+
+    public void OnConnectedToServer()
+    {
+        //현재위치
+
+
+
     }
 }

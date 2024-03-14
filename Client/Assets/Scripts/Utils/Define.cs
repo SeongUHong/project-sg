@@ -52,6 +52,8 @@ public class Define
         Burf,
         fireballredbig,
         fireballbluebig,
+        fireballredtail,
+        fireballbluetail,
         Missile,
     }
 

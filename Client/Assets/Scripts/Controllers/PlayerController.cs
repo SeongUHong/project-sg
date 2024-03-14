@@ -71,7 +71,6 @@ public class PlayerController : BaseController
             OnAttack();
         }
         StartCoroutine(AttackCoolTime());
-        
     }
 
     //���� ��Ÿ�� ���� ���� �÷��׸� false
@@ -92,6 +91,9 @@ public class PlayerController : BaseController
     {
         if(!(_stat.AttackGague < 20))
         {
+            /*if (_stat.AttackGague == 100)
+                SKILL_NAME = "fireballredtail";*/
+
             flame.SetActive(true);
             StartCoroutine(WaitForIt());
             _stat.AttackGagueDown();
@@ -104,7 +106,6 @@ public class PlayerController : BaseController
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("On Trigger");
         if (collision.GetComponent<Collider2D>().gameObject.layer == 10)
         {
 

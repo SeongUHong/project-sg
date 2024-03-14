@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -17,6 +18,12 @@ namespace Conf
         public static bool PLAYER_DEAD_FLAG = false;
         public static bool ENEMY_DEAD_FLAG = false;
         public static Result_Panel _result;
+        public static List<String> PLAYER_ID_LIST = new List<String>();
+        public static List<String> ENEMY_ID_LIST = new List<String>();
+        public enum ATTACK_FLAG
+        {
+            ATTACK = 1,
+        }
     }
 
 }

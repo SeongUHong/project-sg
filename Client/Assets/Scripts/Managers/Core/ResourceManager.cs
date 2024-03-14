@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class ResourceManager : ManagerBase
 {
+    int _player_id = 0;
+    int _enemy_id = 0;
+
 
     //오브젝트를 메모리에 로드
     public T Load<T>(string path) where T : Object
@@ -53,7 +56,26 @@ public class ResourceManager : ManagerBase
 
         //오브젝트 생성
         GameObject go = Object.Instantiate(original, parent);
-        go.name = original.name;
+        //go.name = original.name;
+
+        //탄환이름을 번호로 리스트에 저장
+        if (go.layer == 9 )
+        {
+            _player_id++;
+            go.name = _player_id.ToString();
+
+            Conf.Main.PLAYER_ID_LIST.Add(go.name);
+
+        }
+        else if(go.layer == 10)
+        {
+            _enemy_id++;
+            go.name = _enemy_id.ToString();
+
+            Conf.Main.ENEMY_ID_LIST.Add(go.name);
+        }
+        
+
         return go;
     }
 
