@@ -78,14 +78,19 @@ namespace PacketGenerator
             // 패킷 C# 코드 생성
             Tuple<string, string, string> t = ParseMembers(r);
             genPackets += string.Format(PacketFormat.packetFormat, packetName, t.Item1, t.Item2, t.Item3);
+
             // 패킷ID Enum 생성
             packetEnums += string.Format(PacketFormat.packetEnumFormat, packetName, ++packetId) + Environment.NewLine + "\t";
 
             // 서버 패킷과 클라이언트 패킷을 나눔
             if (packetName.StartsWith("S_") || packetName.StartsWith("s_"))
+            {
                 clientRegister += string.Format(PacketFormat.managerRegisterFormat, packetName) + Environment.NewLine;
+            }
             else
+            {
                 serverRegister += string.Format(PacketFormat.managerRegisterFormat, packetName) + Environment.NewLine;
+            }
         }
 
         // xml 내용을 C# 코드로 반환
@@ -97,7 +102,7 @@ namespace PacketGenerator
             string writeCode = "";
 
             int depth = r.Depth + 1;
-            while (true)
+            while (r.Read())
             {
                 // packet의 직계 자식 요소인가
                 if (r.Depth != depth)
