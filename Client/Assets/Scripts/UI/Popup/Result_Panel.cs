@@ -47,11 +47,11 @@ public class Result_Panel : UIBase
     {
 
         result = Conf.Main._result.transform.Find("Panel").transform.Find("Result_Text").transform.Find("Text").GetComponent<Text>();
-
         if (Managers.Game.Player.GetComponent<Stat>().Hp <= 0)
             result.text = lText;
         else if (Managers.Game.Enemy.GetComponent<Stat>().Hp <= 0)
             result.text = wText;
+
 
     }
 }

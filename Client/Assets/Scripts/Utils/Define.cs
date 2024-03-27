@@ -10,7 +10,7 @@ public class Define
         MainScene,
         SelectScene,
         GameScene,
-
+        MatchingScene,
     }
 
     public enum State

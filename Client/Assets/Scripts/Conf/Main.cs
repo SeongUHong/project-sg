@@ -24,6 +24,7 @@ namespace Conf
         {
             ATTACK = 1,
         }
+        public static bool LOADING_FLAG = false;
     }
 
 }
