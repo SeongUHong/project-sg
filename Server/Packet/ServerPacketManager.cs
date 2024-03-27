@@ -21,6 +21,8 @@ public class PacketManager
 	{
 		_makeFunc.Add((ushort)PacketID.C_LeaveGame, MakePacket<C_LeaveGame>);
 		_handler.Add((ushort)PacketID.C_LeaveGame, PacketHandler.C_LeaveGameHandler);
+		_makeFunc.Add((ushort)PacketID.C_Move, MakePacket<C_Move>);
+		_handler.Add((ushort)PacketID.C_Move, PacketHandler.C_MoveHandler);
 
 	}
 
