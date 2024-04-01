@@ -19,10 +19,20 @@ public class PacketManager
 		
 	public void Register()
 	{
-		_makeFunc.Add((ushort)PacketID.C_LeaveGame, MakePacket<C_LeaveGame>);
-		_handler.Add((ushort)PacketID.C_LeaveGame, PacketHandler.C_LeaveGameHandler);
 		_makeFunc.Add((ushort)PacketID.C_Move, MakePacket<C_Move>);
 		_handler.Add((ushort)PacketID.C_Move, PacketHandler.C_MoveHandler);
+		_makeFunc.Add((ushort)PacketID.C_Shot, MakePacket<C_Shot>);
+		_handler.Add((ushort)PacketID.C_Shot, PacketHandler.C_ShotHandler);
+		_makeFunc.Add((ushort)PacketID.C_FireballMove, MakePacket<C_FireballMove>);
+		_handler.Add((ushort)PacketID.C_FireballMove, PacketHandler.C_FireballMoveHandler);
+		_makeFunc.Add((ushort)PacketID.C_Attacked, MakePacket<C_Attacked>);
+		_handler.Add((ushort)PacketID.C_Attacked, PacketHandler.C_AttackedHandler);
+		_makeFunc.Add((ushort)PacketID.C_DestroyFireball, MakePacket<C_DestroyFireball>);
+		_handler.Add((ushort)PacketID.C_DestroyFireball, PacketHandler.C_DestroyFireballHandler);
+		_makeFunc.Add((ushort)PacketID.C_StartMatch, MakePacket<C_StartMatch>);
+		_handler.Add((ushort)PacketID.C_StartMatch, PacketHandler.C_StartMatchHandler);
+		_makeFunc.Add((ushort)PacketID.C_ReadyBattle, MakePacket<C_ReadyBattle>);
+		_handler.Add((ushort)PacketID.C_ReadyBattle, PacketHandler.C_ReadyBattleHandler);
 
 	}
 

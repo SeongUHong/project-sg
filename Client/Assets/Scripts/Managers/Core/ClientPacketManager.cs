@@ -4,20 +4,27 @@ using System.Collections.Generic;
 
 public class PacketManager
 {
-
 	Dictionary<ushort, Func<PacketSession, ArraySegment<byte>, IPacket>> _makeFunc = new Dictionary<ushort, Func<PacketSession, ArraySegment<byte>, IPacket>>();
 	Dictionary<ushort, Action<PacketSession, IPacket>> _handler = new Dictionary<ushort, Action<PacketSession, IPacket>>();
 		
 	public void Init()
 	{
-		_makeFunc.Add((ushort)PacketID.S_BroadcastEnterGame, MakePacket<S_BroadcastEnterGame>);
-		_handler.Add((ushort)PacketID.S_BroadcastEnterGame, PacketHandler.S_BroadcastEnterGameHandler);
-		_makeFunc.Add((ushort)PacketID.S_BroadcastLeaveGame, MakePacket<S_BroadcastLeaveGame>);
-		_handler.Add((ushort)PacketID.S_BroadcastLeaveGame, PacketHandler.S_BroadcastLeaveGameHandler);
-		_makeFunc.Add((ushort)PacketID.S_PlayerList, MakePacket<S_PlayerList>);
-		_handler.Add((ushort)PacketID.S_PlayerList, PacketHandler.S_PlayerListHandler);
-		_makeFunc.Add((ushort)PacketID.S_BroadcastMove, MakePacket<S_BroadcastMove>);
-		_handler.Add((ushort)PacketID.S_BroadcastMove, PacketHandler.S_BroadcastMoveHandler);
+		_makeFunc.Add((ushort)PacketID.S_EnemyMove, MakePacket<S_EnemyMove>);
+		_handler.Add((ushort)PacketID.S_EnemyMove, PacketHandler.S_EnemyMoveHandler);
+		_makeFunc.Add((ushort)PacketID.S_EnemyFireballMove, MakePacket<S_EnemyFireballMove>);
+		_handler.Add((ushort)PacketID.S_EnemyFireballMove, PacketHandler.S_EnemyFireballMoveHandler);
+		_makeFunc.Add((ushort)PacketID.S_BroadcastEnemyShot, MakePacket<S_BroadcastEnemyShot>);
+		_handler.Add((ushort)PacketID.S_BroadcastEnemyShot, PacketHandler.S_BroadcastEnemyShotHandler);
+		_makeFunc.Add((ushort)PacketID.S_EnemyStat, MakePacket<S_EnemyStat>);
+		_handler.Add((ushort)PacketID.S_EnemyStat, PacketHandler.S_EnemyStatHandler);
+		_makeFunc.Add((ushort)PacketID.S_Stat, MakePacket<S_Stat>);
+		_handler.Add((ushort)PacketID.S_Stat, PacketHandler.S_StatHandler);
+		_makeFunc.Add((ushort)PacketID.S_DestroyFireball, MakePacket<S_DestroyFireball>);
+		_handler.Add((ushort)PacketID.S_DestroyFireball, PacketHandler.S_DestroyFireballHandler);
+		_makeFunc.Add((ushort)PacketID.S_Gameover, MakePacket<S_Gameover>);
+		_handler.Add((ushort)PacketID.S_Gameover, PacketHandler.S_GameoverHandler);
+		_makeFunc.Add((ushort)PacketID.S_Matched, MakePacket<S_Matched>);
+		_handler.Add((ushort)PacketID.S_Matched, PacketHandler.S_MatchedHandler);
 
 	}
 
