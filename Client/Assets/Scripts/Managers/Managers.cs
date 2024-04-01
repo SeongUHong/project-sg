@@ -19,12 +19,16 @@ public class Managers : MonoBehaviour
     ResourceManager _resource = new ResourceManager();
     SceneManagerEx _scene = new SceneManagerEx();
     UIManager _ui = new UIManager();
+    NetworkManager _network = new NetworkManager();
+    PacketManager _packet = new PacketManager();
 
     public static DataManager Data { get { return Instance._data; } }
     public static PoolManager Pool { get { return Instance._pool; } }
     public static ResourceManager Resource { get { return Instance._resource; } }
     public static SceneManagerEx Scene { get { return Instance._scene; } }
     public static UIManager UI { get { return Instance._ui; } }
+    public static NetworkManager Network { get { return Instance._network; } }
+    public static PacketManager Packet { get { return Instance._packet; } }
     #endregion
 
     void Start()
@@ -34,7 +38,6 @@ public class Managers : MonoBehaviour
 
     void Update()
     {
-
     }
 
     static void Init()
@@ -57,6 +60,9 @@ public class Managers : MonoBehaviour
 
             //게임 매니저 실행
             s_instance._game.Init();
+
+            // 패킷 매니저 초기화
+            s_instance._packet.Init();
         }
     }
 

@@ -16,5 +16,11 @@ class PacketHandler
         ClientSession clientSession = session as ClientSession;
 
         Console.WriteLine($"{move.posX}, {move.posY}, {move.posZ}");
+
+        S_BroadcastMove broadcastMove = new S_BroadcastMove();
+        broadcastMove.posX = move.posX;
+        broadcastMove.posY = move.posY;
+
+        clientSession.Send(broadcastMove.Write());
     }
 }

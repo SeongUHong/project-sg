@@ -1,34 +1,69 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <PDL>
-	<packet name="S_BroadcastEnterGame">
-		<int name="playerId"/>
+	<packet name="S_EnemyMove">
 		<float name="posX"/>
 		<float name="posY"/>
-		<float name="posZ"/>
+		<float name="rotZ"/>
 	</packet>
-	<packet name="C_LeaveGame">
+	<packet name="S_EnemyFireballMove">
+		<int name="fireballId"/>
+		<float name="posX"/>
+		<float name="posY"/>
 	</packet>
-	<packet name="S_BroadcastLeaveGame">
-		<int name="playerId"/>
+	<packet name="S_BroadcastEnemyShot">
+		<int name="fireballId"/>
+		<float name="posX"/>
+		<float name="posY"/>
 	</packet>
-	<packet name="S_PlayerList">
-		<list name="player">
-			<bool name="isSelf"/>
-			<int name="playerId"/>
-			<float name="posX"/>
-			<float name="posY"/>
-			<float name="posZ"/>
-		</list>
+	<packet name="S_EnemyStat">
+		<int name="hp"/>
+		<float name="attackGage"/>
 	</packet>
+	<packet name="S_Stat">
+		<int name="hp"/>
+		<float name="attackGage"/>
+	</packet>
+	<!---->
+	<packet name="S_DestroyFireball">
+		<int name="fireballId"/>
+	</packet>
+	<!--배틀 종료-->
+	<packet name="S_Gameover">
+		<bool name="isWin"/>
+	</packet>
+	<!--매칭 성공-->
+	<!--초기 정보 전달-->
+	<packet name="S_Matched">
+		<string name="enemyNickname"/>
+		<bool name="isLeft"/>
+		<int name="hp"/>
+		<float name="attackGage"/>
+	</packet>
+	
 	<packet name="C_Move">
 		<float name="posX"/>
 		<float name="posY"/>
-		<float name="posZ"/>
+		<float name="rotZ"/>
 	</packet>
-	<packet name="S_BroadcastMove">
-		<int name="playerId"/>
+	<packet name="C_Shot">
+		<bool name="isShot"/>
+	</packet>
+	<packet name="C_FireballMove">
+		<int name="fireballId"/>
 		<float name="posX"/>
 		<float name="posY"/>
-		<float name="posZ"/>
+	</packet>
+	<packet name="C_Attacked">
+		<int name="fireballId"/>
+	</packet>
+	<packet name="C_DestroyFireball">
+		<int name="fireballId"/>
+	</packet>
+	<!--매칭 시작-->
+	<packet name="C_StartMatch">
+		<string name="nickname"/>
+	</packet>
+	<!--배틀 시작 가능함을 알림-->
+	<packet name="C_ReadyBattle">
 	</packet>
 </PDL>
