@@ -2,12 +2,12 @@ using ServerCore;
 using System;
 using System.Collections.Generic;
 
-public class PacketManager
+public class ClientPacketManager
 {
 	Dictionary<ushort, Func<PacketSession, ArraySegment<byte>, IPacket>> _makeFunc = new Dictionary<ushort, Func<PacketSession, ArraySegment<byte>, IPacket>>();
 	Dictionary<ushort, Action<PacketSession, IPacket>> _handler = new Dictionary<ushort, Action<PacketSession, IPacket>>();
 		
-	public void Init()
+	public void Register()
 	{
 		_makeFunc.Add((ushort)PacketID.S_EnemyMove, MakePacket<S_EnemyMove>);
 		_handler.Add((ushort)PacketID.S_EnemyMove, PacketHandler.S_EnemyMoveHandler);

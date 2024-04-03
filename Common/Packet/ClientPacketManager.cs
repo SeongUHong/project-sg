@@ -2,18 +2,8 @@ using ServerCore;
 using System;
 using System.Collections.Generic;
 
-public class PacketManager
+public class ClientPacketManager
 {
-	#region Singleton
-	static PacketManager _instance = new PacketManager();
-	public static PacketManager Instance { get { return _instance; } }
-	#endregion
-
-	PacketManager()
-	{
-		Register();
-	}
-
 	Dictionary<ushort, Func<PacketSession, ArraySegment<byte>, IPacket>> _makeFunc = new Dictionary<ushort, Func<PacketSession, ArraySegment<byte>, IPacket>>();
 	Dictionary<ushort, Action<PacketSession, IPacket>> _handler = new Dictionary<ushort, Action<PacketSession, IPacket>>();
 		
