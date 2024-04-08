@@ -4,23 +4,31 @@ using System;
 
 class PacketHandler
 {
-    internal static void C_LeaveGameHandler(PacketSession session, IPacket packet)
+    internal static void C_MoveHandler(PacketSession packetSession, IPacket packet)
     {
-        C_LeaveGame leaveGame = packet as C_LeaveGame;
-        ClientSession clientSession = session as ClientSession;
     }
 
-    internal static void C_MoveHandler(PacketSession session, IPacket packet)
+    internal static void C_ShotHandler(PacketSession packetSession, IPacket packet)
     {
-        C_Move move = packet as C_Move;
-        ClientSession clientSession = session as ClientSession;
+    }
 
-        Console.WriteLine($"{move.posX}, {move.posY}, {move.posZ}");
+    internal static void C_FireballMoveHandler(PacketSession packetSession, IPacket packet)
+    {
+    }
 
-        S_BroadcastMove broadcastMove = new S_BroadcastMove();
-        broadcastMove.posX = move.posX;
-        broadcastMove.posY = move.posY;
+    internal static void C_AttackedHandler(PacketSession packetSession, IPacket packet)
+    {
+    }
 
-        clientSession.Send(broadcastMove.Write());
+    internal static void C_DestroyFireballHandler(PacketSession packetSession, IPacket packet)
+    {
+    }
+
+    internal static void C_StartMatchHandler(PacketSession packetSession, IPacket packet)
+    {
+    }
+
+    internal static void C_ReadyBattleHandler(PacketSession packetSession, IPacket packet)
+    {
     }
 }

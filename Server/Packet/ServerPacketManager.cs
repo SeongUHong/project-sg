@@ -2,14 +2,14 @@ using ServerCore;
 using System;
 using System.Collections.Generic;
 
-public class PacketManager
+public class ServerPacketManager
 {
 	#region Singleton
-	static PacketManager _instance = new PacketManager();
-	public static PacketManager Instance { get { return _instance; } }
+	static ServerPacketManager _instance = new ServerPacketManager();
+	public static ServerPacketManager Instance { get { return _instance; } }
 	#endregion
 
-	PacketManager()
+	ServerPacketManager()
 	{
 		Register();
 	}

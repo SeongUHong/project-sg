@@ -26,12 +26,11 @@ namespace Server
 
         public override void OnRecvPacket(ArraySegment<byte> buffer)
         {
-            PacketManager.Instance.OnRecvPacket(this, buffer);
+            ServerPacketManager.Instance.OnRecvPacket(this, buffer);
         }
 
         public override void OnSend(int byteNum)
         {
-            Console.WriteLine($"ClientSession OnSend : {byteNum}");
         }
     }
 }
