@@ -18,6 +18,8 @@ namespace Conf
         public static bool PLAYER_DEAD_FLAG = false;
         public static bool ENEMY_DEAD_FLAG = false;
         public static Result_Panel _result;
+        public static Matching_Panel _maching;
+        public static string PLAYER_NICK;
         public static List<String> PLAYER_ID_LIST = new List<String>();
         public static List<String> ENEMY_ID_LIST = new List<String>();
         public enum ATTACK_FLAG
@@ -25,6 +27,7 @@ namespace Conf
             ATTACK = 1,
         }
         public static bool LOADING_FLAG = false;
+        public static float SEND_PACKET_INTERVAL = 0.25f;
     }
 
 }

@@ -27,8 +27,8 @@ public class GameManagerEx : ManagerBase
 
     public Main_Panel Main_Panel { get { return Managers.UI.MainSceneUI<Main_Panel>(); } }
     public Result_Panel Result_Panel { get { return Managers.UI.MakePopUp<Result_Panel>();  } }
-    
-
+    public NickName_Panel NickName_Panel { get { return Managers.UI.MakePopUp<NickName_Panel>(); } }
+    public Matching_Panel Matching_Panel { get { return Managers.UI.MakePopUp<Matching_Panel>(); } }
 
     //스폰 되는 지점
     public Vector2 PlayerSpawnPos { get { return _playerSpawnPos; } }
