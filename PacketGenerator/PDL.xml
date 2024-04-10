@@ -1,62 +1,63 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <PDL>
+	<!--적기 이동-->
 	<packet name="S_EnemyMove">
 		<float name="posX"/>
 		<float name="posY"/>
 		<float name="rotZ"/>
 	</packet>
-	<packet name="S_EnemyFireballMove">
+	<!--적 미사일 발사-->
+	<packet name="S_EnemyShot">
 		<int name="fireballId"/>
 		<float name="posX"/>
 		<float name="posY"/>
+		<float name="rotZ"/>
 	</packet>
-	<packet name="S_BroadcastEnemyShot">
+	<!--미사일 발사-->
+	<packet name="S_Shot">
 		<int name="fireballId"/>
 		<float name="posX"/>
 		<float name="posY"/>
+		<float name="rotZ"/>
 	</packet>
-	<packet name="S_EnemyStat">
-		<int name="hp"/>
-		<float name="attackGage"/>
-	</packet>
-	<packet name="S_Stat">
-		<int name="hp"/>
-		<float name="attackGage"/>
-	</packet>
-	<!---->
-	<packet name="S_DestroyFireball">
+	<!--공격-->
+	<packet name="S_Attacked">
 		<int name="fireballId"/>
+	</packet>
+	<!--피격-->
+	<packet name="S_Hit">
+		<int name="fireballId"/>
+	</packet>
+	<!--매칭 성공-->
+	<packet name="S_Matched">
+		<string name="enemyNickname"/>
+		<bool name="isLeft"/>
+	</packet>
+	<!--배틀 시작-->
+	<packet name="S_BroadcastGameStart">
 	</packet>
 	<!--배틀 종료-->
 	<packet name="S_Gameover">
 		<bool name="isWin"/>
 	</packet>
-	<!--매칭 성공-->
-	<!--초기 정보 전달-->
-	<packet name="S_Matched">
-		<string name="enemyNickname"/>
-		<bool name="isLeft"/>
-		<int name="hp"/>
-		<float name="attackGage"/>
-	</packet>
-	
+	<!--이동-->
 	<packet name="C_Move">
 		<float name="posX"/>
 		<float name="posY"/>
 		<float name="rotZ"/>
 	</packet>
+	<!--미사일 발사-->
 	<packet name="C_Shot">
-		<bool name="isShot"/>
-	</packet>
-	<packet name="C_FireballMove">
-		<int name="fireballId"/>
 		<float name="posX"/>
 		<float name="posY"/>
+		<float name="rotZ"/>
 	</packet>
+	<!--공격-->
 	<packet name="C_Attacked">
 		<int name="fireballId"/>
 	</packet>
-	<packet name="C_DestroyFireball">
+	<!--피격-->
+	<packet name="C_Hit">
 		<int name="fireballId"/>
 	</packet>
 	<!--매칭 시작-->

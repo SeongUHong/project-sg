@@ -2,14 +2,14 @@ using ServerCore;
 using System;
 using System.Collections.Generic;
 
-public class ServerPacketManager
+public class ClientPacketManager
 {
 	#region Singleton
-	static ServerPacketManager _instance = new ServerPacketManager();
-	public static ServerPacketManager Instance { get { return _instance; } }
+	static ClientPacketManager _instance = new ClientPacketManager();
+	public static ClientPacketManager Instance { get { return _instance; } }
 	#endregion
 
-	ServerPacketManager()
+	ClientPacketManager()
 	{
 		Init();
 	}
@@ -19,18 +19,22 @@ public class ServerPacketManager
 		
 	public void Init()
 	{
-		_makeFunc.Add((ushort)PacketID.C_Move, MakePacket<C_Move>);
-		_handler.Add((ushort)PacketID.C_Move, PacketHandler.C_MoveHandler);
-		_makeFunc.Add((ushort)PacketID.C_Shot, MakePacket<C_Shot>);
-		_handler.Add((ushort)PacketID.C_Shot, PacketHandler.C_ShotHandler);
-		_makeFunc.Add((ushort)PacketID.C_Attacked, MakePacket<C_Attacked>);
-		_handler.Add((ushort)PacketID.C_Attacked, PacketHandler.C_AttackedHandler);
-		_makeFunc.Add((ushort)PacketID.C_Hit, MakePacket<C_Hit>);
-		_handler.Add((ushort)PacketID.C_Hit, PacketHandler.C_HitHandler);
-		_makeFunc.Add((ushort)PacketID.C_StartMatch, MakePacket<C_StartMatch>);
-		_handler.Add((ushort)PacketID.C_StartMatch, PacketHandler.C_StartMatchHandler);
-		_makeFunc.Add((ushort)PacketID.C_ReadyBattle, MakePacket<C_ReadyBattle>);
-		_handler.Add((ushort)PacketID.C_ReadyBattle, PacketHandler.C_ReadyBattleHandler);
+		_makeFunc.Add((ushort)PacketID.S_EnemyMove, MakePacket<S_EnemyMove>);
+		_handler.Add((ushort)PacketID.S_EnemyMove, PacketHandler.S_EnemyMoveHandler);
+		_makeFunc.Add((ushort)PacketID.S_EnemyShot, MakePacket<S_EnemyShot>);
+		_handler.Add((ushort)PacketID.S_EnemyShot, PacketHandler.S_EnemyShotHandler);
+		_makeFunc.Add((ushort)PacketID.S_Shot, MakePacket<S_Shot>);
+		_handler.Add((ushort)PacketID.S_Shot, PacketHandler.S_ShotHandler);
+		_makeFunc.Add((ushort)PacketID.S_Attacked, MakePacket<S_Attacked>);
+		_handler.Add((ushort)PacketID.S_Attacked, PacketHandler.S_AttackedHandler);
+		_makeFunc.Add((ushort)PacketID.S_Hit, MakePacket<S_Hit>);
+		_handler.Add((ushort)PacketID.S_Hit, PacketHandler.S_HitHandler);
+		_makeFunc.Add((ushort)PacketID.S_Matched, MakePacket<S_Matched>);
+		_handler.Add((ushort)PacketID.S_Matched, PacketHandler.S_MatchedHandler);
+		_makeFunc.Add((ushort)PacketID.S_BroadcastGameStart, MakePacket<S_BroadcastGameStart>);
+		_handler.Add((ushort)PacketID.S_BroadcastGameStart, PacketHandler.S_BroadcastGameStartHandler);
+		_makeFunc.Add((ushort)PacketID.S_Gameover, MakePacket<S_Gameover>);
+		_handler.Add((ushort)PacketID.S_Gameover, PacketHandler.S_GameoverHandler);
 
 	}
 
