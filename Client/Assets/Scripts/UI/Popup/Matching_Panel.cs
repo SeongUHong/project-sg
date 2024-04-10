@@ -12,6 +12,8 @@ public class Matching_Panel : UIBase
         Match_Button,
     }
 
+    String NickName;
+
     private void Awake()
     {
         transform.gameObject.SetActive(false); // ������ ���۵Ǹ� �˾� â�� ������ �ʵ��� �Ѵ�.
@@ -25,15 +27,26 @@ public class Matching_Panel : UIBase
 
     public void OnClick_Button()
     {
-        //매치
+        //닉네임 서버에 보내기
+        IEnumerator SendNickName()
+        {
+            while (true)
+            {
+                yield return new WaitForSeconds(0.25f);
+                C_StartMatch nick = new C_StartMatch();
+                nick.nickname = Conf.Main.PLAYER_NICK;
+                Managers.Network.Send(nick.Write());
+            }
+        }
 
+        //로딩씬전환
+        SceneLoader.Instance.LoadScene("GameScene");
+    
     }
     public override void Init()
     {
         Bind<Button>(typeof(Buttons));
         
-
-
 
         BindEvent(GetButton((int)Buttons.Match_Button).gameObject, (PointerEventData data) => OnClick_Button());
 

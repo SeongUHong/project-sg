@@ -42,9 +42,15 @@ public class PacketHandler
     internal static void S_MatchedHandler(PacketSession packetSession, IPacket packet)
     {
         S_Matched matched = packet as S_Matched;
-        float test = matched.attackGage;
+        Conf.Main.ATTACK_GAGE = matched.attackGage;
+        Conf.Main.IS_LEFT = matched.isLeft;
+        Conf.Main.HP = matched.hp;
+        Conf.Main.ENEMY_NICK = matched.enemyNickname;
         // Class.Method(test);
+        //코드여따가
+
     }
+
 
     // 참고용
     //IEnumerator SendMovePacket()

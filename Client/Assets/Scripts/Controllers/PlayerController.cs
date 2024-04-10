@@ -48,7 +48,15 @@ public class PlayerController : BaseController
 
         AddAction();
 
-        flame = Managers.Game.Player.transform.GetChild(0).gameObject;
+        if (Conf.Main.IS_LEFT)
+        {
+            flame = Managers.Game.Player.transform.GetChild(0).gameObject;
+        }
+        else
+        {
+            flame = Managers.Game.Player_Right.transform.GetChild(0).gameObject;
+        }
+        
 
         animator = GetComponent<Animator>();
         animator.SetBool("expl", false);
@@ -89,18 +97,37 @@ public class PlayerController : BaseController
 
     void OnAttack()
     {
-        if(!(_stat.AttackGague < 20))
+        if (Conf.Main.IS_LEFT)
         {
-            /*if (_stat.AttackGague == 100)
-                SKILL_NAME = "fireballredtail";*/
+            if (!(_stat.AttackGague < 20))
+            {
+                /*if (_stat.AttackGague == 100)
+                    SKILL_NAME = "fireballredtail";*/
 
-            flame.SetActive(true);
-            StartCoroutine(WaitForIt());
-            _stat.AttackGagueDown();
-            Managers.Skill.SpawnSkill(SKILL_NAME, Managers.Game.Player.transform.Find("ship2-flame").position,
-                Managers.Game.Player.transform.Find("ship2-flame").transform.up, _stat.AttackDistance, _stat.ProjectileSpeed, _stat.Offence, Define.Skill.Launch, Managers.Game.Player.transform);
+                flame.SetActive(true);
+                StartCoroutine(WaitForIt());
+                _stat.AttackGagueDown();
+                Managers.Skill.SpawnSkill(SKILL_NAME, Managers.Game.Player.transform.Find("ship2-flame").position,
+                    Managers.Game.Player.transform.Find("ship2-flame").transform.up, _stat.AttackDistance, _stat.ProjectileSpeed, _stat.Offence, Define.Skill.Launch, Managers.Game.Player.transform);
 
+            }
         }
+        else
+        {
+            if (!(_stat.AttackGague < 20))
+            {
+                /*if (_stat.AttackGague == 100)
+                    SKILL_NAME = "fireballredtail";*/
+
+                flame.SetActive(true);
+                StartCoroutine(WaitForIt());
+                _stat.AttackGagueDown();
+                Managers.Skill.SpawnSkill(SKILL_NAME, Managers.Game.Player_Right.transform.Find("ship2-flame").position,
+                    Managers.Game.Player_Right.transform.Find("ship2-flame").transform.up, _stat.AttackDistance, _stat.ProjectileSpeed, _stat.Offence, Define.Skill.Launch, Managers.Game.Player_Right.transform);
+
+            }
+        }
+        
 
     }
 
@@ -114,13 +141,27 @@ public class PlayerController : BaseController
             {
                 Conf.Main.PLAYER_DEAD_FLAG = true;
             }
-            if (Conf.Main.PLAYER_DEAD_FLAG && Managers.Game.Player != null)
+            if (Conf.Main.IS_LEFT)
             {
-                animator.SetBool("expl", true);
-                Conf.Main._result.SetText();
-                
-                Conf.Main._result.Show();
+                if (Conf.Main.PLAYER_DEAD_FLAG && Managers.Game.Player != null)
+                {
+                    animator.SetBool("expl", true);
+                    Conf.Main._result.SetText();
+
+                    Conf.Main._result.Show();
+                }
             }
+            else
+            {
+                if (Conf.Main.PLAYER_DEAD_FLAG && Managers.Game.Player_Right != null)
+                {
+                    animator.SetBool("expl", true);
+                    Conf.Main._result.SetText();
+
+                    Conf.Main._result.Show();
+                }
+            }
+            
         }
 
     }

@@ -20,7 +20,7 @@ public class Managers : MonoBehaviour
     SceneManagerEx _scene = new SceneManagerEx();
     UIManager _ui = new UIManager();
     NetworkManager _network = new NetworkManager();
-    PacketManager _packet = new PacketManager();
+    ClientPacketManager _packet = new ClientPacketManager();
 
     public static DataManager Data { get { return Instance._data; } }
     public static PoolManager Pool { get { return Instance._pool; } }
@@ -28,7 +28,7 @@ public class Managers : MonoBehaviour
     public static SceneManagerEx Scene { get { return Instance._scene; } }
     public static UIManager UI { get { return Instance._ui; } }
     public static NetworkManager Network { get { return Instance._network; } }
-    public static PacketManager Packet { get { return Instance._packet; } }
+    public static ClientPacketManager Packet { get { return Instance._packet; } }
     #endregion
 
     void Start()

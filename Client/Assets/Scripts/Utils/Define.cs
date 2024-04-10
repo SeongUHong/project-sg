@@ -11,6 +11,8 @@ public class Define
         SelectScene,
         GameScene,
         MatchingScene,
+        LoadingScene,
+
     }
 
     public enum State

@@ -12,11 +12,14 @@ public class UIHpBar_Enemy : UIBase
     //대상 오브젝트 스텟
     Stat _stat;
 
+    Text _nick;
 
     enum GameObjects
     {
-        UIHPBar,
+        UIHPBar_Enemy,
         HpBar,
+        NickName,
+
     }
 
     enum Images
@@ -28,9 +31,23 @@ public class UIHpBar_Enemy : UIBase
     {
         Bind<GameObject>(typeof(GameObjects));
         Bind<Image>(typeof(Images));
-        _stat = Managers.Game.Enemy.GetComponent<Stat>();
+        //_nick = GetGameObject((int)GameObjects.UIHPBar_Enemy).transform.Find("NickName").GetComponent<TextMesh>();
+        //_nick = Util.GetOrAddComponent<UIHPBar_Enemy>(_parent).transform.Find("NickName").GetComponent<Text>();
+        if (Conf.Main.IS_LEFT)
+        {
+            _stat = Managers.Game.Enemy.GetComponent<Stat>();
+            _stat.MaxHp = Conf.Main.HP;
+            _parent = Managers.Game.Enemy;
+            _nick.text = Conf.Main.ENEMY_NICK;
+        }
+        else
+        {
+            _stat = Managers.Game.Player_Right.GetComponent<Stat>();
+            _stat.MaxHp = Conf.Main.HP;
+            _parent = Managers.Game.Player_Right;
+            _nick.text = Conf.Main.PLAYER_NICK;
+        }
 
-        _parent = Managers.Game.Enemy;
 
         GameObject go = GetImage((int)Images.Fill).gameObject;
 

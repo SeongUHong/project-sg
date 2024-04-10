@@ -20,6 +20,14 @@ namespace Conf
         public static Result_Panel _result;
         public static Matching_Panel _maching;
         public static string PLAYER_NICK;
+        public static string ENEMY_NICK = "È«¼º¿ì";
+        //public static string ENEMY_NICK;
+        public static float ATTACK_GAGE = 100.0f;
+        //public static float ATTACK_GAGE;
+        public static bool IS_LEFT = false;
+        //public static bool IS_LEFT;
+        public static int HP = 50;
+        //public static int HP;
         public static List<String> PLAYER_ID_LIST = new List<String>();
         public static List<String> ENEMY_ID_LIST = new List<String>();
         public enum ATTACK_FLAG
@@ -28,6 +36,8 @@ namespace Conf
         }
         public static bool LOADING_FLAG = false;
         public static float SEND_PACKET_INTERVAL = 0.25f;
+        
+
     }
 
 }

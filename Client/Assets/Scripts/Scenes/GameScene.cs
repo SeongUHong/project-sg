@@ -5,12 +5,6 @@ using UnityEngine.UI;
 
 public class GameScene : BaseScene
 {
-    private int Timer = 0;
-
-    public GameObject Num_A;   //1¹ø
-    public GameObject Num_B;   //2¹ø
-    public GameObject Num_C;   //3¹ø
-    public GameObject Num_GO;
 
     protected override void Init()
     {

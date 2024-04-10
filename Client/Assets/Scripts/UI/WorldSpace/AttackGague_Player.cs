@@ -28,9 +28,22 @@ public class AttackGague_Player : UIBase
     {
         Bind<GameObject>(typeof(GameObjects));
         Bind<Image>(typeof(Images));
-        _stat = Managers.Game.Player.GetComponent<Stat>();
+        if (Conf.Main.IS_LEFT)
+        {
+            _stat = Managers.Game.Player.GetComponent<Stat>();
+            _stat.MaxAttackGague = Conf.Main.ATTACK_GAGE;
+            _parent = Managers.Game.Player;
+        }
+        else
+        {
+            _stat = Managers.Game.Enemy_Left.GetComponent<Stat>();
+            _stat.MaxAttackGague = Conf.Main.ATTACK_GAGE;
+            _parent = Managers.Game.Enemy_Left;
+        }
+        
+        
 
-        _parent = Managers.Game.Player;
+        
 
         GameObject gague = GetImage((int)Images.Gague_Fill).gameObject;
 
@@ -40,6 +53,10 @@ public class AttackGague_Player : UIBase
 
             GetImage((int)Images.Gague_Fill).GetComponent<Image>().color = new Color(117 / 255f, 1, 84 / 255f);
 
+        }
+        else
+        {
+            GetImage((int)Images.Gague_Fill).GetComponent<Image>().color = new Color(84 / 255f, 153 / 255f, 1);
         }
     }
 

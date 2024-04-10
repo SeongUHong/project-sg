@@ -25,6 +25,9 @@ public class GameManagerEx : ManagerBase
     public GameObject Player { get { return _player; } }
     public GameObject Enemy { get { return _enemy; } }
 
+    public GameObject Player_Right { get { return _player; } }
+    public GameObject Enemy_Left { get { return _enemy; } }
+
     public Main_Panel Main_Panel { get { return Managers.UI.MainSceneUI<Main_Panel>(); } }
     public Result_Panel Result_Panel { get { return Managers.UI.MakePopUp<Result_Panel>();  } }
     public NickName_Panel NickName_Panel { get { return Managers.UI.MakePopUp<NickName_Panel>(); } }
@@ -62,8 +65,6 @@ public class GameManagerEx : ManagerBase
     {
         GameObject player = null;
 
-
-        player = Managers.Resource.Instantiate("Characters/Player");
         /*if (Conf.Main.ChosenShip == "Player1")
         {
             player = Managers.Resource.Instantiate("Characters/Player1");
@@ -85,9 +86,20 @@ public class GameManagerEx : ManagerBase
         }*/
 
         
-        _player = player;
+        
 
-        player.transform.position = PlayerSpawnPos;
+        if (Conf.Main.IS_LEFT)
+        {
+            player = Managers.Resource.Instantiate("Characters/Player");
+            player.transform.position = PlayerSpawnPos;
+        }
+        else
+        {
+            player = Managers.Resource.Instantiate("Characters/Player_Right");
+            player.transform.position = EnemySpawnPos;
+        }
+
+        _player = player;
 
         return player;
     }
@@ -97,12 +109,22 @@ public class GameManagerEx : ManagerBase
         GameObject enemy = null;
 
 
-        enemy = Managers.Resource.Instantiate("Characters/Enemy");
+        
+
+        
+
+        if (Conf.Main.IS_LEFT)
+        {
+            enemy = Managers.Resource.Instantiate("Characters/Enemy");
+            enemy.transform.position = EnemySpawnPos;
+        }
+        else
+        {
+            enemy = Managers.Resource.Instantiate("Characters/Enemy_Left");
+            enemy.transform.position = PlayerSpawnPos;
+        }
 
         _enemy = enemy;
-
-        enemy.transform.position = EnemySpawnPos;
-
 
         return enemy;
     }

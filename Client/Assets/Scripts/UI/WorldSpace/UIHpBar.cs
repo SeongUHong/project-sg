@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -12,12 +13,14 @@ public class UIHpBar : UIBase
     //대상 오브젝트 스텟
     Stat _stat;
 
+    Text _nick;
 
     enum GameObjects
     {
         UIHPBar,
         HpBar,
-        
+        NickName,
+
     }
 
     enum Images
@@ -29,9 +32,22 @@ public class UIHpBar : UIBase
     {
         Bind<GameObject>(typeof(GameObjects));
         Bind<Image>(typeof(Images));
-        _stat = Managers.Game.Player.GetComponent<Stat>();
+        _nick = GetGameObject((int)GameObjects.NickName).GetComponent<Text>();
+        if (Conf.Main.IS_LEFT)
+        {
+            _stat = Managers.Game.Player.GetComponent<Stat>();
+            _stat.MaxHp = Conf.Main.HP;
+            _parent = Managers.Game.Player;
+            _nick.text = Conf.Main.PLAYER_NICK;
+        }
+        else
+        {
+            _stat = Managers.Game.Enemy_Left.GetComponent<Stat>();
+            _stat.MaxHp = Conf.Main.HP;
+            _parent = Managers.Game.Enemy_Left;
+            _nick.text = Conf.Main.ENEMY_NICK;
+        }
 
-        _parent = Managers.Game.Player;
 
         GameObject go = GetImage((int)Images.Fill).gameObject;
 
