@@ -9,7 +9,7 @@ namespace Server
         static SessionManager _sessionManager = new SessionManager();
         public static SessionManager Instance { get { return _sessionManager; } }
 
-        int _sessionId = 0;
+        ushort _sessionId = 0;
         Dictionary<int, ClientSession> _sessions = new Dictionary<int, ClientSession>();
         object _lock = new object();
 
@@ -18,7 +18,7 @@ namespace Server
         {
             lock (_lock)
             {
-                int sessionId = ++_sessionId;
+                ushort sessionId = ++_sessionId;
                 ClientSession session = new ClientSession();
                 session.SessionId = sessionId;
                 // Dictionary에 세션 저장

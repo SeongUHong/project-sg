@@ -4,21 +4,40 @@ using System.Collections.Generic;
 
 namespace Server
 {
-    class GameRoom : IJobQueue
+    class BattleRoom : IJobQueue
     {
-        List<ClientSession> _sessions = new List<ClientSession>();
+        Dictionary<ushort, ClientSession> _sessions = new Dictionary<ushort, ClientSession>();
         JobQueue _jobQueue = new JobQueue();
         List<ArraySegment<byte>> _pendingList = new List<ArraySegment<byte>>();
 
+        public void Init(List<ClientSession> sessions)
+        {
+            // 플레이어 등록
+            foreach (ClientSession session in sessions)
+                _sessions.Add(session.Player.PlayerId, session);
+            // 타이머 시작
+            Push(() => { FlushTimer(); });
+
+            Console.WriteLine($"Matching completed. (playerId : {sessions[0].Player.PlayerId}, with playerId : {sessions[1].Player.PlayerId})");
+        }
+
+        // 작업을 대기시킴
         public void Push(Action job)
         {
             _jobQueue.Push(job);
         }
 
+        // Flush()를 일정 간격으로 등록
+        void FlushTimer()
+        {
+            Push(() => { Flush(); });
+            JobTimer.Instance.Push(FlushTimer, Config.FLUSH_BATTLE_JOB_INTERVAL);
+        }
+
         // 대기중인 작업들을 진행시킴
         public void Flush()
         {
-            foreach (ClientSession s in _sessions)
+            foreach (ClientSession s in _sessions.Values)
                 s.Send(_pendingList);
 
             _pendingList.Clear();
