@@ -52,6 +52,9 @@ namespace PacketGenerator
                 File.WriteAllText("ClientPacketManager.cs", clientManagerText);
                 string serverManagerText = string.Format(PacketFormat.serverManagerFormat, serverRegister);
                 File.WriteAllText("ServerPacketManager.cs", serverManagerText);
+                // 더미 클라이언트용
+                string dummyClientManagerText = string.Format(PacketFormat.DummyClientManagerFormat, clientRegister);
+                File.WriteAllText("DummyClientPacketManager.cs", dummyClientManagerText);
             }
         }
 
