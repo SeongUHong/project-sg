@@ -74,7 +74,6 @@ public class SceneLoader : MonoBehaviour
 
         //서버 정보를 받아서 게임씬에 로드
         //왼쪽,hp,어택게이지,적닉네임
-        
 
         float timer = 0.0f;
         while (!op.isDone)

@@ -12,17 +12,12 @@ public class ClientPacketManager
 		_makeFunc.Add((ushort)PacketID.S_EnemyMove, MakePacket<S_EnemyMove>);
 		_handler.Add((ushort)PacketID.S_EnemyMove, PacketHandler.S_EnemyMoveHandler);
 		_makeFunc.Add((ushort)PacketID.S_EnemyShot, MakePacket<S_EnemyShot>);
-		_handler.Add((ushort)PacketID.S_EnemyShot, PacketHandler.S_EnemyShotHandler);
 		_makeFunc.Add((ushort)PacketID.S_Shot, MakePacket<S_Shot>);
-		_handler.Add((ushort)PacketID.S_Shot, PacketHandler.S_ShotHandler);
 		_makeFunc.Add((ushort)PacketID.S_Attacked, MakePacket<S_Attacked>);
-		_handler.Add((ushort)PacketID.S_Attacked, PacketHandler.S_AttackedHandler);
 		_makeFunc.Add((ushort)PacketID.S_Hit, MakePacket<S_Hit>);
-		_handler.Add((ushort)PacketID.S_Hit, PacketHandler.S_HitHandler);
 		_makeFunc.Add((ushort)PacketID.S_Matched, MakePacket<S_Matched>);
 		_handler.Add((ushort)PacketID.S_Matched, PacketHandler.S_MatchedHandler);
-		_makeFunc.Add((ushort)PacketID.S_BroadcastGameStart, MakePacket<S_BroadcastGameStart>);
-		_handler.Add((ushort)PacketID.S_BroadcastGameStart, PacketHandler.S_BroadcastGameStartHandler);
+		_makeFunc.Add((ushort)PacketID.S_BroadcastGameStart, MakePacket<S_BroadcastGameStart>);	
 		_makeFunc.Add((ushort)PacketID.S_Gameover, MakePacket<S_Gameover>);
 		_handler.Add((ushort)PacketID.S_Gameover, PacketHandler.S_GameoverHandler);
 

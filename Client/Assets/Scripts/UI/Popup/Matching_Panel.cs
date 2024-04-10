@@ -41,7 +41,7 @@ public class Matching_Panel : UIBase
 
         //로딩씬전환
         SceneLoader.Instance.LoadScene("GameScene");
-    
+        
     }
     public override void Init()
     {

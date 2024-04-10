@@ -19,8 +19,9 @@ namespace Conf
         public static bool ENEMY_DEAD_FLAG = false;
         public static Result_Panel _result;
         public static Matching_Panel _maching;
+        public static InGame_NickName_Panel _inGameNick;
         public static string PLAYER_NICK;
-        public static string ENEMY_NICK = "È«¼º¿ì";
+        public static string ENEMY_NICK = "HONG";
         //public static string ENEMY_NICK;
         public static float ATTACK_GAGE = 100.0f;
         //public static float ATTACK_GAGE;

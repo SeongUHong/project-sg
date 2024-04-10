@@ -23,7 +23,9 @@ public class GameScene : BaseScene
         GameObject enemy = Managers.Game.InstantiateEnemy();
 
         Conf.Main._result = Managers.Game.Result_Panel;
-
+        Conf.Main._inGameNick = Managers.Game.InGame_NickName_Panel;
+        Conf.Main._inGameNick.SetNickName();
+        Conf.Main._inGameNick.Show();
     }
 
 

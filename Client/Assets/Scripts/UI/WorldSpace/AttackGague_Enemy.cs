@@ -31,13 +31,11 @@ public class AttackGague_Enemy : UIBase
         if(Conf.Main.IS_LEFT)
         {
             _stat = Managers.Game.Enemy.GetComponent<Stat>();
-            _stat.MaxAttackGague = Conf.Main.ATTACK_GAGE;
             _parent = Managers.Game.Enemy;
         }
         else
         {
             _stat = Managers.Game.Player_Right.GetComponent<Stat>();
-            _stat.MaxAttackGague = Conf.Main.ATTACK_GAGE;
             _parent = Managers.Game.Player_Right;
         }
         

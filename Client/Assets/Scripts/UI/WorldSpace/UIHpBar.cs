@@ -32,22 +32,16 @@ public class UIHpBar : UIBase
     {
         Bind<GameObject>(typeof(GameObjects));
         Bind<Image>(typeof(Images));
-        _nick = GetGameObject((int)GameObjects.NickName).GetComponent<Text>();
         if (Conf.Main.IS_LEFT)
         {
             _stat = Managers.Game.Player.GetComponent<Stat>();
-            _stat.MaxHp = Conf.Main.HP;
             _parent = Managers.Game.Player;
-            _nick.text = Conf.Main.PLAYER_NICK;
         }
         else
         {
             _stat = Managers.Game.Enemy_Left.GetComponent<Stat>();
-            _stat.MaxHp = Conf.Main.HP;
             _parent = Managers.Game.Enemy_Left;
-            _nick.text = Conf.Main.ENEMY_NICK;
         }
-
 
         GameObject go = GetImage((int)Images.Fill).gameObject;
 
