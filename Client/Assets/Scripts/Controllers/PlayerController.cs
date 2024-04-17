@@ -95,6 +95,7 @@ public class PlayerController : BaseController
         flame.SetActive(false);
     }
 
+    //어택시
     void OnAttack()
     {
         if (Conf.Main.IS_LEFT)
@@ -131,6 +132,7 @@ public class PlayerController : BaseController
 
     }
 
+    //기체폭파 & 결과화면문구생성
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.GetComponent<Collider2D>().gameObject.layer == 10)

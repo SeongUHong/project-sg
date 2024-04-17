@@ -29,8 +29,22 @@ public class JoyStickHandler : MonoBehaviour, IDragHandler, IPointerDownHandler,
         //character = Managers.Game.Enemy;
 
         // 시작하면 charactor를 180도 오른쪽으로 회전
+
+        StartCoroutine(S_EnemyMove());
     }
 
+    IEnumerator S_EnemyMove()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(0.25f);
+            S_EnemyMove move = new S_EnemyMove();
+            move.posX = character.transform.up.x;
+            move.posY = character.transform.up.y;
+            move.rotZ = character.transform.up.z;
+            Managers.Network.Send(move.Write());
+        }
+    }
 
     void Update()
     {

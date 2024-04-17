@@ -29,6 +29,7 @@ namespace Conf
         //public static bool IS_LEFT;
         public static int HP = 50;
         //public static int HP;
+        public static Vector3 ENEMY_ROCATION;
         public static List<String> PLAYER_ID_LIST = new List<String>();
         public static List<String> ENEMY_ID_LIST = new List<String>();
         public enum ATTACK_FLAG

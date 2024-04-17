@@ -7,36 +7,11 @@ public class PacketHandler
     internal static void S_EnemyMoveHandler(PacketSession packetSession, IPacket packet)
     {
         throw new NotImplementedException();
-    }
+        C_Move move = packet as C_Move;
+        Conf.Main.ENEMY_ROCATION.x = move.posX;
+        Conf.Main.ENEMY_ROCATION.y = move.posY;
+        Conf.Main.ENEMY_ROCATION.z = move.rotZ;
 
-    internal static void S_EnemyFireballMoveHandler(PacketSession packetSession, IPacket packet)
-    {
-        throw new NotImplementedException();
-    }
-
-    internal static void S_BroadcastEnemyShotHandler(PacketSession packetSession, IPacket packet)
-    {
-        throw new NotImplementedException();
-    }
-
-    internal static void S_EnemyStatHandler(PacketSession packetSession, IPacket packet)
-    {
-        throw new NotImplementedException();
-    }
-
-    internal static void S_StatHandler(PacketSession packetSession, IPacket packet)
-    {
-        throw new NotImplementedException();
-    }
-
-    internal static void S_DestroyFireballHandler(PacketSession packetSession, IPacket packet)
-    {
-        throw new NotImplementedException();
-    }
-
-    internal static void S_GameoverHandler(PacketSession packetSession, IPacket packet)
-    {
-        throw new NotImplementedException();
     }
 
     internal static void S_MatchedHandler(PacketSession packetSession, IPacket packet)
@@ -47,6 +22,11 @@ public class PacketHandler
         // Class.Method(test);
         //코드여따가
 
+    }
+
+    internal static void S_GameoverHandler(PacketSession arg1, IPacket arg2)
+    {
+        throw new NotImplementedException();
     }
 
 
