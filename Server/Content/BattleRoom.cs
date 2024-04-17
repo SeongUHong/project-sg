@@ -9,6 +9,7 @@ namespace Server
         Dictionary<ushort, ClientSession> _sessions = new Dictionary<ushort, ClientSession>();
         JobQueue _jobQueue = new JobQueue();
         List<ArraySegment<byte>> _pendingList = new List<ArraySegment<byte>>();
+        object _lock = new object();
 
         public void Init(List<ClientSession> sessions)
         {
@@ -47,6 +48,28 @@ namespace Server
         public void Broadcast(ArraySegment<byte> segment)
         {
             _pendingList.Add(segment);
+        }
+
+        // 배틀 준비 완료 처리
+        public void ReadyBattle(ClientSession session)
+        {
+            lock (_lock)
+            {
+                if (session.Player.IsReady)
+                    return;
+
+                session.Player.IsReady = true;
+
+                // 전체 준비가 되었는지 확인
+                foreach (ClientSession s in _sessions.Values)
+                {
+                    if (!s.Player.IsReady)
+                        return;
+                }
+
+                // 게임 시작이 가능하면 패킷 전송
+                Broadcast(new S_BroadcastGameStart().Write());
+            }
         }
 
         // 플레이어 입장
