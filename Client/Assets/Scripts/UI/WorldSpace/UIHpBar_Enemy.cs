@@ -31,7 +31,7 @@ public class UIHpBar_Enemy : UIBase
     {
         Bind<GameObject>(typeof(GameObjects));
         Bind<Image>(typeof(Images));
-        if (Conf.Main.IS_LEFT)
+        if (Managers.Game.IsLeft)
         {
             _stat = Managers.Game.Enemy.GetComponent<Stat>();
             _parent = Managers.Game.Enemy;

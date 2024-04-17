@@ -58,9 +58,9 @@ public class Stat : MonoBehaviour
     public void Update()
     {
         if (Hp <= 0 && this.gameObject.layer == 10)
-            Conf.Main.PLAYER_DEAD_FLAG = true;
+            Managers.Game.PlayerDeadFlag = true;
         else if (Hp <= 0 && this.gameObject.layer == 9)
-            Conf.Main.ENEMY_DEAD_FLAG = true;
+            Managers.Game.EnemyDeadFlag = true;
     }
 
     public virtual bool OnAttacked(int pureDamage)

@@ -29,16 +29,16 @@ public class InGame_NickName_Panel : UIBase
     {
         _Lnick = Conf.Main._inGameNick.transform.Find("Panel").transform.Find("NickName_Left").transform.Find("Text").GetComponent<Text>();
         _Rnick = Conf.Main._inGameNick.transform.Find("Panel").transform.Find("NickName_Right").transform.Find("Text").GetComponent<Text>();
-        if (Conf.Main.IS_LEFT)
+        if (Managers.Game.IsLeft)
         {
-            _Lnick.text = Conf.Main.PLAYER_NICK;
-            _Rnick.text = Conf.Main.ENEMY_NICK;
+            _Lnick.text = Managers.Game.PlayerNick;
+            _Rnick.text = Managers.Game.EnemyNick;
 
         }
         else
         {
-            _Rnick.text = Conf.Main.PLAYER_NICK;
-            _Lnick.text = Conf.Main.ENEMY_NICK;
+            _Rnick.text = Managers.Game.PlayerNick;
+            _Lnick.text = Managers.Game.EnemyNick;
         }
     }
 }

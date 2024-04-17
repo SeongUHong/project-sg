@@ -27,11 +27,11 @@ public class NickName_Panel : UIBase
 
     public void OnClick_Button()
     {
-        Conf.Main.PLAYER_NICK = Nickname.text;
+        Managers.Game.PlayerNick = Nickname.text;
 
 
         _playerNick = Conf.Main._maching.transform.Find("Player_Nick").GetComponent<Text>();
-        _playerNick.text = Conf.Main.PLAYER_NICK;
+        _playerNick.text = Managers.Game.PlayerNick;
 
         Conf.Main._maching.Show();
         Awake();

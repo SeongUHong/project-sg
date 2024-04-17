@@ -72,8 +72,6 @@ public class SceneLoader : MonoBehaviour
         AsyncOperation op = SceneManager.LoadSceneAsync(sceneName);
         op.allowSceneActivation = false;
 
-        //서버 정보를 받아서 게임씬에 로드
-        //왼쪽,hp,어택게이지,적닉네임
 
         float timer = 0.0f;
         while (!op.isDone)
@@ -96,6 +94,9 @@ public class SceneLoader : MonoBehaviour
                 if (progressBar.fillAmount == 1.0f)
                 {
                     op.allowSceneActivation = true;
+                    //게임씬 준비완료 C_ReadyBattle보내기
+                    C_ReadyBattle ready = new C_ReadyBattle();
+                    Managers.Network.Send(ready.Write());
                     yield break;
                 }
             }

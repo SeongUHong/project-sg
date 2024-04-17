@@ -64,7 +64,7 @@ public class EnemyController : BaseController
             Debug.Log("Not Exist Player Controller UI");
         }
 
-        if (Conf.Main.IS_LEFT) 
+        if (Managers.Game.IsLeft) 
         {
             flame = Managers.Game.Enemy.transform.GetChild(0).gameObject;
             character = Managers.Game.Enemy;
@@ -140,7 +140,7 @@ public class EnemyController : BaseController
 
     void OnAttack()
     {
-        if (Conf.Main.IS_LEFT)
+        if (Managers.Game.IsLeft)
         {
             if (!(_stat.AttackGague < 20))
             {
@@ -179,11 +179,11 @@ public class EnemyController : BaseController
             _stat.OnAttacked(100);
             if (_stat.Hp <= 0)
             {
-                Conf.Main.ENEMY_DEAD_FLAG = true;
+                Managers.Game.EnemyDeadFlag = true;
             }
-            if (Conf.Main.IS_LEFT)
+            if (Managers.Game.IsLeft)
             {
-                if (Conf.Main.ENEMY_DEAD_FLAG && Managers.Game.Enemy != null)
+                if (Managers.Game.EnemyDeadFlag && Managers.Game.Enemy != null)
                 {
                     animator.SetBool("expl", true);
                     Conf.Main._result.SetText();
@@ -192,7 +192,7 @@ public class EnemyController : BaseController
             }
             else
             {
-                if (Conf.Main.ENEMY_DEAD_FLAG && Managers.Game.Enemy_Left != null)
+                if (Managers.Game.EnemyDeadFlag && Managers.Game.Enemy_Left != null)
                 {
                     animator.SetBool("expl", true);
                     Conf.Main._result.SetText();
@@ -236,7 +236,7 @@ public class EnemyController : BaseController
     //적 기체 위치 C_Move
     IEnumerator EnemyMove()
     {
-        TurnAngle(Conf.Main.ENEMY_ROCATION);
+        TurnAngle(Managers.Game.EnemyRocation);
         return new WaitForSecondsRealtime(0.25f);
     }
 

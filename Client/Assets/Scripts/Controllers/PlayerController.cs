@@ -48,7 +48,7 @@ public class PlayerController : BaseController
 
         AddAction();
 
-        if (Conf.Main.IS_LEFT)
+        if (Managers.Game.IsLeft)
         {
             flame = Managers.Game.Player.transform.GetChild(0).gameObject;
         }
@@ -98,7 +98,7 @@ public class PlayerController : BaseController
     //어택시
     void OnAttack()
     {
-        if (Conf.Main.IS_LEFT)
+        if (Managers.Game.IsLeft)
         {
             if (!(_stat.AttackGague < 20))
             {
@@ -141,11 +141,11 @@ public class PlayerController : BaseController
             _stat.OnAttacked(100);
             if (_stat.Hp <= 0)
             {
-                Conf.Main.PLAYER_DEAD_FLAG = true;
+                Managers.Game.PlayerDeadFlag = true;
             }
-            if (Conf.Main.IS_LEFT)
+            if (Managers.Game.IsLeft)
             {
-                if (Conf.Main.PLAYER_DEAD_FLAG && Managers.Game.Player != null)
+                if (Managers.Game.PlayerDeadFlag && Managers.Game.Player != null)
                 {
                     animator.SetBool("expl", true);
                     Conf.Main._result.SetText();
@@ -155,7 +155,7 @@ public class PlayerController : BaseController
             }
             else
             {
-                if (Conf.Main.PLAYER_DEAD_FLAG && Managers.Game.Player_Right != null)
+                if (Managers.Game.PlayerDeadFlag && Managers.Game.Player_Right != null)
                 {
                     animator.SetBool("expl", true);
                     Conf.Main._result.SetText();

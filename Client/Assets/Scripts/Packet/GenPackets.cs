@@ -531,6 +531,7 @@ public class C_StartMatch : IPacket
 	}
 }
 
+//게임씬로드시에 서버에 보냄
 public class C_ReadyBattle : IPacket
 {
 	

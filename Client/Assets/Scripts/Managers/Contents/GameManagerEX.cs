@@ -20,7 +20,25 @@ public class GameManagerEx : ManagerBase
     //스폰위치 랜덤 범위
     //float _positionVar = 3.0f;
 
+    //플레이어 닉
+    String _playerNick;
+    //적플레이어 닉
+    String _enemyNick = null;
 
+    //플레이어가 왼쪽인지 오른쪽인지 
+    bool _isLeft;
+
+    //적플레이어 위치정보
+    Vector3 _enemyRocation;
+
+    //플레이어 격침
+    bool _playerDeadFlag;
+
+    //적플레이어 격침
+    bool _enemyDeadFlag;
+
+    //게임 시작전 포즈
+    bool _isPause;
 
     public GameObject Player { get { return _player; } }
     public GameObject Enemy { get { return _enemy; } }
@@ -34,6 +52,13 @@ public class GameManagerEx : ManagerBase
     public Matching_Panel Matching_Panel { get { return Managers.UI.MakePopUp<Matching_Panel>(); } }
     public InGame_NickName_Panel InGame_NickName_Panel { get { return Managers.UI.MakePopUp<InGame_NickName_Panel>(); } }
 
+    public String PlayerNick { get { return _playerNick; } set { _playerNick = value; } }
+    public String EnemyNick { get { return _enemyNick; } set { _enemyNick = value; } }
+    public Boolean IsLeft { get { return _isLeft; } set { _isLeft = value; } }
+    public Vector3 EnemyRocation { get { return _enemyRocation; } set { _enemyRocation = value; } }
+    public Boolean PlayerDeadFlag { get { return _playerDeadFlag; } set { _playerDeadFlag = value; } }
+    public Boolean EnemyDeadFlag { get { return _enemyDeadFlag; } set { _enemyDeadFlag = value; } }
+    public Boolean IsPause { get { return _isPause; } set { _isPause = value; } }
     //스폰 되는 지점
     public Vector2 PlayerSpawnPos { get { return _playerSpawnPos; } }
     public Vector2 EnemySpawnPos { get { return _enemySpawnPos; } }
@@ -89,7 +114,7 @@ public class GameManagerEx : ManagerBase
         
         
 
-        if (Conf.Main.IS_LEFT)
+        if (Managers.Game.IsLeft)
         {
             player = Managers.Resource.Instantiate("Characters/Player");
             player.transform.position = PlayerSpawnPos;
@@ -114,7 +139,7 @@ public class GameManagerEx : ManagerBase
 
         
 
-        if (Conf.Main.IS_LEFT)
+        if (Managers.Game.IsLeft)
         {
             enemy = Managers.Resource.Instantiate("Characters/Enemy");
             enemy.transform.position = EnemySpawnPos;

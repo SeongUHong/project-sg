@@ -27,22 +27,38 @@ public class Matching_Panel : UIBase
 
     public void OnClick_Button()
     {
-        //닉네임 서버에 보내기
-        IEnumerator SendNickName()
-        {
-            while (true)
-            {
-                yield return new WaitForSeconds(0.25f);
-                C_StartMatch nick = new C_StartMatch();
-                nick.nickname = Conf.Main.PLAYER_NICK;
-                Managers.Network.Send(nick.Write());
-            }
-        }
+
+        Managers.Network.Init();
+        
+        StartCoroutine(SendNickName());
+
 
         //로딩씬전환
-        SceneLoader.Instance.LoadScene("GameScene");
+        if (Managers.Game.EnemyNick != null)
+        {
+            SceneLoader.Instance.LoadScene("GameScene");
+        }
         
+
     }
+
+    //닉네임 서버에 보내기
+    IEnumerator SendNickName()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(1.0f);
+            if (Managers.Network.IsConnet)
+            {
+                C_StartMatch nick = new C_StartMatch();
+                nick.nickname = Managers.Game.PlayerNick;
+                Managers.Network.Send(nick.Write());
+                break;
+            }
+
+        }
+    }
+
     public override void Init()
     {
         Bind<Button>(typeof(Buttons));

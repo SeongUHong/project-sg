@@ -28,7 +28,7 @@ public class AttackGague_Player : UIBase
     {
         Bind<GameObject>(typeof(GameObjects));
         Bind<Image>(typeof(Images));
-        if (Conf.Main.IS_LEFT)
+        if (Managers.Game.IsLeft)
         {
             _stat = Managers.Game.Player.GetComponent<Stat>();
             _parent = Managers.Game.Player;

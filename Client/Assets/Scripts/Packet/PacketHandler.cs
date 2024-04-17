@@ -8,25 +8,52 @@ public class PacketHandler
     {
         throw new NotImplementedException();
         C_Move move = packet as C_Move;
-        Conf.Main.ENEMY_ROCATION.x = move.posX;
-        Conf.Main.ENEMY_ROCATION.y = move.posY;
-        Conf.Main.ENEMY_ROCATION.z = move.rotZ;
+        Vector3 enemuRocation = new Vector3();
+        enemuRocation.x = move.posX;
+        enemuRocation.y = move.posY;
+        enemuRocation.z = move.rotZ;
+        Managers.Game.EnemyRocation = enemuRocation;
 
     }
 
     internal static void S_MatchedHandler(PacketSession packetSession, IPacket packet)
     {
         S_Matched matched = packet as S_Matched;
-        Conf.Main.IS_LEFT = matched.isLeft;
-        Conf.Main.ENEMY_NICK = matched.enemyNickname;
+        Managers.Game.IsLeft = matched.isLeft;
+        Managers.Game.EnemyNick = matched.enemyNickname;
         // Class.Method(test);
-        //코드여따가
 
+    }
+
+    internal static void S_EnemyShotHandler(PacketSession arg1, IPacket arg2)
+    {
+        
+    }
+
+    internal static void S_ShotHandler(PacketSession arg1, IPacket arg2)
+    {
+        
+    }
+
+    internal static void S_AttackedHandler(PacketSession arg1, IPacket arg2)
+    {
+        
+    }
+
+    internal static void S_HitHandler(PacketSession arg1, IPacket arg2)
+    {
+        
     }
 
     internal static void S_GameoverHandler(PacketSession arg1, IPacket arg2)
     {
-        throw new NotImplementedException();
+        
+    }
+
+    internal static void S_BroadcastGameStartHandler(PacketSession arg1, IPacket arg2)
+    {
+        //게임씬로드시 C_ReadyBattle를 보내면 서버에서 이패킷이 옴 이걸 받으면 게임시작하도록 멈춰놓기
+        Managers.Game.IsPause = true;
     }
 
 
