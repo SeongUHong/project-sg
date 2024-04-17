@@ -13,5 +13,6 @@ namespace Server
         public float PosX { get; set; }
         public float PosY { get; set; }
         public float RotZ { get; set; }
+        public bool IsReady { get; set; }
     }
 }

@@ -16,7 +16,7 @@ namespace Server
         object _lock = new object();
 
         const int MATCH_INTERVAL = 2000;
-        const int BATTLE_USER_NUM = 2;
+        const int BATTLE_PLAYER_NUM = Config.BATTLE_PLAYER_NUM;
 
         public MatchManager()
         {
@@ -70,11 +70,11 @@ namespace Server
         {
             lock (_lock)
             {
-                if (_waitingQueue.Count < BATTLE_USER_NUM)
+                if (_waitingQueue.Count < BATTLE_PLAYER_NUM)
                     return null;
 
                 List<ClientSession> sessions = new List<ClientSession>();
-                for (int i = 0; i < BATTLE_USER_NUM; i++)
+                for (int i = 0; i < BATTLE_PLAYER_NUM; i++)
                 {
                     // 대기중인 플레이어ID
                     ushort playerId = _waitingQueue.Dequeue();

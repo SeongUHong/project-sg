@@ -15,15 +15,21 @@ class PacketHandler
 
     internal static void C_ReadyBattleHandler(PacketSession packetSession, IPacket packet)
     {
+        ClientSession session = packetSession as ClientSession;
+        C_ReadyBattle readyBattle = packet as C_ReadyBattle;
+
+        // 멀티쓰레드 대비하여 꺼내서 사용
+        // BattleRoom이 null로 바뀌어도 무방함
+        BattleRoom room = session.BattleRoom;
+        if (room == null)
+            return;
+
+        room.ReadyBattle(session);
     }
 
     internal static void C_MoveHandler(PacketSession packetSession, IPacket packet)
     {
-        // 멀티쓰레드 대비하여 꺼내서 사용
-        // BattleRoom null로 바뀌어도 무방함
-        //BattleRoom room = session.BattleRoom;
-        //if (room == null)
-        //    return;
+        
     }
 
     internal static void C_ShotHandler(PacketSession arg1, IPacket arg2)
