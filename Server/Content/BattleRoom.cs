@@ -15,7 +15,11 @@ namespace Server
         {
             // 플레이어 등록
             foreach (ClientSession session in sessions)
+            {
                 _sessions.Add(session.Player.PlayerId, session);
+                session.BattleRoom = this;
+            }
+
             // 타이머 시작
             Push(() => { FlushTimer(); });
 

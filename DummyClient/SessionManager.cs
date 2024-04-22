@@ -12,7 +12,6 @@ namespace DummyClient
         List<ServerSession> _sessions = new List<ServerSession>();
         int SessionId = 1;
         object _lock = new object();
-        Random _rand = new Random();
 
         public ServerSession Generate()
         {
@@ -29,26 +28,31 @@ namespace DummyClient
         {
             lock (_lock)
             {
-                string testName = "testName";
+                
                 foreach (ServerSession session in _sessions)
                 {
-                    if (session.IsMatched)
-                        continue;
-
-                    C_StartMatch startMatch = new C_StartMatch();
-                    startMatch.nickname = testName + session.Id;
-                    session.Send(startMatch.Write());
+                    if (!session.IsMatched)
+                    {
+                        RequestMatch(session);
+                    }
+                    else if (!session.IsReady) {
+                        Ready(session);
+                    }
                 }
             }
         }
 
-        public void HandleMatched(ServerSession session, S_Matched matched)
+        public void RequestMatch(ServerSession session)
         {
-            lock (_lock)
-            {
-                session.IsMatched = true;
-                Console.WriteLine($"Matched With : {matched.enemyNickname}");
-            }
+            string testName = "testName";
+            C_StartMatch startMatch = new C_StartMatch();
+            startMatch.nickname = testName + session.Id;
+            session.Send(startMatch.Write());
+        }
+
+        public void Ready(ServerSession session)
+        {
+            session.Send(new C_ReadyBattle().Write());
         }
     }
 }

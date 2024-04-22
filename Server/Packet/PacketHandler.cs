@@ -16,7 +16,6 @@ class PacketHandler
     internal static void C_ReadyBattleHandler(PacketSession packetSession, IPacket packet)
     {
         ClientSession session = packetSession as ClientSession;
-        C_ReadyBattle readyBattle = packet as C_ReadyBattle;
 
         // 멀티쓰레드 대비하여 꺼내서 사용
         // BattleRoom이 null로 바뀌어도 무방함
@@ -25,6 +24,7 @@ class PacketHandler
             return;
 
         room.ReadyBattle(session);
+        Console.WriteLine($"Ready for battle. (sessionId : {session.SessionId})");
     }
 
     internal static void C_MoveHandler(PacketSession packetSession, IPacket packet)

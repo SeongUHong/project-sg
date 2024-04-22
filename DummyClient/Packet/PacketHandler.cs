@@ -9,7 +9,9 @@ class PacketHandler
     {
         ServerSession session = packetSession as ServerSession;
         S_Matched matched = packet as S_Matched;
-        SessionManager.Instance.HandleMatched(session, matched);
+
+        session.IsMatched = true;
+        Console.WriteLine($"Matched With : {matched.enemyNickname}");
     }
 
     internal static void S_EnemyMoveHandler(PacketSession arg1, IPacket arg2)
@@ -32,8 +34,11 @@ class PacketHandler
     {
     }
 
-    internal static void S_BroadcastGameStartHandler(PacketSession arg1, IPacket arg2)
+    internal static void S_BroadcastGameStartHandler(PacketSession packetSession, IPacket packet)
     {
+        ServerSession session = packetSession as ServerSession;
+        session.IsReady = true;
+        Console.WriteLine("GameStart");
     }
 
     internal static void S_GameoverHandler(PacketSession arg1, IPacket arg2)
