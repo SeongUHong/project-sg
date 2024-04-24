@@ -33,8 +33,8 @@ public class NickName_Panel : UIBase
         _playerNick = Conf.Main._maching.transform.Find("Player_Nick").GetComponent<Text>();
         _playerNick.text = Managers.Game.PlayerNick;
 
-        Conf.Main._maching.Show();
         Awake();
+        Conf.Main._maching.Show();
     }
     public override void Init()
     {

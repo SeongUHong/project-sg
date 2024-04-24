@@ -32,7 +32,9 @@ public class Main_Panel : UIBase
 
     public void OnClick_Start() // 'Start' 버튼을 클릭하며 호출 되어질 함수
     {
-        
+
+        Managers.Network.Init();
+
         SceneManagerEx scene = Managers.Scene;
         scene.LoadScene(Define.Scenes.MatchingScene); // SceneManager의 LoadScene 함수를 사용하여! 현재 신 'MatchingScene'을 다시 불러오도록 시킨다.
                                                       // 같은 신을 다시 불러오면 게임이 재시작 된다.

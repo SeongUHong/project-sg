@@ -12,6 +12,7 @@ namespace Conf
         public static float MONSTER_SPAWN_RANGE = 3.0f;
         public static Result_Panel _result;
         public static Matching_Panel _maching;
+        public static Loading_Panel _loading;
         public static InGame_NickName_Panel _inGameNick;
         public static List<String> PLAYER_ID_LIST = new List<String>();
         public static List<String> ENEMY_ID_LIST = new List<String>();
