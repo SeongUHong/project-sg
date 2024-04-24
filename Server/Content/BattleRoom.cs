@@ -76,36 +76,20 @@ namespace Server
             }
         }
 
-        // 플레이어 입장
-        //public void Enter(ClientSession session)
-        //{
-        //    // 플레이어 추가
-        //    _sessions.Add(session);
-        //    // 세션에 룸 바인드
-        //    session.Room = this;
+        // 플레이어의 이동을 상대에게 알림
+        internal void HandleMove(ClientSession session, C_Move move)
+        {
+            ClientSession anotherSession;
+            if (_sessions.TryGetValue(session.Player.EnemyPlayerId, out anotherSession))
+                return;
 
-        //    // 입장한 플레이어에게 전체 플레이어 정보 전송
-        //    S_PlayerList players = new S_PlayerList();
-        //    foreach (ClientSession s in _sessions)
-        //    {
-        //        players.players.Add(new S_PlayerList.Player()
-        //        {
-        //            isSelf = (s == session),
-        //            playerId = s.SessionId,
-        //            posX = s.PosX,
-        //            posY = s.PosY,
-        //            posZ = s.PosZ,
-        //        });
-        //    }
-        //    session.Send(players.Write());
-
-        //    // 입장한 플레이어에 대한 정보를 전체 전송
-        //    S_BroadcastEnterGame enter = new S_BroadcastEnterGame();
-        //    enter.playerId = session.SessionId;
-        //    enter.posX = 0;
-        //    enter.posY = 0;
-        //    enter.posZ = 0;
-        //    Broadcast(enter.Write());
-        //}
+            S_EnemyMove enemyMove = new S_EnemyMove()
+            {
+                posX = move.posX,
+                posY = move.posY,
+                rotZ = move.rotZ,
+            };
+            anotherSession.Send(enemyMove.Write());
+        }
     }
 }

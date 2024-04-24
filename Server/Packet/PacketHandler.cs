@@ -29,7 +29,14 @@ class PacketHandler
 
     internal static void C_MoveHandler(PacketSession packetSession, IPacket packet)
     {
-        
+        ClientSession session = packetSession as ClientSession;
+        C_Move move = packet as C_Move;
+
+        BattleRoom room = session.BattleRoom;
+        if (room == null)
+            return;
+
+        room.HandleMove(session, move);
     }
 
     internal static void C_ShotHandler(PacketSession arg1, IPacket arg2)

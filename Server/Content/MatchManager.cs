@@ -44,28 +44,27 @@ namespace Server
                 if (sessions == null)
                     return;
 
-                ClientSession session1 = sessions[0];
-                ClientSession session2 = sessions[1];
-                // 매칭된 플레이어가 서로의 ID를 가짐
-                session1.Player.EnemyPlayerId = session2.Player.PlayerId;
-                session2.Player.EnemyPlayerId = session1.Player.PlayerId;
-                bool isLeft = true;
-
                 // 배틀룸 생성
                 BattleRoom battle = new BattleRoom();
                 // 배틀 초기화
                 battle.Init(sessions);
 
+                ClientSession session1 = sessions[0];
+                ClientSession session2 = sessions[1];
+
                 // 매칭 완료 패킷 전송
-                foreach (ClientSession session in sessions)
-                {
-                    S_Matched matched = new S_Matched();
-                    matched.enemyNickname = session.Player.Nickname;
-                    matched.isLeft = isLeft;
-                    if (isLeft)
-                        isLeft = false;
-                    session.Send(matched.Write());
-                }
+                // 매칭된 플레이어가 서로의 ID를 가짐
+                session1.Player.EnemyPlayerId = session2.Player.PlayerId;
+                S_Matched matched = new S_Matched();
+                matched.enemyNickname = session2.Player.Nickname;
+                matched.isLeft = true;
+                session1.Send(matched.Write());
+
+                session2.Player.EnemyPlayerId = session1.Player.PlayerId;
+                matched = new S_Matched();
+                matched.enemyNickname = session1.Player.Nickname;
+                matched.isLeft = false;
+                session2.Send(matched.Write());
             }
         }
 
