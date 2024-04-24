@@ -41,7 +41,7 @@ public class JoyStickHandler : MonoBehaviour, IDragHandler, IPointerDownHandler,
             S_EnemyMove move = new S_EnemyMove();
             move.posX = character.transform.up.x;
             move.posY = character.transform.up.y;
-            move.rotZ = character.transform.up.z;
+            move.rotZ = character.transform.rotation.z;
             Managers.Network.Send(move.Write());
         }
     }

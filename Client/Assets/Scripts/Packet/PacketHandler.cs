@@ -14,6 +14,9 @@ public class PacketHandler
         enemuRocation.z = move.rotZ;
         Managers.Game.EnemyRocation = enemuRocation;
 
+        Debug.Log($"EnemyMove x : {Managers.Game.EnemyRocation.x}");
+        Debug.Log($"EnemyMove y : {Managers.Game.EnemyRocation.y}");
+        Debug.Log($"EnemyMove z : {Managers.Game.EnemyRocation.z}");
     }
 
     internal static void S_MatchedHandler(PacketSession packetSession, IPacket packet)
@@ -21,6 +24,14 @@ public class PacketHandler
         S_Matched matched = packet as S_Matched;
         Managers.Game.IsLeft = matched.isLeft;
         Managers.Game.EnemyNick = matched.enemyNickname;
+
+        if (Managers.Game.EnemyNick != null)
+        {
+            Conf.Main._maching.Awake();
+            Conf.Main._loading.Show();
+        }
+        
+
         // Class.Method(test);
 
     }

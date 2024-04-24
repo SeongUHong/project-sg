@@ -99,7 +99,7 @@ public class EnemyController : BaseController
 
 
         //발사 테스트
-        Invoke("Fire",2.0f);
+        //Invoke("Fire",2.0f);
     }
 
 

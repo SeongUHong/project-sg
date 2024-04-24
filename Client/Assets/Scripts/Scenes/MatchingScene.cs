@@ -7,7 +7,6 @@ public class MatchingScene : BaseScene
 
     //닉네임 판넬 초기화
     NickName_Panel nickName_Panel;
-    
 
     protected override void Init()
     {
@@ -23,8 +22,12 @@ public class MatchingScene : BaseScene
         nickName_Panel.Show();
 
         Conf.Main._maching = Managers.Game.Matching_Panel;
+        Conf.Main._loading = Managers.Game.Load_Panel;
 
+    }
 
+    private void Update()
+    {
     }
 
 

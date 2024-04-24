@@ -86,6 +86,7 @@ public class SceneLoader : MonoBehaviour
                 {
                     timer = 0f;
                 }
+                Managers.Game.IsPause = false;
             }
             else
             {

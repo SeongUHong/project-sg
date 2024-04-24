@@ -12,9 +12,9 @@ public class Matching_Panel : UIBase
         Match_Button,
     }
 
-    String NickName;
 
-    private void Awake()
+
+    public void Awake()
     {
         transform.gameObject.SetActive(false); // ������ ���۵Ǹ� �˾� â�� ������ �ʵ��� �Ѵ�.
     }
@@ -23,23 +23,21 @@ public class Matching_Panel : UIBase
     {
         new WaitForSeconds(Define.NEXT_DELAY_TIME);
         transform.gameObject.SetActive(true);
+
+
     }
 
     public void OnClick_Button()
     {
 
-        Managers.Network.Init();
         
         StartCoroutine(SendNickName());
 
-
-        //로딩씬전환
-        if (Managers.Game.EnemyNick != null)
-        {
-            SceneLoader.Instance.LoadScene("GameScene");
-        }
+       //적닉네임받을때까지 대기 메서드작성
         
-
+        
+        
+        
     }
 
     //닉네임 서버에 보내기
@@ -58,6 +56,8 @@ public class Matching_Panel : UIBase
 
         }
     }
+
+
 
     public override void Init()
     {

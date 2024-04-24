@@ -23,7 +23,7 @@ public class GameManagerEx : ManagerBase
     //플레이어 닉
     String _playerNick;
     //적플레이어 닉
-    String _enemyNick = null;
+    String _enemyNick;
 
     //플레이어가 왼쪽인지 오른쪽인지 
     bool _isLeft;
@@ -51,6 +51,7 @@ public class GameManagerEx : ManagerBase
     public NickName_Panel NickName_Panel { get { return Managers.UI.MakePopUp<NickName_Panel>(); } }
     public Matching_Panel Matching_Panel { get { return Managers.UI.MakePopUp<Matching_Panel>(); } }
     public InGame_NickName_Panel InGame_NickName_Panel { get { return Managers.UI.MakePopUp<InGame_NickName_Panel>(); } }
+    public Loading_Panel Load_Panel { get { return Managers.UI.MakePopUp<Loading_Panel>(); } }
 
     public String PlayerNick { get { return _playerNick; } set { _playerNick = value; } }
     public String EnemyNick { get { return _enemyNick; } set { _enemyNick = value; } }
