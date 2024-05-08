@@ -91,10 +91,10 @@ public class EnemyController : BaseController
 
         //무빙테스트
         //Invoke("Random",2.0f);
-        //InvokeRepeating("TestRotate", 1.0f,50.0f);
+        InvokeRepeating("TestRotate", 1.0f,50.0f);
 
         //적 기체 무브
-        InvokeRepeating("EnemyMove", 0.25f,0.25f);
+        //InvokeRepeating("EnemyMove", 0.25f,0.25f);
 
 
         //발사 테스트
@@ -227,7 +227,7 @@ public class EnemyController : BaseController
 
     IEnumerator TestRotate()
     {
-        character.transform.Rotate(0, 0, joystickVector.x); 
+        character.transform.Rotate(Managers.Game.EnemyRocation.x, Managers.Game.EnemyRocation.y, Managers.Game.EnemyRocation.z); 
         return new WaitForSecondsRealtime(3.0f);
         
     }
@@ -244,6 +244,8 @@ public class EnemyController : BaseController
         
         Vector3 originJoystickVec = character.transform.up;
         // character가 바라보고 있는 벡터
+
+        character.GetComponent<Rigidbody2D>().velocity = character.transform.up * speed;
 
         float angle = Vector3.Angle(currentJoystickVec, originJoystickVec);
         int sign = (Vector3.Cross(currentJoystickVec, originJoystickVec).z > 0) ? -1 : 1;

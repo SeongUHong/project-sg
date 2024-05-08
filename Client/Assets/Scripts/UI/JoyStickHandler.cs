@@ -24,7 +24,16 @@ public class JoyStickHandler : MonoBehaviour, IDragHandler, IPointerDownHandler,
     void Start()
     {
 
-        character = Managers.Game.Player;
+        if(Managers.Game.Player != null)
+        {
+            character = Managers.Game.Player;
+        }
+        else
+        {
+            character = Managers.Game.Player_Right;
+        }
+
+        
 
         //적 움직임 테스트용
         //character = Managers.Game.Enemy;
@@ -41,9 +50,9 @@ public class JoyStickHandler : MonoBehaviour, IDragHandler, IPointerDownHandler,
         {
             yield return new WaitForSeconds(0.25f);
             C_Move move = new C_Move();
-            move.posX = character.transform.up.x;
-            move.posY = character.transform.up.y;
-            move.rotZ = character.transform.rotation.z;
+            move.posX = character.transform.position.x;
+            move.posY = character.transform.position.y;
+            move.rotZ = character.transform.position.z;
             Managers.Network.Send(move.Write());
         }
     }
@@ -65,6 +74,8 @@ public class JoyStickHandler : MonoBehaviour, IDragHandler, IPointerDownHandler,
             if (RectTransformUtility.ScreenPointToLocalPointInRectangle(touchArea,
             eventData.position, eventData.pressEventCamera, out Vector2 localPoint))
             {
+                character.GetComponent<Rigidbody2D>().velocity = character.transform.up * speed;
+
                 localPoint.x = (localPoint.x / touchArea.sizeDelta.x);
                 localPoint.y = (localPoint.y / touchArea.sizeDelta.y);
                 // Joystick Touch Area의 비율 구하기 ( -0.5 ~ 0.5 )
