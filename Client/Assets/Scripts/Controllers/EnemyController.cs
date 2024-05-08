@@ -2,6 +2,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -78,8 +79,6 @@ public class EnemyController : BaseController
         animator = GetComponent<Animator>();
         animator.SetBool("expl", false);
 
-       
-
         //AddAction();
 
     }
@@ -87,7 +86,7 @@ public class EnemyController : BaseController
     void Update()
     {
         if (character != null)
-            character.GetComponent<Rigidbody2D>().velocity = character.transform.up * speed;
+            //character.GetComponent<Rigidbody2D>().velocity = character.transform.up * speed;
         // 캐릭터는 3의 속도로 계속 전진
 
         //무빙테스트
@@ -242,6 +241,7 @@ public class EnemyController : BaseController
 
     private void TurnAngle(Vector3 currentJoystickVec)
     {
+        
         Vector3 originJoystickVec = character.transform.up;
         // character가 바라보고 있는 벡터
 

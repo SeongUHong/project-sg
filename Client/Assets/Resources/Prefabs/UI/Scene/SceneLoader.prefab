@@ -482,7 +482,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1870624465986884380}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 510505d767b89df4aa59001f7bb163c0, type: 3}
+  m_Script: {fileID: 11500000, guid: b96041d29e98cee4c93d48d783896c43, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   sceneLoaderCanvasGroup: {fileID: 1870624465986884379}

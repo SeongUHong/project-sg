@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using System;
+using System.Threading;
 
 public class JoyStickHandler : MonoBehaviour, IDragHandler, IPointerDownHandler, IPointerUpHandler
 {
@@ -30,15 +31,16 @@ public class JoyStickHandler : MonoBehaviour, IDragHandler, IPointerDownHandler,
 
         // 시작하면 charactor를 180도 오른쪽으로 회전
 
-        StartCoroutine(S_EnemyMove());
+        StartCoroutine(C_Move());
     }
 
-    IEnumerator S_EnemyMove()
+
+    IEnumerator C_Move()
     {
         while (true)
         {
             yield return new WaitForSeconds(0.25f);
-            S_EnemyMove move = new S_EnemyMove();
+            C_Move move = new C_Move();
             move.posX = character.transform.up.x;
             move.posY = character.transform.up.y;
             move.rotZ = character.transform.rotation.z;
@@ -48,8 +50,8 @@ public class JoyStickHandler : MonoBehaviour, IDragHandler, IPointerDownHandler,
 
     void Update()
     {
-        if(character!= null)
-            character.GetComponent<Rigidbody2D>().velocity = character.transform.up * speed;
+        /*if(character!= null)
+            character.GetComponent<Rigidbody2D>().velocity = character.transform.up * speed;*/
         // 캐릭터는 3의 속도로 계속 전진
     }
 
