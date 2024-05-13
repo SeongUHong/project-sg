@@ -22,8 +22,11 @@ class PacketHandler
     {
     }
 
-    internal static void S_ShotHandler(PacketSession arg1, IPacket arg2)
+    internal static void S_ShotHandler(PacketSession packetSession, IPacket packet)
     {
+        S_Shot shot = packet as S_Shot;
+
+        Console.WriteLine($"shoot fireball (fireballId : {shot.fireballId})");
     }
 
     internal static void S_AttackedHandler(PacketSession arg1, IPacket arg2)

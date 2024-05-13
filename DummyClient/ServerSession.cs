@@ -9,6 +9,7 @@ namespace DummyClient
         public int Id { get; set; }
         public bool IsMatched { get; set; }
         public bool IsReady { get; set; }
+        public bool IsShoot { get; set; }
 
         public override void OnConnected(EndPoint endPoint)
         {

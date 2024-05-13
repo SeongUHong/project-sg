@@ -38,6 +38,11 @@ namespace DummyClient
                     else if (!session.IsReady) {
                         Ready(session);
                     }
+                    else
+                    {
+                        if (!session.IsShoot)
+                            Shot(session);
+                    }
                 }
             }
         }
@@ -53,6 +58,21 @@ namespace DummyClient
         public void Ready(ServerSession session)
         {
             session.Send(new C_ReadyBattle().Write());
+        }
+
+        public void Shot(ServerSession session)
+        {
+            Random rand = new Random();
+
+            C_Shot shot = new C_Shot()
+            {
+                posX = rand.Next(1, 10),
+                posY = rand.Next(1, 10),
+                rotZ = (float)rand.Next(0, 100) / 100f,
+            };
+            session.Send(shot.Write());
+
+            session.IsShoot = true;
         }
     }
 }
