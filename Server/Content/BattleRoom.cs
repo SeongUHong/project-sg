@@ -7,8 +7,10 @@ namespace Server
     class BattleRoom : IJobQueue
     {
         Dictionary<ushort, ClientSession> _sessions = new Dictionary<ushort, ClientSession>();
+        Dictionary<ushort, Fireball> _fireballs = new Dictionary<ushort, Fireball>();
         JobQueue _jobQueue = new JobQueue();
         List<ArraySegment<byte>> _pendingList = new List<ArraySegment<byte>>();
+        ushort _fireballId = 0;
         object _lock = new object();
 
         public void Init(List<ClientSession> sessions)
@@ -77,7 +79,7 @@ namespace Server
         }
 
         // 플레이어의 이동을 상대에게 알림
-        internal void HandleMove(ClientSession session, C_Move move)
+        public void HandleMove(ClientSession session, C_Move move)
         {
             ClientSession anotherSession;
             if (_sessions.TryGetValue(session.Player.EnemyPlayerId, out anotherSession))
@@ -90,6 +92,41 @@ namespace Server
                 rotZ = move.rotZ,
             };
             anotherSession.Send(enemyMove.Write());
+        }
+
+        // 미사일을 생성함
+        public void CreateFireball(ClientSession session, C_Shot shot)
+        {
+            ushort playerId = session.Player.EnemyPlayerId;
+            ushort fireballId;
+
+            // 미사일 생성
+            lock (_lock)
+            {
+                fireballId = _fireballId++;
+
+                Fireball fireBall = new Fireball();
+                fireBall.FireballId = fireballId;
+                fireBall.PlayerId = playerId;
+                fireBall.PosX = shot.posX;
+                fireBall.PosY = shot.posY;
+                fireBall.RotZ = shot.rotZ;
+
+                _fireballs.Add(fireballId, fireBall);
+            }
+
+            // 새로운 미사일 생성을 알림
+            S_Shot newShot = new S_Shot()
+            {
+                fireballId = fireballId,
+                posX = shot.posX,
+                posY = shot.posY,
+                rotZ = shot.rotZ,
+            };
+            
+            Broadcast(newShot.Write());
+
+            Console.WriteLine($"shot (fireballId : {fireballId}, posX : {newShot.posX}, posY : {newShot.posY}, rotZ : {newShot.rotZ}");
         }
     }
 }

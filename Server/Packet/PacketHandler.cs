@@ -40,8 +40,16 @@ class PacketHandler
         Console.WriteLine($"Player moved (sessionId : {session.SessionId}, posX : {move.posX}, posY : {move.posY}, rotZ : {move.rotZ}");
     }
 
-    internal static void C_ShotHandler(PacketSession arg1, IPacket arg2)
+    internal static void C_ShotHandler(PacketSession packetSession, IPacket packet)
     {
+        ClientSession session = packetSession as ClientSession;
+        C_Shot shot = packet as C_Shot;
+
+        BattleRoom room = session.BattleRoom;
+        if (room == null)
+            return;
+
+        room.CreateFireball(session, shot);
     }
 
     internal static void C_AttackedHandler(PacketSession arg1, IPacket arg2)
