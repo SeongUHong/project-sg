@@ -82,7 +82,7 @@ namespace Server
         public void HandleMove(ClientSession session, C_Move move)
         {
             ClientSession anotherSession;
-            if (_sessions.TryGetValue(session.Player.EnemyPlayerId, out anotherSession))
+            if (!_sessions.TryGetValue(session.Player.EnemyPlayerId, out anotherSession))
                 return;
 
             S_EnemyMove enemyMove = new S_EnemyMove()

@@ -14,8 +14,9 @@ class PacketHandler
         Console.WriteLine($"Matched With : {matched.enemyNickname}");
     }
 
-    internal static void S_EnemyMoveHandler(PacketSession arg1, IPacket arg2)
+    internal static void S_EnemyMoveHandler(PacketSession packetSession, IPacket packet)
     {
+        Console.WriteLine($"Enemy moved");
     }
 
     internal static void S_EnemyShotHandler(PacketSession arg1, IPacket arg2)

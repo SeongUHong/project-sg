@@ -42,6 +42,8 @@ namespace DummyClient
                     {
                         if (!session.IsShoot)
                             Shot(session);
+                        else
+                            Move(session);
                     }
                 }
             }
@@ -73,6 +75,19 @@ namespace DummyClient
             session.Send(shot.Write());
 
             session.IsShoot = true;
+        }
+
+        public void Move(ServerSession session)
+        {
+            Random rand = new Random();
+
+            C_Move move = new C_Move()
+            {
+                posX = rand.Next(1, 10),
+                posY = rand.Next(1, 10),
+                rotZ = (float)rand.Next(0, 100) / 100f,
+            };
+            session.Send(move.Write());
         }
     }
 }
