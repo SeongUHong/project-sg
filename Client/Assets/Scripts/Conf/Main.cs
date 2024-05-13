@@ -21,7 +21,7 @@ namespace Conf
             ATTACK = 1,
         }
         public static float SEND_PACKET_INTERVAL = 0.25f;
-        //public static bool IS_PAUSE;
+        public static float MOVE_POWER = 1.0f;
 
     }
 

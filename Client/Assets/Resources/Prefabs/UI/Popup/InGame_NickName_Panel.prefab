@@ -167,7 +167,7 @@ GameObject:
   - component: {fileID: 7661144479314539780}
   - component: {fileID: 7661144479314539783}
   - component: {fileID: 2222523750386491886}
-  - component: {fileID: 7359489919016223221}
+  - component: {fileID: 3396878707801028501}
   m_Layer: 5
   m_Name: InGame_NickName_Panel
   m_TagString: Untagged
@@ -189,11 +189,11 @@ RectTransform:
   m_Children:
   - {fileID: 7661144479880643137}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0.1, y: -0.1}
+  m_AnchoredPosition: {x: 0.1000061, y: -0.1000061}
   m_SizeDelta: {x: 67.4784, y: 15.6019}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &7661144479314539781
@@ -240,7 +240,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 1
+  m_PresetInfoIsWorld: 0
 --- !u!114 &7661144479314539783
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -270,7 +270,7 @@ SortingGroup:
   m_SortingLayer: 1
   m_SortingOrder: 0
   m_SortAtRoot: 0
---- !u!114 &7359489919016223221
+--- !u!114 &3396878707801028501
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -279,7 +279,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 7661144479314539782}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 25b276d60b4202c4c8142641d1410a5c, type: 3}
+  m_Script: {fileID: 11500000, guid: dbd7f2bd5b6d27449b689e4d037b05f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &7661144479880643136

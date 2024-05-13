@@ -29,7 +29,8 @@ public class GameManagerEx : ManagerBase
     bool _isLeft;
 
     //적플레이어 위치정보
-    Vector3 _enemyRocation;
+    Vector3 _enemyPosition;
+    Vector3 _enemyRotate;
 
     //플레이어 격침
     bool _playerDeadFlag;
@@ -56,7 +57,8 @@ public class GameManagerEx : ManagerBase
     public String PlayerNick { get { return _playerNick; } set { _playerNick = value; } }
     public String EnemyNick { get { return _enemyNick; } set { _enemyNick = value; } }
     public Boolean IsLeft { get { return _isLeft; } set { _isLeft = value; } }
-    public Vector3 EnemyRocation { get { return _enemyRocation; } set { _enemyRocation = value; } }
+    public Vector3 EnemyPosition { get { return _enemyPosition; } set { _enemyPosition = value; } }
+    public Vector3 EnemyRotate { get { return _enemyRotate; } set { _enemyRotate = value; } }
     public Boolean PlayerDeadFlag { get { return _playerDeadFlag; } set { _playerDeadFlag = value; } }
     public Boolean EnemyDeadFlag { get { return _enemyDeadFlag; } set { _enemyDeadFlag = value; } }
     public Boolean IsPause { get { return _isPause; } set { _isPause = value; } }

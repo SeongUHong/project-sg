@@ -35,6 +35,8 @@ public class EnemyController : BaseController
     private bool m_IsBreak; // 코루틴 실행여부
     private Coroutine runningCoroutine; // 부드러운 회전 코루틴
     public Vector2 rect;
+    private Vector3 position;
+    private Vector3 rotate;
 
 
     //적 랜덤움직임
@@ -79,19 +81,20 @@ public class EnemyController : BaseController
         animator = GetComponent<Animator>();
         animator.SetBool("expl", false);
 
+
         //AddAction();
 
     }
 
     void Update()
     {
-        if (character != null)
-            //character.GetComponent<Rigidbody2D>().velocity = character.transform.up * speed;
+        //if (character != null)
+        //character.GetComponent<Rigidbody2D>().velocity = character.transform.up * speed;
         // 캐릭터는 3의 속도로 계속 전진
 
         //무빙테스트
         //Invoke("Random",2.0f);
-        InvokeRepeating("TestRotate", 1.0f,50.0f);
+        //InvokeRepeating("TestRotate", 0.2f,1f);
 
         //적 기체 무브
         //InvokeRepeating("EnemyMove", 0.25f,0.25f);
@@ -99,6 +102,16 @@ public class EnemyController : BaseController
 
         //발사 테스트
         //Invoke("Fire",2.0f);
+
+        position = new Vector3(Managers.Game.EnemyPosition.x, Managers.Game.EnemyPosition.y, 0);
+
+        transform.position = position;
+
+        //transform.Translate(joystickVector);
+        //rotate = Managers.Game.EnemyRotate;
+
+        //character.transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(_dir), 1 * Time.deltaTime);
+
     }
 
 
@@ -227,7 +240,6 @@ public class EnemyController : BaseController
 
     IEnumerator TestRotate()
     {
-        character.transform.Rotate(Managers.Game.EnemyRocation.x, Managers.Game.EnemyRocation.y, Managers.Game.EnemyRocation.z); 
         return new WaitForSecondsRealtime(3.0f);
         
     }
@@ -235,7 +247,7 @@ public class EnemyController : BaseController
     //적 기체 위치 C_Move
     IEnumerator EnemyMove()
     {
-        TurnAngle(Managers.Game.EnemyRocation);
+        TurnAngle(Managers.Game.EnemyPosition);
         return new WaitForSecondsRealtime(0.25f);
     }
 

@@ -4,19 +4,18 @@ using UnityEngine;
 
 public class PacketHandler
 {
+
+
     internal static void S_EnemyMoveHandler(PacketSession packetSession, IPacket packet)
     {
-        throw new NotImplementedException();
-        C_Move move = packet as C_Move;
-        Vector3 enemuRocation = new Vector3();
-        enemuRocation.x = move.posX;
-        enemuRocation.y = move.posY;
-        enemuRocation.z = move.rotZ;
-        Managers.Game.EnemyRocation = enemuRocation;
-
-        Debug.Log($"EnemyMove x : {Managers.Game.EnemyRocation.x}");
-        Debug.Log($"EnemyMove y : {Managers.Game.EnemyRocation.y}");
-        Debug.Log($"EnemyMove z : {Managers.Game.EnemyRocation.z}");
+        S_EnemyMove move = packet as S_EnemyMove;
+        Vector3 enemyPosition = new Vector3();
+        enemyPosition.x = move.posX;
+        enemyPosition.y = move.posY;
+        Managers.Game.EnemyPosition = enemyPosition;
+        Vector3 enemyRotation = new Vector3();
+        enemyRotation.z = move.rotZ;
+        Managers.Game.EnemyRotate = enemyRotation;
     }
 
     internal static void S_MatchedHandler(PacketSession packetSession, IPacket packet)
