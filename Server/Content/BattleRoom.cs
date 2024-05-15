@@ -47,13 +47,18 @@ namespace Server
             foreach (ClientSession s in _sessions.Values)
                 s.Send(_pendingList);
 
-            _pendingList.Clear();
+            lock (_lock) {
+                _pendingList.Clear();
+            }
         }
 
         // 정보 전송
         public void Broadcast(ArraySegment<byte> segment)
         {
-            _pendingList.Add(segment);
+            lock (_lock)
+            {
+                _pendingList.Add(segment);
+            }
         }
 
         // 배틀 준비 완료 처리
