@@ -33,12 +33,10 @@ public class JoyStickHandler : MonoBehaviour, IDragHandler, IPointerDownHandler,
             character = Managers.Game.Player_Right;
         }
 
-        
+
 
         //적 움직임 테스트용
         //character = Managers.Game.Enemy;
-
-        // 시작하면 charactor를 180도 오른쪽으로 회전
 
         StartCoroutine(C_Move());
     }
@@ -59,8 +57,8 @@ public class JoyStickHandler : MonoBehaviour, IDragHandler, IPointerDownHandler,
 
     void Update()
     {
-        /*if(character!= null)
-            character.GetComponent<Rigidbody2D>().velocity = character.transform.up * speed;*/
+        if (character != null)
+            character.GetComponent<Rigidbody2D>().velocity = character.transform.up * speed;
         // 캐릭터는 3의 속도로 계속 전진
     }
 

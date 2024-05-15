@@ -33,7 +33,7 @@ public class GameScene : BaseScene
 
     private void Update()
     {
-        /*if (Managers.Game.IsPause)
+        if (Managers.Game.IsPause)
         {
             Time.timeScale = 1;
             return;
@@ -42,7 +42,7 @@ public class GameScene : BaseScene
         {
             Time.timeScale = 0;
             return;
-        }*/
+        }
     }
 
 

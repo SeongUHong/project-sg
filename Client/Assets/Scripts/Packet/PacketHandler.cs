@@ -35,6 +35,10 @@ public class PacketHandler
 
     }
 
+    internal static void S_FireballMoveHandler(PacketSession arg1, IPacket arg2)
+    {
+    }
+
     internal static void S_EnemyShotHandler(PacketSession arg1, IPacket arg2)
     {
         
