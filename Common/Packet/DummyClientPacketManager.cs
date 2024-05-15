@@ -25,8 +25,8 @@ public class ClientPacketManager
 		_handler.Add((ushort)PacketID.S_EnemyShot, PacketHandler.S_EnemyShotHandler);
 		_makeFunc.Add((ushort)PacketID.S_Shot, MakePacket<S_Shot>);
 		_handler.Add((ushort)PacketID.S_Shot, PacketHandler.S_ShotHandler);
-		_makeFunc.Add((ushort)PacketID.S_Attacked, MakePacket<S_Attacked>);
-		_handler.Add((ushort)PacketID.S_Attacked, PacketHandler.S_AttackedHandler);
+		_makeFunc.Add((ushort)PacketID.S_FireballMove, MakePacket<S_FireballMove>);
+		_handler.Add((ushort)PacketID.S_FireballMove, PacketHandler.S_FireballMoveHandler);
 		_makeFunc.Add((ushort)PacketID.S_Hit, MakePacket<S_Hit>);
 		_handler.Add((ushort)PacketID.S_Hit, PacketHandler.S_HitHandler);
 		_makeFunc.Add((ushort)PacketID.S_Matched, MakePacket<S_Matched>);

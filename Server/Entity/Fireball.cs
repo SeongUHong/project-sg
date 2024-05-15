@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Text;
+using System.Numerics;
 
 namespace Server
 {
@@ -12,5 +10,11 @@ namespace Server
         public float PosX { get; set; }
         public float PosY { get; set; }
         public float RotZ { get; set; }
+
+        public void Move()
+        {
+            PosX += (float)Math.Cos(RotZ) * Config.FIREBALL_SPEED * Config.MOVE_FIREBALL_INTERVAL;
+            PosY += (float)Math.Sin(RotZ) * Config.FIREBALL_SPEED * Config.MOVE_FIREBALL_INTERVAL;
+        }
     }
 }

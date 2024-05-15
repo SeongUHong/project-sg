@@ -9,7 +9,7 @@ public enum PacketID
 	S_EnemyMove = 1,
 	S_EnemyShot = 2,
 	S_Shot = 3,
-	S_Attacked = 4,
+	S_FireballMove = 4,
 	S_Hit = 5,
 	S_Matched = 6,
 	S_BroadcastGameStart = 7,
@@ -170,11 +170,14 @@ public class S_Shot : IPacket
 	}
 }
 
-public class S_Attacked : IPacket
+public class S_FireballMove : IPacket
 {
 	public int fireballId;
+	public float posX;
+	public float posY;
+	public float rotZ;
 
-	public ushort Protocol { get { return (ushort)PacketID.S_Attacked; } }
+	public ushort Protocol { get { return (ushort)PacketID.S_FireballMove; } }
 
 	public void Read(ArraySegment<byte> segment)
 	{
@@ -184,6 +187,12 @@ public class S_Attacked : IPacket
 		count += sizeof(ushort);
 		this.fireballId = BitConverter.ToInt32(segment.Array, segment.Offset + count);
 		count += sizeof(int);
+		this.posX = BitConverter.ToSingle(segment.Array, segment.Offset + count);
+		count += sizeof(float);
+		this.posY = BitConverter.ToSingle(segment.Array, segment.Offset + count);
+		count += sizeof(float);
+		this.rotZ = BitConverter.ToSingle(segment.Array, segment.Offset + count);
+		count += sizeof(float);
 	}
 
 	public ArraySegment<byte> Write()
@@ -192,10 +201,16 @@ public class S_Attacked : IPacket
 		ushort count = 0;
 
 		count += sizeof(ushort);
-		Array.Copy(BitConverter.GetBytes((ushort)PacketID.S_Attacked), 0, segment.Array, segment.Offset + count, sizeof(ushort));
+		Array.Copy(BitConverter.GetBytes((ushort)PacketID.S_FireballMove), 0, segment.Array, segment.Offset + count, sizeof(ushort));
 		count += sizeof(ushort);
 		Array.Copy(BitConverter.GetBytes(this.fireballId), 0, segment.Array, segment.Offset + count, sizeof(int));
 		count += sizeof(int);
+		Array.Copy(BitConverter.GetBytes(this.posX), 0, segment.Array, segment.Offset + count, sizeof(float));
+		count += sizeof(float);
+		Array.Copy(BitConverter.GetBytes(this.posY), 0, segment.Array, segment.Offset + count, sizeof(float));
+		count += sizeof(float);
+		Array.Copy(BitConverter.GetBytes(this.rotZ), 0, segment.Array, segment.Offset + count, sizeof(float));
+		count += sizeof(float);
 
 		Array.Copy(BitConverter.GetBytes(count), 0, segment.Array, segment.Offset, sizeof(ushort));
 

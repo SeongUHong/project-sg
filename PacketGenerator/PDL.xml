@@ -20,9 +20,11 @@
 		<float name="posY"/>
 		<float name="rotZ"/>
 	</packet>
-	<!--공격-->
-	<packet name="S_Attacked">
+	<packet name="S_FireballMove">
 		<int name="fireballId"/>
+		<float name="posX"/>
+		<float name="posY"/>
+		<float name="rotZ"/>
 	</packet>
 	<!--피격-->
 	<packet name="S_Hit">

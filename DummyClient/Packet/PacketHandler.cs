@@ -44,6 +44,10 @@ class PacketHandler
         Console.WriteLine("GameStart");
     }
 
+    internal static void S_FireballMoveHandler(PacketSession arg1, IPacket arg2)
+    {
+    }
+
     internal static void S_GameoverHandler(PacketSession arg1, IPacket arg2)
     {
     }
