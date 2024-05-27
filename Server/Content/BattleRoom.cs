@@ -7,7 +7,7 @@ namespace Server
     class BattleRoom : IJobQueue
     {
         Dictionary<ushort, ClientSession> _sessions = new Dictionary<ushort, ClientSession>();
-        Dictionary<ushort, Fireball> _fireballs = new Dictionary<ushort, Fireball>();
+        Dictionary<int, Fireball> _fireballs = new Dictionary<int, Fireball>();
         JobQueue _jobQueue = new JobQueue();
         List<ArraySegment<byte>> _pendingList = new List<ArraySegment<byte>>();
         ushort _fireballId = 0;
@@ -85,11 +85,33 @@ namespace Server
             }
         }
 
+        public ClientSession GetAnotherSession(ushort playerId)
+        {
+            ClientSession anotherSession = null;
+            if (!_sessions.TryGetValue(playerId, out anotherSession))
+            {
+                Console.WriteLine($"Cant find session (playerId : {playerId})");
+            }
+
+            return anotherSession;
+        }
+
+        public Fireball GetFireBall(int fireballId)
+        {
+            Fireball fireball = null;
+            if (!_fireballs.TryGetValue(fireballId, out fireball))
+            {
+                Console.WriteLine($"Cant find fireball (fireballId : {fireballId})");
+            }
+
+            return fireball;
+        }
+
         // 플레이어의 이동을 상대에게 알림
         public void HandleMove(ClientSession session, C_Move move)
         {
-            ClientSession anotherSession;
-            if (!_sessions.TryGetValue(session.Player.EnemyPlayerId, out anotherSession))
+            ClientSession anotherSession = GetAnotherSession(session.Player.EnemyPlayerId);
+            if (anotherSession == null)
                 return;
 
             S_EnemyMove enemyMove = new S_EnemyMove()
@@ -104,8 +126,8 @@ namespace Server
         // 미사일을 생성함
         public void CreateFireball(ClientSession session, C_Shot shot)
         {
-            ClientSession anotherSession;
-            if (!_sessions.TryGetValue(session.Player.EnemyPlayerId, out anotherSession))
+            ClientSession anotherSession = GetAnotherSession(session.Player.EnemyPlayerId);
+            if (anotherSession == null)
                 return;
 
             ushort playerId = session.Player.PlayerId;
@@ -137,7 +159,7 @@ namespace Server
             session.Send(newShot.Write());
 
             // 새로운 미사일 생성을 적에게 알림
-            S_Shot newEnemyShot = new S_Shot()
+            S_EnemyShot newEnemyShot = new S_EnemyShot()
             {
                 fireballId = fireballId,
                 posX = shot.posX,
@@ -178,8 +200,19 @@ namespace Server
                     rotZ = fire.RotZ,
                 };
                 Broadcast(fireMove.Write());
-                Console.WriteLine($"Fireball moved (fireballId : {fire.FireballId}, posX : {fire.PosX}, posY : {fire.PosY}, rotZ : {fire.RotZ}");
             }
+        }
+
+        // 피격을 알림
+        public void HandleHit(ClientSession session, C_Hit hit)
+        {
+            ClientSession anotherSession = GetAnotherSession(session.Player.EnemyPlayerId);
+            if (anotherSession == null)
+                return;
+
+            Fireball fireball = GetFireBall(hit.fireballId);
+            if (fireball == null)
+                return;
         }
     }
 }
