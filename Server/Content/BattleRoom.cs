@@ -85,12 +85,12 @@ namespace Server
             }
         }
 
-        public ClientSession GetAnotherSession(ushort playerId)
+        public ClientSession GetAnotherSession(ushort anotherPlayerId)
         {
             ClientSession anotherSession = null;
-            if (!_sessions.TryGetValue(playerId, out anotherSession))
+            if (!_sessions.TryGetValue(anotherPlayerId, out anotherSession))
             {
-                Console.WriteLine($"Cant find session (playerId : {playerId})");
+                Console.WriteLine($"Cant find session (playerId : {anotherPlayerId})");
             }
 
             return anotherSession;
@@ -168,7 +168,7 @@ namespace Server
             };
             anotherSession.Send(newEnemyShot.Write());
 
-            Console.WriteLine($"shoot (fireballId : {fireballId}, posX : {newShot.posX}, posY : {newShot.posY}, rotZ : {newShot.rotZ}");
+            Console.WriteLine($"shoot (fireballId : {fireballId}, posX : {newShot.posX}, posY : {newShot.posY}, rotZ : {newShot.rotZ})");
         }
 
         // 미사일 이동 처리
