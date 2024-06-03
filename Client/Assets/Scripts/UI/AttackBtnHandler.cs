@@ -16,7 +16,7 @@ public class AttackBtnHandler : MonoBehaviour
 
     public void OnAttack()
     {
-        Managers.Skill.SpawnSkill(SKILL_NAME, Managers.Game.Player.transform.position, _dir, _stat.AttackDistance, _stat.ProjectileSpeed, _stat.Offence, Define.Skill.Launch, Managers.Game.Player.transform);
+        //Managers.Skill.SpawnSkill(SKILL_NAME, Managers.Game.Player.transform.position, _dir, _stat.AttackDistance, _stat.ProjectileSpeed, _stat.Offence, Define.Skill.Launch, Managers.Game.Player.transform);
 
         //적공격(테스트용)
         //Managers.Skill.SpawnSkill(SKILL_NAME, Managers.Game.Enemy.transform.position, _dir, _stat.AttackDistance, _stat.ProjectileSpeed, _stat.Offence, Define.Skill.Launch, Managers.Game.Enemy.transform);

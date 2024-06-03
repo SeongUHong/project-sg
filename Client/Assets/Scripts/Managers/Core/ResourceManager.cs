@@ -44,7 +44,7 @@ public class ResourceManager : ManagerBase
         {
             if ($"{path}" == "UI/Scene/UISceneMain")
                 return null;
-            Debug.Log($"Failed to load Prefab : {path}");
+            //Debug.Log($"Failed to load Prefab : {path}");
             return null;
         }
 
@@ -59,22 +59,26 @@ public class ResourceManager : ManagerBase
         //go.name = original.name;
 
         //탄환이름을 번호로 리스트에 저장
-        if (go.layer == 9 )
+        if (go.layer == 9)
         {
-            _player_id++;
+            /*_player_id++;
             go.name = _player_id.ToString();
 
-            Conf.Main.PLAYER_ID_LIST.Add(go.name);
+            Conf.Main.PLAYER_ID_LIST.Add(go.name);*/
+            //go.name = Managers.Skill.GetFireBallID().ToString();
+            
 
         }
-        else if(go.layer == 10)
+        else if (go.layer == 10)
         {
-            _enemy_id++;
+            /*_enemy_id++;
             go.name = _enemy_id.ToString();
 
-            Conf.Main.ENEMY_ID_LIST.Add(go.name);
+            Conf.Main.ENEMY_ID_LIST.Add(go.name);*/
+
+            //go.name = Managers.Skill.GetFireBallID().ToString();
         }
-        
+
 
         return go;
     }

@@ -135,13 +135,13 @@ public class EnemyController : BaseController
         yield return new WaitForSeconds(_stat.AttackSpeed);
     }
 
-    IEnumerator WaitForIt()
+    public IEnumerator WaitForIt()
     {
         yield return new WaitForSeconds(0.2f);
         flame.SetActive(false);
     }
 
-    void OnAttack()
+    public void OnAttack()
     {
         if (Managers.Game.IsLeft)
         {
@@ -154,6 +154,7 @@ public class EnemyController : BaseController
 
                 Managers.Skill.SpawnSkill(SKILL_NAME, Managers.Game.Enemy.transform.Find("ship2-flame_enemy").position,
                     Managers.Game.Enemy.transform.Find("ship2-flame_enemy").transform.up, _stat.AttackDistance, _stat.ProjectileSpeed, _stat.Offence, Define.Skill.Launch, Managers.Game.Enemy.transform);
+
 
             }
         }else
@@ -179,7 +180,7 @@ public class EnemyController : BaseController
         if (collision.GetComponent<Collider2D>().gameObject.layer == 9)
         {
 
-            _stat.OnAttacked(100);
+            _stat.OnAttacked(5);
             if (_stat.Hp <= 0)
             {
                 Managers.Game.EnemyDeadFlag = true;

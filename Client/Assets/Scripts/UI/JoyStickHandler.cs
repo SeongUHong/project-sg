@@ -96,7 +96,7 @@ public class JoyStickHandler : MonoBehaviour, IDragHandler, IPointerDownHandler,
 
         catch (Exception ex)
         {
-            Debug.Log("조이스틱 컨트롤러 OnDrag 에러"); 
+            //Debug.Log("조이스틱 컨트롤러 OnDrag 에러"); 
         }
     }
 
@@ -115,7 +115,7 @@ public class JoyStickHandler : MonoBehaviour, IDragHandler, IPointerDownHandler,
         }
         catch
         {
-            Debug.Log("조이스틱 컨트롤러 OnPointerUp 에러");
+            //Debug.Log("조이스틱 컨트롤러 OnPointerUp 에러");
         }
         
     }

@@ -22,6 +22,7 @@ public class MainScene : BaseScene
         _main_Panel.Show();
 
         Time.timeScale = 1.0f;
+
     }
 
     public override void Clear()

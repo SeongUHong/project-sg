@@ -32,6 +32,9 @@ public class GameManagerEx : ManagerBase
     Vector3 _enemyPosition;
     Vector3 _enemyRotate;
 
+    //탄환 발사 허가
+    bool _canShoot;
+
     //플레이어 격침
     bool _playerDeadFlag;
 
@@ -59,6 +62,7 @@ public class GameManagerEx : ManagerBase
     public Boolean IsLeft { get { return _isLeft; } set { _isLeft = value; } }
     public Vector3 EnemyPosition { get { return _enemyPosition; } set { _enemyPosition = value; } }
     public Vector3 EnemyRotate { get { return _enemyRotate; } set { _enemyRotate = value; } }
+    public Boolean CanShoot { get { return _canShoot; } set { _canShoot = value;  } }
     public Boolean PlayerDeadFlag { get { return _playerDeadFlag; } set { _playerDeadFlag = value; } }
     public Boolean EnemyDeadFlag { get { return _enemyDeadFlag; } set { _enemyDeadFlag = value; } }
     public Boolean IsPause { get { return _isPause; } set { _isPause = value; } }

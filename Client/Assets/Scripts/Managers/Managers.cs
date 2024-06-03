@@ -21,6 +21,7 @@ public class Managers : MonoBehaviour
     UIManager _ui = new UIManager();
     NetworkManager _network = new NetworkManager();
     ClientPacketManager _packet = new ClientPacketManager();
+    LogManager _log = new LogManager();
 
     public static DataManager Data { get { return Instance._data; } }
     public static PoolManager Pool { get { return Instance._pool; } }
@@ -29,6 +30,7 @@ public class Managers : MonoBehaviour
     public static UIManager UI { get { return Instance._ui; } }
     public static NetworkManager Network { get { return Instance._network; } }
     public static ClientPacketManager Packet { get { return Instance._packet; } }
+    public static LogManager Log { get { return Instance._log; } }
     #endregion
 
     void Start()
@@ -63,6 +65,9 @@ public class Managers : MonoBehaviour
 
             // 패킷 매니저 초기화
             s_instance._packet.Init();
+
+            //로그 매니저 초기화
+            s_instance._log.Init();
         }
     }
 
@@ -71,5 +76,6 @@ public class Managers : MonoBehaviour
         Pool.Clear();
         Scene.Clear();
         UI.Clear();
+        Log.Clear();
     }
 }

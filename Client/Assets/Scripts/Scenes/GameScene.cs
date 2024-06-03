@@ -29,10 +29,15 @@ public class GameScene : BaseScene
         Conf.Main._inGameNick.Show();
 
         Managers.Game.IsPause = false;
+
+
+        Debug.Log("Game Scene!");
+
     }
 
     private void Update()
     {
+
         if (Managers.Game.IsPause)
         {
             Time.timeScale = 1;

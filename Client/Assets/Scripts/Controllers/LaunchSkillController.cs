@@ -6,6 +6,8 @@ public class LaunchSkillController : MonoBehaviour
 {
     private Rigidbody2D rd2d;
 
+    //플레이어 위치
+    GameObject _player;
     //탄환 현재 위치
     Vector3 _locate;
 
@@ -26,7 +28,7 @@ public class LaunchSkillController : MonoBehaviour
 
     //대상 레이어
     int[] _layers;
-
+    
 
     public void SetSkillStatus(Vector2 startPos, Vector2 dir, float distance, float speed, int damage)
     {
@@ -52,9 +54,19 @@ public class LaunchSkillController : MonoBehaviour
         rd2d.MovePosition(rd2d.position + _dir * Time.fixedDeltaTime * 2);
 
         //서버 전송용 탄환위치
-        _locate = rd2d.position;
+        //_locate = rd2d.position;
+
+
+
         //서버 전송용 탄환ID
         //this.name;
+    }
+
+    public void FixPosition(float posX,float posY, float rotZ)
+    {
+
+        this.transform.position = new Vector3(posX, posY);
+
     }
 
     void OnBecameInvisible() //화면밖으로 나가 보이지 않게 되면 호출이 된다.
@@ -64,15 +76,16 @@ public class LaunchSkillController : MonoBehaviour
 
             Destroy(this.gameObject); //객체를 삭제한다
             //번호로 저장된 탄환이름을 리스트에서 삭제
-            Conf.Main.PLAYER_ID_LIST.Remove(this.gameObject.name);
+            Managers.Skill.DeleteFireBall(int.Parse(this.gameObject.name));
+            //Conf.Main.PLAYER_ID_LIST.Remove(this.gameObject.name);
             Debug.Log($"Removed Player Bullet : {this.name}");
-
         }
         else if (this.gameObject.layer == 10)
         {
             Destroy(this.gameObject); //객체를 삭제한다
             //번호로 저장된 탄환이름을 리스트에서 삭제
-            Conf.Main.ENEMY_ID_LIST.Remove(this.gameObject.name);
+            Managers.Skill.DeleteFireBall(int.Parse(this.gameObject.name));
+            //Conf.Main.ENEMY_ID_LIST.Remove(this.gameObject.name);
             Debug.Log($"Removed Enemy Bullet : {this.name}");
         }
     }
@@ -84,7 +97,8 @@ public class LaunchSkillController : MonoBehaviour
 
             Destroy(this.gameObject); //객체를 삭제한다
             //번호로 저장된 탄환이름을 리스트에서 삭제
-            Conf.Main.PLAYER_ID_LIST.Remove(this.gameObject.name);
+            Managers.Skill.DeleteFireBall(int.Parse(this.gameObject.name));
+            //Conf.Main.PLAYER_ID_LIST.Remove(this.gameObject.name);
             Debug.Log($"Removed Player Bullet : {this.name}");
 
         }
@@ -92,7 +106,8 @@ public class LaunchSkillController : MonoBehaviour
         {
             Destroy(this.gameObject); //객체를 삭제한다
             //번호로 저장된 탄환이름을 리스트에서 삭제
-            Conf.Main.ENEMY_ID_LIST.Remove(this.gameObject.name);
+            Managers.Skill.DeleteFireBall(int.Parse(this.gameObject.name));
+            //Conf.Main.ENEMY_ID_LIST.Remove(this.gameObject.name);
             Debug.Log($"Removed Enemy Bullet : {this.name}");
         }
 
