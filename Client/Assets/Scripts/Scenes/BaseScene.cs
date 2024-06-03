@@ -28,7 +28,7 @@ public abstract class BaseScene : MonoBehaviour
         _uis.Add(ui.GetType(), ui);
     }
 
-    public UIBase getUI<T>() where T : UIBase
+    public UIBase GetUI<T>() where T : UIBase
     {
         UIBase ui = null;
         if (!_uis.TryGetValue(typeof(T), out ui))

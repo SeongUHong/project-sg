@@ -29,7 +29,7 @@ public class NickName_Panel : UIBase
         Managers.Game.PlayerNick = Nickname.text;
 
 
-        Matching_Panel matchingPanel = Managers.Scene.CurrentScene.getUI<Matching_Panel>() as Matching_Panel;
+        Matching_Panel matchingPanel = Managers.Scene.CurrentScene.GetUI<Matching_Panel>() as Matching_Panel;
         matchingPanel.SetPlayerNick(Nickname.text);
 
         Hide();

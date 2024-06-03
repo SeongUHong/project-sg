@@ -28,7 +28,6 @@ public class MatchingScene : BaseScene
         loadingPanel.Hide();
         AddUI(loadingPanel);
 
-        Debug.Log("MatchingScene");
     }
 
     public override void Clear()

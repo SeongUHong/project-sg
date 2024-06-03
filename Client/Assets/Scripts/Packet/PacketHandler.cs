@@ -44,6 +44,8 @@ public class PacketHandler
 
     internal static void S_EnemyShotHandler(PacketSession packetSession, IPacket packet)
     {
+        Debug.Log("S_Enemy");
+
         S_EnemyShot enemyShot = packet as S_EnemyShot;
         Vector3 _enemyShot = new Vector3();
         _enemyShot.x = enemyShot.posX;
@@ -57,8 +59,7 @@ public class PacketHandler
         Managers.Skill.SetFireBallID(enemyShot.fireballId);
         Managers.Skill.AddFireBall(fireball, enemyShot.fireballId);
 
-
-
+       
     }
 
     internal static void S_ShotHandler(PacketSession packetSession, IPacket packet)
