@@ -19,9 +19,9 @@ public class Main_Panel : UIBase
         BindEvent(GetButton((int)Buttons.Start_Button).gameObject, (PointerEventData data) => OnClick_Start());
     }
 
-    private void Awake()
+    public void Hide()
     {
-        transform.gameObject.SetActive(false); // 게임이 시작되면 GameOver 팝업 창을 보이지 않도록 한다.
+        transform.gameObject.SetActive(false);
     }
 
     public void Show()

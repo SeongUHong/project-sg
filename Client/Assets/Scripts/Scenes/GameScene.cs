@@ -29,6 +29,8 @@ public class GameScene : BaseScene
         Conf.Main._inGameNick.Show();
 
         Managers.Game.IsPause = false;
+
+        Debug.Log("Gama Scene");
     }
 
     private void Update()

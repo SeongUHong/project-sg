@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class PacketHandler
 {
-
-
     internal static void S_EnemyMoveHandler(PacketSession packetSession, IPacket packet)
     {
         S_EnemyMove move = packet as S_EnemyMove;
@@ -24,15 +22,16 @@ public class PacketHandler
         Managers.Game.IsLeft = matched.isLeft;
         Managers.Game.EnemyNick = matched.enemyNickname;
 
-        if (Managers.Game.EnemyNick != null)
-        {
-            Conf.Main._maching.Awake();
-            Conf.Main._loading.Show();
-        }
-        
+        Debug.Log("S_MatchedHandler");
 
-        // Class.Method(test);
+        BaseScene scene = Managers.Scene.CurrentScene;
 
+        Matching_Panel matchingPanel = scene.getUI<Matching_Panel>() as Matching_Panel;
+        matchingPanel.Hide();
+
+        Loading_Panel loadingPanel = scene.getUI<Loading_Panel>() as Loading_Panel;
+        loadingPanel.SetNickName();
+        loadingPanel.Show();
     }
 
     internal static void S_FireballMoveHandler(PacketSession arg1, IPacket arg2)
@@ -68,6 +67,8 @@ public class PacketHandler
     {
         //게임씬로드시 C_ReadyBattle를 보내면 서버에서 이패킷이 옴 이걸 받으면 게임시작하도록 멈춰놓기
         Managers.Game.IsPause = true;
+
+        Debug.Log("S_BroadcastGameStartHandler");
     }
 
 
