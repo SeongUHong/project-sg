@@ -21,9 +21,9 @@ public class GameManagerEx : ManagerBase
     //float _positionVar = 3.0f;
 
     //플레이어 닉
-    String _playerNick;
+    string _playerNick;
     //적플레이어 닉
-    String _enemyNick;
+    string _enemyNick;
 
     //플레이어가 왼쪽인지 오른쪽인지 
     bool _isLeft;
@@ -50,22 +50,19 @@ public class GameManagerEx : ManagerBase
     public GameObject Player_Right { get { return _player; } }
     public GameObject Enemy_Left { get { return _enemy; } }
 
-    public Main_Panel Main_Panel { get { return Managers.UI.MainSceneUI<Main_Panel>(); } }
     public Result_Panel Result_Panel { get { return Managers.UI.MakePopUp<Result_Panel>();  } }
-    public NickName_Panel NickName_Panel { get { return Managers.UI.MakePopUp<NickName_Panel>(); } }
-    public Matching_Panel Matching_Panel { get { return Managers.UI.MakePopUp<Matching_Panel>(); } }
     public InGame_NickName_Panel InGame_NickName_Panel { get { return Managers.UI.MakePopUp<InGame_NickName_Panel>(); } }
-    public Loading_Panel Load_Panel { get { return Managers.UI.MakePopUp<Loading_Panel>(); } }
 
-    public String PlayerNick { get { return _playerNick; } set { _playerNick = value; } }
-    public String EnemyNick { get { return _enemyNick; } set { _enemyNick = value; } }
-    public Boolean IsLeft { get { return _isLeft; } set { _isLeft = value; } }
+    public string PlayerNick { get { return _playerNick; } set { _playerNick = value; } }
+    public string EnemyNick { get { return _enemyNick; } set { _enemyNick = value; } }
+    public bool IsLeft { get { return _isLeft; } set { _isLeft = value; } }
     public Vector3 EnemyPosition { get { return _enemyPosition; } set { _enemyPosition = value; } }
     public Vector3 EnemyRotate { get { return _enemyRotate; } set { _enemyRotate = value; } }
-    public Boolean CanShoot { get { return _canShoot; } set { _canShoot = value;  } }
-    public Boolean PlayerDeadFlag { get { return _playerDeadFlag; } set { _playerDeadFlag = value; } }
-    public Boolean EnemyDeadFlag { get { return _enemyDeadFlag; } set { _enemyDeadFlag = value; } }
-    public Boolean IsPause { get { return _isPause; } set { _isPause = value; } }
+    public bool CanShoot { get { return _canShoot; } set { _canShoot = value;  } }
+    public bool PlayerDeadFlag { get { return _playerDeadFlag; } set { _playerDeadFlag = value; } }
+    public bool EnemyDeadFlag { get { return _enemyDeadFlag; } set { _enemyDeadFlag = value; } }
+    public bool IsPause { get { return _isPause; } set { _isPause = value; } }
+
     //스폰 되는 지점
     public Vector2 PlayerSpawnPos { get { return _playerSpawnPos; } }
     public Vector2 EnemySpawnPos { get { return _enemySpawnPos; } }

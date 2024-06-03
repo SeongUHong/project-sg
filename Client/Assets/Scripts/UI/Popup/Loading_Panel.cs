@@ -12,25 +12,27 @@ public class Loading_Panel : UIBase
         Load_Button,
     }
 
-    Text _playerNick;
-    Text _enemyNick;
-
-
-    private void Awake()
+    enum Texts
     {
-        transform.gameObject.SetActive(false); // ������ ���۵Ǹ� �˾� â�� ������ �ʵ��� �Ѵ�.
+        Player_Nick,
+        Enemy_Nick,
+    }
+
+    public void Hide()
+    {
+        transform.gameObject.SetActive(false);
     }
 
     public void Show()
     {
         new WaitForSeconds(Define.NEXT_DELAY_TIME);
         transform.gameObject.SetActive(true);
+    }
 
-
-        _playerNick = Conf.Main._loading.transform.Find("Player_Nick").GetComponent<Text>();
-        _enemyNick = Conf.Main._loading.transform.Find("Enemy_Nick").GetComponent<Text>();
-        _playerNick.text = Managers.Game.PlayerNick;
-        _enemyNick.text = Managers.Game.EnemyNick;
+    public void SetNickName()
+    {
+        GetText((int)Texts.Player_Nick).text = Managers.Game.PlayerNick;
+        GetText((int)Texts.Enemy_Nick).text = Managers.Game.EnemyNick;
     }
 
     public void OnClick_Button()
@@ -43,15 +45,10 @@ public class Loading_Panel : UIBase
     public override void Init()
     {
         Bind<Button>(typeof(Buttons));
-
+        Bind<Text>(typeof(Texts));
 
         BindEvent(GetButton((int)Buttons.Load_Button).gameObject, (PointerEventData data) => OnClick_Button());
 
-    }
-
-    internal object Find(string v)
-    {
-        throw new NotImplementedException();
     }
 
     public void SetText()

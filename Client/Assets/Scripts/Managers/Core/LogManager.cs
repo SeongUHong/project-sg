@@ -6,10 +6,11 @@ using System; /* DateTime */
 
 public class LogManager : ManagerBase
 {
-    
+
     static string logFilePath = Path.Combine(Application.persistentDataPath, "log.txt");
 
-    public override void Init() {
+    public override void Init()
+    {
         File.WriteAllText(logFilePath, "Log started at: " + System.DateTime.Now + "\n");
         Application.logMessageReceived += saveLog;
     }
@@ -22,15 +23,16 @@ public class LogManager : ManagerBase
             writer.WriteLine(stackTrace);
 
         }
-       
+
     }
     public void Clear()
     {
 
-        
+
     }
     public void OnDestroy()
     {
         Application.logMessageReceived -= saveLog;
     }
+
 }

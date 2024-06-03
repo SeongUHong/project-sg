@@ -99,6 +99,8 @@ public class PlayerController : BaseController
     void OnAttack()
     {
 
+        Debug.Log("OnAttack");
+
         if (Managers.Game.IsLeft)
         {
             if (!(_stat.AttackGague < 20))

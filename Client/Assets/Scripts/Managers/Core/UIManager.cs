@@ -131,21 +131,6 @@ public class UIManager
         return Util.GetOrAddComponent<T>(go);
     }
 
-    public T MainSceneUI<T>(Transform parentTransform = null, string name = null) where T : UIBase
-    {
-        if (string.IsNullOrEmpty(name))
-        {
-            name = typeof(T).Name;
-        }
-        GameObject go = Managers.Resource.Instantiate($"UI/MainSceneUI/{name}");
-        if (parentTransform != null)
-        {
-            go.transform.SetParent(parentTransform);
-        }
-
-        return Util.GetOrAddComponent<T>(go);
-    }
-
     public void Clear()
     {
     }

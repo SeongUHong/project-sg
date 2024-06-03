@@ -2,6 +2,7 @@ using ServerCore;
 using System;
 using System.Collections.Generic;
 using System.Net;
+using UnityEngine;
 
 public class NetworkManager : ManagerBase
 {
@@ -26,13 +27,13 @@ public class NetworkManager : ManagerBase
         );
     }
 
-    private void Update()
-    {
-        if (!_isConnect)
-            return;
+    //void Update()
+    //{
+    //    if (!_isConnect)
+    //        return;
 
-        HandlePackets();
-    }
+    //    HandlePackets();
+    //}
 
     // 패킷 처리
     public void HandlePackets()

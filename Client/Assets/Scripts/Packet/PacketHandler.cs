@@ -23,14 +23,14 @@ public class PacketHandler
         Managers.Game.IsLeft = matched.isLeft;
         Managers.Game.EnemyNick = matched.enemyNickname;
 
-        if (Managers.Game.EnemyNick != null)
-        {
-            Conf.Main._maching.Awake();
-            Conf.Main._loading.Show();
-        }
+        BaseScene scene = Managers.Scene.CurrentScene;
 
-        // Class.Method(test);
+        Matching_Panel matchingPanel = scene.GetUI<Matching_Panel>() as Matching_Panel;
+        matchingPanel.Hide();
 
+        Loading_Panel loadingPanel = scene.GetUI<Loading_Panel>() as Loading_Panel;
+        loadingPanel.SetNickName();
+        loadingPanel.Show();
     }
 
     internal static void S_FireballMoveHandler(PacketSession packetSession, IPacket packet)
@@ -107,6 +107,8 @@ public class PacketHandler
     {
         //게임씬로드시 C_ReadyBattle를 보내면 서버에서 이패킷이 옴 이걸 받으면 게임시작하도록 멈춰놓기
         Managers.Game.IsPause = true;
+
+        Debug.Log("S_BroadcastGameStartHandler");
     }
 
 

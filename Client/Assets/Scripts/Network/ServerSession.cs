@@ -19,7 +19,9 @@ public class ServerSession : PacketSession
 
     public override void OnRecvPacket(ArraySegment<byte> buffer)
     {
-        Managers.Packet.OnRecvPacket(this, buffer);
+        // 유니티 오브젝트는 메인 스레드만 수정이 가능함
+        // 따라서 큐에 쌓아놓고 메인 스레드가 처리하도록 함
+        Managers.Packet.OnRecvPacket(this, buffer, (session, packet) => PacketQueue.Instance.Push(packet));
     }
 
     public override void OnSend(int byteNum)

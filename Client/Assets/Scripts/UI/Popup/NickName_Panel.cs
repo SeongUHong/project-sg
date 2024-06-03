@@ -12,17 +12,16 @@ public class NickName_Panel : UIBase
     }
 
     public InputField Nickname;
-    Text _playerNick;
 
-    private void Awake()
+    public void Hide()
     {
-        transform.gameObject.SetActive(false); // ������ ���۵Ǹ� �˾� â�� ������ �ʵ��� �Ѵ�.
+        gameObject.SetActive(false);
     }
 
     public void Show()
     {
         new WaitForSeconds(Define.NEXT_DELAY_TIME);
-        transform.gameObject.SetActive(true);
+        gameObject.SetActive(true);
     }
 
     public void OnClick_Button()
@@ -30,26 +29,23 @@ public class NickName_Panel : UIBase
         Managers.Game.PlayerNick = Nickname.text;
 
 
-        _playerNick = Conf.Main._maching.transform.Find("Player_Nick").GetComponent<Text>();
-        _playerNick.text = Managers.Game.PlayerNick;
+        Matching_Panel matchingPanel = Managers.Scene.CurrentScene.getUI<Matching_Panel>() as Matching_Panel;
+        matchingPanel.SetPlayerNick(Nickname.text);
 
-        Awake();
-        Conf.Main._maching.Show();
+        Hide();
+        matchingPanel.Show();
     }
     public override void Init()
     {
         Bind<Button>(typeof(Buttons));
-        //Bind<Text>(typeof(Text));
-        //Awake();
 
         BindEvent(GetButton((int)Buttons.Nick_Button).gameObject, (PointerEventData data) => OnClick_Button());
-
     }
 
     public void SetText()
     {
 
-        
+
 
 
 

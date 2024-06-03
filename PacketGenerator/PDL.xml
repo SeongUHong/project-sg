@@ -30,6 +30,10 @@
 	<packet name="S_Hit">
 		<int name="fireballId"/>
 	</packet>
+	<!--적 피격-->
+	<packet name="S_EnemyHit">
+		<int name="fireballId"/>
+	</packet>
 	<!--매칭 성공-->
 	<packet name="S_Matched">
 		<string name="enemyNickname"/>
@@ -53,10 +57,6 @@
 		<float name="posX"/>
 		<float name="posY"/>
 		<float name="rotZ"/>
-	</packet>
-	<!--공격-->
-	<packet name="C_Attacked">
-		<int name="fireballId"/>
 	</packet>
 	<!--피격-->
 	<packet name="C_Hit">

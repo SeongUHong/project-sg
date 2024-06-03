@@ -11,12 +11,14 @@ public class Matching_Panel : UIBase
     {
         Match_Button,
     }
-
-
-
-    public void Awake()
+    enum Texts
     {
-        transform.gameObject.SetActive(false); // ������ ���۵Ǹ� �˾� â�� ������ �ʵ��� �Ѵ�.
+        Player_Nick,
+    }
+
+    public void Hide()
+    {
+        transform.gameObject.SetActive(false);
     }
 
     public void Show()
@@ -62,23 +64,13 @@ public class Matching_Panel : UIBase
     public override void Init()
     {
         Bind<Button>(typeof(Buttons));
-        
+        Bind<Text>(typeof(Texts));
 
         BindEvent(GetButton((int)Buttons.Match_Button).gameObject, (PointerEventData data) => OnClick_Button());
-
     }
 
-    internal object Find(string v)
+    public void SetPlayerNick(string nickName)
     {
-        throw new NotImplementedException();
-    }
-
-    public void SetText()
-    {
-
-
-
-
-
+        GetText((int)Texts.Player_Nick).text = nickName;
     }
 }

@@ -29,10 +29,6 @@ class PacketHandler
         Console.WriteLine($"shoot fireball (fireballId : {shot.fireballId})");
     }
 
-    internal static void S_AttackedHandler(PacketSession arg1, IPacket arg2)
-    {
-    }
-
     internal static void S_HitHandler(PacketSession arg1, IPacket arg2)
     {
     }
@@ -49,6 +45,10 @@ class PacketHandler
     }
 
     internal static void S_GameoverHandler(PacketSession arg1, IPacket arg2)
+    {
+    }
+
+    internal static void S_EnemyHitHandler(PacketSession arg1, IPacket arg2)
     {
     }
 }

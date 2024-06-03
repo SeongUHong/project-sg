@@ -30,9 +30,6 @@ public class GameScene : BaseScene
 
         Managers.Game.IsPause = false;
 
-
-        Debug.Log("Game Scene!");
-
     }
 
     private void Update()

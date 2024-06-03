@@ -52,11 +52,15 @@ class PacketHandler
         room.CreateFireball(session, shot);
     }
 
-    internal static void C_AttackedHandler(PacketSession arg1, IPacket arg2)
+    internal static void C_HitHandler(PacketSession packetSession, IPacket packet)
     {
-    }
+        ClientSession session = packetSession as ClientSession;
+        C_Hit hit = packet as C_Hit;
 
-    internal static void C_HitHandler(PacketSession arg1, IPacket arg2)
-    {
+        BattleRoom room = session.BattleRoom;
+        if (room == null)
+            return;
+
+        room.HandleHit(session, hit);
     }
 }

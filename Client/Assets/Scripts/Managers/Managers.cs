@@ -40,6 +40,8 @@ public class Managers : MonoBehaviour
 
     void Update()
     {
+        if (_network.IsConnet)
+            _network.HandlePackets();
     }
 
     static void Init()
