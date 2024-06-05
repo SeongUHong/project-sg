@@ -11,6 +11,7 @@ namespace Server
         JobQueue _jobQueue = new JobQueue();
         List<ArraySegment<byte>> _pendingList = new List<ArraySegment<byte>>();
         ushort _fireballId = 0;
+        int _time = 0;
         object _lock = new object();
 
         public void Init(List<ClientSession> sessions)
@@ -22,10 +23,12 @@ namespace Server
                 session.BattleRoom = this;
             }
 
-            // 타이머 시작
+            // 작업 등록
             BindJobTimer(Flush, Config.FLUSH_BATTLE_JOB_INTERVAL);
-            // 미사일 이동 시작
-            BindJobTimer(BroadcastMoveFireball, Config.MOVE_FIREBALL_JOB_INTERVAL);
+            BindJobTimer(DeleteFireball, Config.REMOVE_FIREBALL_JOB_INTERVAL);
+
+            // 타이머 시작
+            BindJobTimer(RunTimer, Config.GAME_TIME_COUNT_INTERVAL);
 
             Console.WriteLine($"Matching completed. (playerId : {sessions[0].Player.PlayerId}, with playerId : {sessions[1].Player.PlayerId})");
         }
@@ -42,6 +45,26 @@ namespace Server
             Push(job);
             JobTimer.Instance.Push(() => { BindJobTimer(job, interval); }, interval);
         }
+
+        // 게임 제한시간 타이머
+        void RunTimer()
+        {
+            int time = 0;
+
+            lock (_lock)
+            {
+                _time += 1;
+                time = _time;
+            }
+
+            S_CountTime countTime = new S_CountTime()
+            {
+                elapsedSec = time
+            };
+
+            Broadcast(countTime.Write());
+        }
+
 
         // 대기중인 작업들을 진행시킴
         public void Flush()
@@ -168,38 +191,22 @@ namespace Server
             };
             anotherSession.Send(newEnemyShot.Write());
 
-            Console.WriteLine($"shoot (fireballId : {fireballId}, posX : {newShot.posX}, posY : {newShot.posY}, rotZ : {newShot.rotZ}");
+            Console.WriteLine($"shoot (fireballId : {fireballId}, posX : {newShot.posX}, posY : {newShot.posY}, rotZ : {newShot.rotZ})");
         }
 
-        // 미사일 이동 처리
-        public void MoveFireball()
+        // 미사일 삭제 처리
+        public void DeleteFireball()
         {
             lock (_lock)
             {
                 foreach (Fireball fire in _fireballs.Values)
                 {
-                    fire.Move();
+                    if (fire.CanRemove(_time))
+                    {
+                        _fireballs.Remove(fire.FireballId);
+                        Console.WriteLine($"Removed fireball (fireballId : {fire.FireballId})");
+                    }
                 }
-            }
-        }
-
-        // 미사일 이동 패킷 전송
-        public void BroadcastMoveFireball()
-        {
-            // 미사일을 이동 시킴
-            MoveFireball();
-
-            // 이동 정보 전체 전송
-            foreach (Fireball fire in _fireballs.Values)
-            {
-                S_FireballMove fireMove = new S_FireballMove()
-                {
-                    fireballId = fire.FireballId,
-                    posX = fire.PosX,
-                    posY = fire.PosY,
-                    rotZ = fire.RotZ,
-                };
-                Broadcast(fireMove.Write());
             }
         }
 

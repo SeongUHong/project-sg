@@ -25,8 +25,6 @@ public class ClientPacketManager
 		_handler.Add((ushort)PacketID.S_EnemyShot, PacketHandler.S_EnemyShotHandler);
 		_makeFunc.Add((ushort)PacketID.S_Shot, MakePacket<S_Shot>);
 		_handler.Add((ushort)PacketID.S_Shot, PacketHandler.S_ShotHandler);
-		_makeFunc.Add((ushort)PacketID.S_FireballMove, MakePacket<S_FireballMove>);
-		_handler.Add((ushort)PacketID.S_FireballMove, PacketHandler.S_FireballMoveHandler);
 		_makeFunc.Add((ushort)PacketID.S_Hit, MakePacket<S_Hit>);
 		_handler.Add((ushort)PacketID.S_Hit, PacketHandler.S_HitHandler);
 		_makeFunc.Add((ushort)PacketID.S_EnemyHit, MakePacket<S_EnemyHit>);
@@ -37,6 +35,8 @@ public class ClientPacketManager
 		_handler.Add((ushort)PacketID.S_BroadcastGameStart, PacketHandler.S_BroadcastGameStartHandler);
 		_makeFunc.Add((ushort)PacketID.S_Gameover, MakePacket<S_Gameover>);
 		_handler.Add((ushort)PacketID.S_Gameover, PacketHandler.S_GameoverHandler);
+		_makeFunc.Add((ushort)PacketID.S_CountTime, MakePacket<S_CountTime>);
+		_handler.Add((ushort)PacketID.S_CountTime, PacketHandler.S_CountTimeHandler);
 
 	}
 

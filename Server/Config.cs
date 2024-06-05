@@ -8,13 +8,15 @@ namespace Server
     {
         // 배틀 중 패킷 전송 간격
         public const int FLUSH_BATTLE_JOB_INTERVAL = 250;
-        // 미사일 이동 패킷 전송 간격
-        public const int MOVE_FIREBALL_JOB_INTERVAL = 500;
-
+        // 배틀 플레이어 수
         public const int BATTLE_PLAYER_NUM = 2;
-        // 미사일 이동 속도
-        public const float FIREBALL_SPEED = 1.0f;
-        // 미사일 이동 처리 간격
-        public const float MOVE_FIREBALL_INTERVAL = 0.5f;
+        // 게임 제한 시간
+        public const int GAME_TIME_LIMIT = 180;
+        // 게임 제한 시간 카운트 간격
+        public const int GAME_TIME_COUNT_INTERVAL = 1000;
+        // 미사일 생존 시간
+        public const int FIREBALL_LIMIT_TIME = 10;
+        // 미사일 삭제 간격
+        public const int REMOVE_FIREBALL_JOB_INTERVAL = 1000;
     }
 }

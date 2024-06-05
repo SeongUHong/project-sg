@@ -20,12 +20,6 @@
 		<float name="posY"/>
 		<float name="rotZ"/>
 	</packet>
-	<packet name="S_FireballMove">
-		<int name="fireballId"/>
-		<float name="posX"/>
-		<float name="posY"/>
-		<float name="rotZ"/>
-	</packet>
 	<!--피격-->
 	<packet name="S_Hit">
 		<int name="fireballId"/>
@@ -44,7 +38,11 @@
 	</packet>
 	<!--배틀 종료-->
 	<packet name="S_Gameover">
-		<bool name="isWin"/>
+		<int name="status"/>
+	</packet>
+	<!--제한 시간 카운트-->
+	<packet name="S_CountTime">
+		<int name="elapsedSec"/>
 	</packet>
 	<!--이동-->
 	<packet name="C_Move">

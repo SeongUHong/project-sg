@@ -10,11 +10,14 @@ namespace Server
         public float PosX { get; set; }
         public float PosY { get; set; }
         public float RotZ { get; set; }
+        public int RegTime { get; set; }
 
-        public void Move()
+        public bool CanRemove(int time)
         {
-            PosX += (float)Math.Cos(RotZ) * Config.FIREBALL_SPEED * Config.MOVE_FIREBALL_INTERVAL;
-            PosY += (float)Math.Sin(RotZ) * Config.FIREBALL_SPEED * Config.MOVE_FIREBALL_INTERVAL;
+            if (RegTime + Config.FIREBALL_LIMIT_TIME < time)
+                return true;
+
+            return false;
         }
     }
 }
