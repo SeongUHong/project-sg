@@ -1,7 +1,6 @@
 using ServerCore;
 using System;
 using System.Collections.Generic;
-using UnityEngine;
 
 public class ClientPacketManager
 {
@@ -20,6 +19,8 @@ public class ClientPacketManager
 		_handler.Add((ushort)PacketID.S_FireballMove, PacketHandler.S_FireballMoveHandler);
 		_makeFunc.Add((ushort)PacketID.S_Hit, MakePacket<S_Hit>);
 		_handler.Add((ushort)PacketID.S_Hit, PacketHandler.S_HitHandler);
+		_makeFunc.Add((ushort)PacketID.S_EnemyHit, MakePacket<S_EnemyHit>);
+		_handler.Add((ushort)PacketID.S_EnemyHit, PacketHandler.S_EnemyHitHandler);
 		_makeFunc.Add((ushort)PacketID.S_Matched, MakePacket<S_Matched>);
 		_handler.Add((ushort)PacketID.S_Matched, PacketHandler.S_MatchedHandler);
 		_makeFunc.Add((ushort)PacketID.S_BroadcastGameStart, MakePacket<S_BroadcastGameStart>);

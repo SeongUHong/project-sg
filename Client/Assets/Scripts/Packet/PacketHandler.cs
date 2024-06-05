@@ -42,6 +42,10 @@ public class PacketHandler
         //fireball.GetComponent<LaunchSkillController>().FixPosition(fireballMove.posX, fireballMove.posY, fireballMove.rotZ);
     }
 
+    internal static void S_EnemyHitHandler(PacketSession packetSession, IPacket packet)
+    {
+    }
+
     internal static void S_EnemyShotHandler(PacketSession packetSession, IPacket packet)
     {
         Debug.Log("S_Enemy");
