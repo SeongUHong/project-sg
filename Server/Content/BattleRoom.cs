@@ -242,5 +242,30 @@ namespace Server
                 Console.WriteLine($"Hit (playerId : {session.SessionId}, fireballId : {hit.fireballId})");
             }
         }
+
+        // 플레이어 기체 파괴 처리
+        public void DestroyPlayer(ClientSession session)
+        {
+            lock (_lock)
+            {
+                ClientSession anotherSession = GetAnotherSession(session.Player.EnemyPlayerId);
+                if (anotherSession == null)
+                    return;
+
+                // 승리
+                anotherSession.Send(new S_Gameover()
+                {
+                    status = (int)Config.GAMEOVER_STATUS.WIN
+                }.Write());
+
+                // 패배
+                session.Send(new S_Gameover()
+                {
+                    status = (int)Config.GAMEOVER_STATUS.WIN
+                }.Write());
+
+                Console.WriteLine($"Player destroyed (playerId : {session.SessionId})");
+            }
+        }
     }
 }

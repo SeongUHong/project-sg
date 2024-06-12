@@ -25,6 +25,8 @@ public class ServerPacketManager
 		_handler.Add((ushort)PacketID.C_Shot, PacketHandler.C_ShotHandler);
 		_makeFunc.Add((ushort)PacketID.C_Hit, MakePacket<C_Hit>);
 		_handler.Add((ushort)PacketID.C_Hit, PacketHandler.C_HitHandler);
+		_makeFunc.Add((ushort)PacketID.C_Destroyed, MakePacket<C_Destroyed>);
+		_handler.Add((ushort)PacketID.C_Destroyed, PacketHandler.C_DestroyedHandler);
 		_makeFunc.Add((ushort)PacketID.C_StartMatch, MakePacket<C_StartMatch>);
 		_handler.Add((ushort)PacketID.C_StartMatch, PacketHandler.C_StartMatchHandler);
 		_makeFunc.Add((ushort)PacketID.C_ReadyBattle, MakePacket<C_ReadyBattle>);

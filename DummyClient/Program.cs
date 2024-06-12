@@ -2,11 +2,14 @@
 using System;
 using System.Net;
 using System.Threading;
+using System.Timers;
 
 namespace DummyClient
 {
     class Program
     {
+        public static System.Timers.Timer timer = new System.Timers.Timer(1000);
+
         static void Main(string[] args)
         {
             string host = Dns.GetHostName();
@@ -19,6 +22,10 @@ namespace DummyClient
             connector.Connect(endPoint,
                 () => { return SessionManager.Instance.Generate(); },
                 2);
+
+            timer.Elapsed += SessionManager.Instance.ElapseTime;
+            timer.AutoReset = true;
+            timer.Enabled = true;
 
             while (true)
             {

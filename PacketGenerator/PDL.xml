@@ -60,6 +60,9 @@
 	<packet name="C_Hit">
 		<int name="fireballId"/>
 	</packet>
+	<!--파괴-->
+	<packet name="C_Destroyed">
+	</packet>
 	<!--매칭 시작-->
 	<packet name="C_StartMatch">
 		<string name="nickname"/>

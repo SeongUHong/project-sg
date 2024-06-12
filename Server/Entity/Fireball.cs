@@ -14,7 +14,7 @@ namespace Server
 
         public bool CanRemove(int time)
         {
-            if (RegTime + Config.FIREBALL_LIMIT_TIME < time)
+            if (RegTime - Config.FIREBALL_LIMIT_TIME > time)
                 return true;
 
             return false;
