@@ -35,15 +35,28 @@ public class PacketHandler
 
     internal static void S_FireballMoveHandler(PacketSession packetSession, IPacket packet)
     {
-        S_FireballMove fireballMove = packet as S_FireballMove;
+        //S_FireballMove fireballMove = packet as S_FireballMove;
 
-        GameObject fireball = Managers.Skill.GetFireBall(fireballMove.fireballId);
+        //GameObject fireball = Managers.Skill.GetFireBall(fireballMove.fireballId);
 
         //fireball.GetComponent<LaunchSkillController>().FixPosition(fireballMove.posX, fireballMove.posY, fireballMove.rotZ);
+
     }
 
     internal static void S_EnemyHitHandler(PacketSession packetSession, IPacket packet)
     {
+        S_EnemyHit enemyHit = packet as S_EnemyHit;
+        int fireballid = enemyHit.fireballId;
+
+        Stat _enemyStat = Managers.Game.Enemy.GetComponent<Stat>();
+        _enemyStat.OnAttacked(5);
+
+
+        GameObject fireball = Managers.Skill.GetFireBall(fireballid);
+        //파이어볼 오브젝트 삭제
+        Managers.Skill.DestroyFireBall(fireball); //객체를 삭제한다
+        //번호로 저장된 탄환이름을 리스트에서 삭제
+        Managers.Skill.DeleteFireBall(fireballid);
     }
 
     internal static void S_EnemyShotHandler(PacketSession packetSession, IPacket packet)
@@ -64,6 +77,11 @@ public class PacketHandler
         Managers.Skill.AddFireBall(fireball, enemyShot.fireballId);
 
        
+    }
+
+    internal static void S_CountTimeHandler(PacketSession arg1, IPacket arg2)
+    { 
+
     }
 
     internal static void S_ShotHandler(PacketSession packetSession, IPacket packet)
@@ -89,22 +107,117 @@ public class PacketHandler
             Managers.Game.CanShoot = false;
         }
 
-        
-
-    }
-
-    internal static void S_AttackedHandler(PacketSession packetSession, IPacket packet)
-    {
-        
     }
 
     internal static void S_HitHandler(PacketSession packetSession, IPacket packet)
     {
+        S_Hit hit = packet as S_Hit;
+        int fireballid = hit.fireballId;
+
+        Stat _playerStat = Managers.Game.Player.GetComponent<Stat>();
+        _playerStat.OnAttacked(5);
+
+
+        GameObject fireball = Managers.Skill.GetFireBall(fireballid);
+        //파이어볼 오브젝트 삭제
+        Managers.Skill.DestroyFireBall(fireball); //객체를 삭제한다
+        //번호로 저장된 탄환이름을 리스트에서 삭제
+        Managers.Skill.DeleteFireBall(fireballid);
         
     }
 
     internal static void S_GameoverHandler(PacketSession packetSession, IPacket packet)
     {
+        //status =1 윈, status = 2 루즈 ,stauts = 3 드로우
+        S_Gameover gameover = packet as S_Gameover;
+        int status = gameover.status;
+
+        Animator p_animator = Managers.Game.Player.GetComponent<Animator>();
+        Animator e_animator = Managers.Game.Enemy.GetComponent<Animator>();
+
+        if (status == 1)
+        {
+            Managers.Game.PlayerDeadFlag = true;
+
+            if (Managers.Game.IsLeft)
+            {
+                if (Managers.Game.PlayerDeadFlag && Managers.Game.Player != null)
+                {
+                    p_animator.SetBool("expl", true);
+                    Conf.Main._result.SetText();
+                    Conf.Main._result.Show();
+                }
+            }
+            else
+            {
+                if (Managers.Game.PlayerDeadFlag && Managers.Game.Player_Right != null)
+                {
+                    p_animator.SetBool("expl", true);
+                    Conf.Main._result.SetText();
+                    Conf.Main._result.Show();
+                }
+            }
+        }else if(status == 2)
+        {
+            Managers.Game.EnemyDeadFlag = true;
+
+            if (Managers.Game.IsLeft)
+            {
+                if (Managers.Game.EnemyDeadFlag && Managers.Game.Enemy != null)
+                {
+                    e_animator.SetBool("expl", true);
+                    Conf.Main._result.SetText();
+                    Conf.Main._result.Show();
+                }
+            }
+            else
+            {
+                if (Managers.Game.EnemyDeadFlag && Managers.Game.Enemy_Left != null)
+                {
+                    e_animator.SetBool("expl", true);
+                    Conf.Main._result.SetText();
+                    Conf.Main._result.Show();
+                }
+            }
+        }else 
+        {
+            Managers.Game.PlayerDeadFlag = true;
+            Managers.Game.EnemyDeadFlag = true;
+
+            if (Managers.Game.IsLeft)
+            {
+                if (Managers.Game.PlayerDeadFlag && Managers.Game.Player != null)
+                {
+                    p_animator.SetBool("expl", true);
+                    Conf.Main._result.SetText();
+                    Conf.Main._result.Show();
+                }
+                if (Managers.Game.EnemyDeadFlag && Managers.Game.Enemy != null)
+                {
+                    e_animator.SetBool("expl", true);
+                    Conf.Main._result.SetText();
+                    Conf.Main._result.Show();
+                }
+            }
+            else
+            {
+                if (Managers.Game.PlayerDeadFlag && Managers.Game.Player_Right != null)
+                {
+                    p_animator.SetBool("expl", true);
+                    Conf.Main._result.SetText();
+                    Conf.Main._result.Show();
+                }
+                if (Managers.Game.EnemyDeadFlag && Managers.Game.Enemy_Left != null)
+                {
+                    e_animator.SetBool("expl", true);
+                    Conf.Main._result.SetText();
+                    Conf.Main._result.Show();
+                }
+            }
+        }
+
+        
+
         
     }
 

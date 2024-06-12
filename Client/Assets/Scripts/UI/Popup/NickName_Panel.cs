@@ -1,5 +1,7 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -12,6 +14,7 @@ public class NickName_Panel : UIBase
     }
 
     public InputField Nickname;
+    public TextMeshProUGUI Information;
 
     public void Hide()
     {
@@ -27,13 +30,23 @@ public class NickName_Panel : UIBase
     public void OnClick_Button()
     {
         Managers.Game.PlayerNick = Nickname.text;
-
-
         Matching_Panel matchingPanel = Managers.Scene.CurrentScene.GetUI<Matching_Panel>() as Matching_Panel;
-        matchingPanel.SetPlayerNick(Nickname.text);
 
-        Hide();
-        matchingPanel.Show();
+        if (Managers.Game.PlayerNick == null || Managers.Game.PlayerNick == "")
+        {
+            Information.text = "Please Enter Nickname";
+        }
+        else
+        {
+            
+            matchingPanel.SetPlayerNick(Nickname.text);
+
+            Hide();
+            matchingPanel.Show();
+        }
+
+
+        
     }
     public override void Init()
     {

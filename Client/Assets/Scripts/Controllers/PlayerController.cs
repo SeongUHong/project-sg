@@ -63,6 +63,14 @@ public class PlayerController : BaseController
 
     }
 
+    public void Update()
+    {
+        if (_stat.Hp<=0) { 
+            //C_Dead 보내기
+            
+        }
+    }
+
     //Invoke�� ����� �� �ְ� ���� ��ư�� �׼� �߰�
     void AddAction()
     {
@@ -157,8 +165,7 @@ public class PlayerController : BaseController
         if (collision.GetComponent<Collider2D>().gameObject.layer == 10)
         {
 
-            _stat.OnAttacked(5);
-            if (_stat.Hp <= 0)
+            /*if (_stat.Hp <= 0)
             {
                 Managers.Game.PlayerDeadFlag = true;
             }
@@ -181,7 +188,7 @@ public class PlayerController : BaseController
 
                     Conf.Main._result.Show();
                 }
-            }
+            }*/
             
         }
 

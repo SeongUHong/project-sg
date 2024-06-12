@@ -45,27 +45,27 @@ public class Managers : MonoBehaviour
     static void Init()
     {
         //매니저 초기화 & 없을 경우 생성
-        if (s_instance == null)
+        if (s_instance != null)
+            return;
+
+        GameObject go = GameObject.Find("@Managers");
+        if (go == null)
         {
-            GameObject go = GameObject.Find("@Managers");
-            if (go == null)
-            {
-                go = new GameObject { name = "@Managers" };
-                go.AddComponent<Managers>();
-            }
-
-            DontDestroyOnLoad(go);
-            s_instance = go.GetComponent<Managers>();
-
-            //풀 매니저 실행
-            s_instance._pool.Init();
-
-            //게임 매니저 실행
-            s_instance._game.Init();
-
-            // 패킷 매니저 초기화
-            s_instance._packet.Init();
+            go = new GameObject("@Managers");
+            go.AddComponent<Managers>();
         }
+
+        DontDestroyOnLoad(go);
+        s_instance = go.GetComponent<Managers>();
+
+        //풀 매니저 실행
+        s_instance._pool.Init();
+
+        //게임 매니저 실행
+        s_instance._game.Init();
+
+        // 패킷 매니저 초기화
+        s_instance._packet.Init();
     }
 
     public static void Clear()

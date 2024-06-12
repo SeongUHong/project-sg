@@ -29,9 +29,8 @@ public class EnemyController : BaseController
     Animator animator;
 
     //위치정보에 필요한 정보
-    private Vector2 joystickVector; // 조이스틱의 방향벡터이자 플레이어에게 넘길 방향정보.
     private float speed = 1f; // 캐릭터 스피드
-    private float rotateSpeed = 3f; // 회전 속도
+    private float rotateSpeed = 2.2f; // 회전 속도
     private Vector3 position;
     private Vector3 rotate;
 
@@ -78,7 +77,6 @@ public class EnemyController : BaseController
         animator = GetComponent<Animator>();
         animator.SetBool("expl", false);
 
-
     }
 
     void Update()
@@ -87,9 +85,7 @@ public class EnemyController : BaseController
             character.GetComponent<Rigidbody2D>().velocity = character.transform.up * speed;
         // 캐릭터는 3의 속도로 계속 전진
 
-
-        //발사 테스트
-        //Invoke("Fire",2.0f);
+        
 
         position = new Vector3(Managers.Game.EnemyPosition.x, Managers.Game.EnemyPosition.y, 0);
 
@@ -103,8 +99,13 @@ public class EnemyController : BaseController
 
         //서버에서 받아온 각도
         float aAngle = rotate.z * Mathf.Rad2Deg;
-        transform.rotation = Quaternion.Euler(0, 0, aAngle * rotateSpeed);
+        Vector3 rotation = new Vector3(0.0f , 0.0f , aAngle * rotateSpeed);
+        transform.rotation = Quaternion.Euler(rotation);
+
+
+
     }
+
 
     void AddAction()
     {
@@ -179,8 +180,8 @@ public class EnemyController : BaseController
 
         if (collision.GetComponent<Collider2D>().gameObject.layer == 9)
         {
-
-            _stat.OnAttacked(5);
+            /*Debug.Log($"맞은탄환아이디 : {collision.GetComponent<Collider2D>().gameObject.transform.name}");
+            //_stat.OnAttacked(5);
             if (_stat.Hp <= 0)
             {
                 Managers.Game.EnemyDeadFlag = true;
@@ -202,7 +203,7 @@ public class EnemyController : BaseController
                     Conf.Main._result.SetText();
                     Conf.Main._result.Show();
                 }
-            }
+            }*/
             
             
         }
@@ -214,19 +215,9 @@ public class EnemyController : BaseController
         
     }
 
-    Vector2 Random()
-    {
-
-        random = UnityEngine.Random.Range(0,360);
-
-        joystickVector = new Vector2(random, random);
-
-        return joystickVector;
-    }
 
     public void MoveHandler()
     {
-        Random();
 
     }
 

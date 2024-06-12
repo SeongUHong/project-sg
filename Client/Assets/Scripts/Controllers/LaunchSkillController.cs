@@ -28,7 +28,10 @@ public class LaunchSkillController : MonoBehaviour
 
     //대상 레이어
     int[] _layers;
-    
+
+    //스텟
+    Stat _playerStat;
+    Stat _enemyStat;
 
     public void SetSkillStatus(Vector2 startPos, Vector2 dir, float distance, float speed, int damage)
     {
@@ -42,6 +45,9 @@ public class LaunchSkillController : MonoBehaviour
     void Start()
     {
         rd2d = GetComponent<Rigidbody2D>();
+
+        _playerStat = Managers.Game.Player.GetComponent<Stat>();
+        _enemyStat = Managers.Game.Enemy.GetComponent<Stat>();
     }
 
     void Update()
@@ -71,6 +77,8 @@ public class LaunchSkillController : MonoBehaviour
 
     void OnBecameInvisible() //화면밖으로 나가 보이지 않게 되면 호출이 된다.
     {
+        //서버에 사라진 파이어볼id보내기
+
         if (this.gameObject.layer == 9)
         {
 
@@ -78,7 +86,6 @@ public class LaunchSkillController : MonoBehaviour
             //번호로 저장된 탄환이름을 리스트에서 삭제
             Managers.Skill.DeleteFireBall(int.Parse(this.gameObject.name));
             //Conf.Main.PLAYER_ID_LIST.Remove(this.gameObject.name);
-            Debug.Log($"Removed Player Bullet : {this.name}");
         }
         else if (this.gameObject.layer == 10)
         {
@@ -86,29 +93,41 @@ public class LaunchSkillController : MonoBehaviour
             //번호로 저장된 탄환이름을 리스트에서 삭제
             Managers.Skill.DeleteFireBall(int.Parse(this.gameObject.name));
             //Conf.Main.ENEMY_ID_LIST.Remove(this.gameObject.name);
-            Debug.Log($"Removed Enemy Bullet : {this.name}");
         }
+
     }
 
     private void OnTriggerEnter2D(Collider2D collision) //플레이어에 부딪히면 데미지를 주고 탄환파괴
     {
         if (this.gameObject.layer == 9 && collision.GetComponent<Collider2D>().gameObject.layer == 8)
         {
+            /*string name = collision.GetComponent<Collider2D>().gameObject.transform.name;
+            int id = int.Parse(name);
+            C_Hit hit = new C_Hit();
+            hit.fireballId = id;
+            Debug.Log($"맞은탄환아이디 : {collision.GetComponent<Collider2D>().gameObject.transform.name}");
 
-            Destroy(this.gameObject); //객체를 삭제한다
+            Managers.Network.Send(hit.Write());*/
+
+            
+
+            /*_enemyStat.OnAttacked(5);
+
             //번호로 저장된 탄환이름을 리스트에서 삭제
             Managers.Skill.DeleteFireBall(int.Parse(this.gameObject.name));
             //Conf.Main.PLAYER_ID_LIST.Remove(this.gameObject.name);
             Debug.Log($"Removed Player Bullet : {this.name}");
+            Destroy(this.gameObject); //객체를 삭제한다*/
 
         }
         else if (this.gameObject.layer == 10 && collision.GetComponent<Collider2D>().gameObject.layer == 7)
         {
-            Destroy(this.gameObject); //객체를 삭제한다
-            //번호로 저장된 탄환이름을 리스트에서 삭제
-            Managers.Skill.DeleteFireBall(int.Parse(this.gameObject.name));
-            //Conf.Main.ENEMY_ID_LIST.Remove(this.gameObject.name);
-            Debug.Log($"Removed Enemy Bullet : {this.name}");
+            C_Hit hit = new C_Hit();
+            hit.fireballId = int.Parse(this.gameObject.name);
+            Managers.Network.Send(hit.Write());
+
+            
+            
         }
 
     }

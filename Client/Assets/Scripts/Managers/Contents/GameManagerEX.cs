@@ -138,11 +138,6 @@ public class GameManagerEx : ManagerBase
     {
         GameObject enemy = null;
 
-
-        
-
-        
-
         if (Managers.Game.IsLeft)
         {
             enemy = Managers.Resource.Instantiate("Characters/Enemy");

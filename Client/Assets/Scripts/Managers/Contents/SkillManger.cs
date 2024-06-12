@@ -66,9 +66,6 @@ public class SkillManager : ManagerBase
         Stat _stat = Managers.Game.Player.GetComponent<Stat>();
         skillController.SetSkillStatus(pos, _dir, _stat.AttackDistance, _stat.ProjectileSpeed, _stat.Offence);
 
-        Debug.Log($"skillName : {skillName}");
-        Debug.Log($"pos : {pos.x},{pos.y}");
-
         skill.transform.position = pos;
 
         if (skill == null)
@@ -112,6 +109,11 @@ public class SkillManager : ManagerBase
     public void DeleteFireBall(int fireballid)
     {
         _fireBalls.Remove(fireballid);
+    }
+
+    public void DestroyFireBall(GameObject fireball)
+    {
+        Destroy(fireball);
     }
 
     internal void SpawnSkill(string sKILL_NAME, object position, Vector2 dir, object attackDistance, float projectileSpeed, int offence)
