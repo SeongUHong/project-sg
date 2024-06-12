@@ -14,5 +14,6 @@ namespace Server
         public float PosY { get; set; }
         public float RotZ { get; set; }
         public bool IsReady { get; set; }
+        public ushort HitCount { get; set; }
     }
 }

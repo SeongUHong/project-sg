@@ -1,15 +1,33 @@
 ﻿using ServerCore;
 using System;
+using System.Collections.Generic;
 using System.Net;
 
 namespace DummyClient
 {
     public class ServerSession : PacketSession
     {
+        List<int> _fireballIds = new List<int>();
+
         public int Id { get; set; }
         public bool IsMatched { get; set; }
         public bool IsReady { get; set; }
-        public bool IsShoot { get; set; }
+        public bool IsHit { get; set; }
+        public ushort ShootCount { get; set; }
+        public int FirstFireballId { 
+            get 
+            {
+                if (_fireballIds.Count > 0)
+                    return _fireballIds[0];
+                else
+                    return -1;
+            }
+        }
+
+        public void AddFireballId(int fireballId)
+        {
+            _fireballIds.Add(fireballId);
+        }
 
         public override void OnConnected(EndPoint endPoint)
         {

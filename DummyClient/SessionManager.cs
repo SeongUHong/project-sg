@@ -28,7 +28,6 @@ namespace DummyClient
         {
             lock (_lock)
             {
-                
                 foreach (ServerSession session in _sessions)
                 {
                     if (!session.IsMatched)
@@ -40,10 +39,22 @@ namespace DummyClient
                     }
                     else
                     {
-                        if (!session.IsShoot)
+                        if (session.ShootCount <= 3)
+                        {
                             Shot(session);
+                        }
+                        else if (session.ShootCount >= 3 && !session.IsHit)
+                        {
+                            foreach (ServerSession s in _sessions)
+                            {
+                                if (session != s)
+                                    Hit(session, s);
+                            }
+                        }
                         else
+                        {
                             Move(session);
+                        }
                     }
                 }
             }
@@ -74,7 +85,7 @@ namespace DummyClient
             };
             session.Send(shot.Write());
 
-            session.IsShoot = true;
+            session.ShootCount++;
         }
 
         public void Move(ServerSession session)
@@ -88,6 +99,21 @@ namespace DummyClient
                 rotZ = (float)rand.Next(0, 100) / 100f,
             };
             session.Send(move.Write());
+        }
+
+        public void Hit(ServerSession session, ServerSession anotherSession)
+        {
+            int fireballId = anotherSession.FirstFireballId;
+            if (fireballId < 0)
+            {
+                Console.WriteLine($"Cant find fireballId ({fireballId})");
+                return;
+            }
+
+            session.Send(new C_Hit()
+            {
+                fireballId = fireballId
+            }.Write());
         }
     }
 }

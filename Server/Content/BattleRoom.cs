@@ -113,7 +113,7 @@ namespace Server
             ClientSession anotherSession = null;
             if (!_sessions.TryGetValue(playerId, out anotherSession))
             {
-                Console.WriteLine($"Cant find session (playerId : {playerId})");
+                Console.WriteLine($"[ERROR]Cant find session (playerId : {playerId})");
             }
 
             return anotherSession;
@@ -124,7 +124,7 @@ namespace Server
             Fireball fireball = null;
             if (!_fireballs.TryGetValue(fireballId, out fireball))
             {
-                Console.WriteLine($"Cant find fireball (fireballId : {fireballId})");
+                Console.WriteLine($"[WARN]Cant find fireball (fireballId : {fireballId})");
             }
 
             return fireball;
@@ -213,13 +213,34 @@ namespace Server
         // 피격을 알림
         public void HandleHit(ClientSession session, C_Hit hit)
         {
-            ClientSession anotherSession = GetAnotherSession(session.Player.EnemyPlayerId);
-            if (anotherSession == null)
-                return;
+            lock (_lock) {
+                ClientSession anotherSession = GetAnotherSession(session.Player.EnemyPlayerId);
+                if (anotherSession == null)
+                    return;
 
-            Fireball fireball = GetFireBall(hit.fireballId);
-            if (fireball == null)
-                return;
+                Fireball fireball = GetFireBall(hit.fireballId);
+                if (fireball == null)
+                    return;
+
+                // 미사일 삭제
+                _fireballs.Remove(hit.fireballId);
+
+                // 피격 횟수 증가
+                session.Player.HitCount++;
+
+                // 본인과 상대에게 피격 사실을 알림
+                session.Send(new S_Hit()
+                {
+                    fireballId = hit.fireballId,
+                }.Write());
+
+                anotherSession.Send(new S_EnemyHit()
+                {
+                    fireballId = hit.fireballId,
+                }.Write());
+
+                Console.WriteLine($"Hit (playerId : {session.SessionId}, fireballId : {hit.fireballId})");
+            }
         }
     }
 }

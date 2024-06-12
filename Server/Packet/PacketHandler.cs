@@ -37,7 +37,6 @@ class PacketHandler
             return;
 
         room.HandleMove(session, move);
-        Console.WriteLine($"Player moved (sessionId : {session.SessionId}, posX : {move.posX}, posY : {move.posY}, rotZ : {move.rotZ}");
     }
 
     internal static void C_ShotHandler(PacketSession packetSession, IPacket packet)

@@ -24,13 +24,18 @@ class PacketHandler
 
     internal static void S_ShotHandler(PacketSession packetSession, IPacket packet)
     {
+        ServerSession session = packetSession as ServerSession;
         S_Shot shot = packet as S_Shot;
+
+        session.AddFireballId(shot.fireballId);
 
         Console.WriteLine($"shoot fireball (fireballId : {shot.fireballId})");
     }
 
-    internal static void S_HitHandler(PacketSession arg1, IPacket arg2)
+    internal static void S_HitHandler(PacketSession packetSession, IPacket packet)
     {
+        ServerSession session = packetSession as ServerSession;
+        session.IsHit = true;
     }
 
     internal static void S_BroadcastGameStartHandler(PacketSession packetSession, IPacket packet)
