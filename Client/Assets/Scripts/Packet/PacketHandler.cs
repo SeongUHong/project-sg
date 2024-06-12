@@ -138,30 +138,10 @@ public class PacketHandler
         Animator p_animator = Managers.Game.Player.GetComponent<Animator>();
         Animator e_animator = Managers.Game.Enemy.GetComponent<Animator>();
 
+        Debug.Log($"{status}");
+
         if (status == 1)
         {
-            Managers.Game.PlayerDeadFlag = true;
-
-            if (Managers.Game.IsLeft)
-            {
-                if (Managers.Game.PlayerDeadFlag && Managers.Game.Player != null)
-                {
-                    p_animator.SetBool("expl", true);
-                    Conf.Main._result.SetText();
-                    Conf.Main._result.Show();
-                }
-            }
-            else
-            {
-                if (Managers.Game.PlayerDeadFlag && Managers.Game.Player_Right != null)
-                {
-                    p_animator.SetBool("expl", true);
-                    Conf.Main._result.SetText();
-                    Conf.Main._result.Show();
-                }
-            }
-        }else if(status == 2)
-        {
             Managers.Game.EnemyDeadFlag = true;
 
             if (Managers.Game.IsLeft)
@@ -182,7 +162,31 @@ public class PacketHandler
                     Conf.Main._result.Show();
                 }
             }
-        }else 
+        }
+        else if (status == 2)
+        {
+            Managers.Game.PlayerDeadFlag = true;
+
+            if (Managers.Game.IsLeft)
+            {
+                if (Managers.Game.PlayerDeadFlag && Managers.Game.Player != null)
+                {
+                    p_animator.SetBool("expl", true);
+                    Conf.Main._result.SetText();
+                    Conf.Main._result.Show();
+                }
+            }
+            else
+            {
+                if (Managers.Game.PlayerDeadFlag && Managers.Game.Player_Right != null)
+                {
+                    p_animator.SetBool("expl", true);
+                    Conf.Main._result.SetText();
+                    Conf.Main._result.Show();
+                }
+            }
+        }
+        else if(status == 3)
         {
             Managers.Game.PlayerDeadFlag = true;
             Managers.Game.EnemyDeadFlag = true;
@@ -217,6 +221,8 @@ public class PacketHandler
                     Conf.Main._result.Show();
                 }
             }
+
+                Managers.Game.IsPause = true;
         }
 
         

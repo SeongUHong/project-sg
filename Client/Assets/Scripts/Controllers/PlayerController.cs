@@ -65,9 +65,10 @@ public class PlayerController : BaseController
 
     public void Update()
     {
-        if (_stat.Hp<=0) { 
-            //C_Dead 보내기
-            
+        if (_stat.Hp<=0) {
+            //C_Destroyed 보내기
+            C_Destroyed destroy = new C_Destroyed();
+            Managers.Network.Send(destroy.Write());
         }
     }
 
