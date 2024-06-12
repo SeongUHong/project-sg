@@ -18,8 +18,9 @@ public enum PacketID
 	C_Move = 10,
 	C_Shot = 11,
 	C_Hit = 12,
-	C_StartMatch = 13,
-	C_ReadyBattle = 14,
+	C_Destroyed = 13,
+	C_StartMatch = 14,
+	C_ReadyBattle = 15,
 	
 }
 
@@ -487,6 +488,37 @@ public class C_Hit : IPacket
 		count += sizeof(ushort);
 		Array.Copy(BitConverter.GetBytes(this.fireballId), 0, segment.Array, segment.Offset + count, sizeof(int));
 		count += sizeof(int);
+
+		Array.Copy(BitConverter.GetBytes(count), 0, segment.Array, segment.Offset, sizeof(ushort));
+
+		return SendBufferHelper.Close(count);
+	}
+}
+
+public class C_Destroyed : IPacket
+{
+	
+
+	public ushort Protocol { get { return (ushort)PacketID.C_Destroyed; } }
+
+	public void Read(ArraySegment<byte> segment)
+	{
+		ushort count = 0;
+
+		count += sizeof(ushort);
+		count += sizeof(ushort);
+		
+	}
+
+	public ArraySegment<byte> Write()
+	{
+		ArraySegment<byte> segment = SendBufferHelper.Open(4096);
+		ushort count = 0;
+
+		count += sizeof(ushort);
+		Array.Copy(BitConverter.GetBytes((ushort)PacketID.C_Destroyed), 0, segment.Array, segment.Offset + count, sizeof(ushort));
+		count += sizeof(ushort);
+		
 
 		Array.Copy(BitConverter.GetBytes(count), 0, segment.Array, segment.Offset, sizeof(ushort));
 

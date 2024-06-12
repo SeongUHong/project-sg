@@ -18,5 +18,12 @@ namespace Server
         public const int FIREBALL_LIMIT_TIME = 10;
         // 미사일 삭제 간격
         public const int REMOVE_FIREBALL_JOB_INTERVAL = 1000;
+
+        public enum GAMEOVER_STATUS
+        {
+            WIN,
+            LOSE,
+            DROW
+        }
     }
 }

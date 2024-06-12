@@ -79,9 +79,12 @@ public class PacketHandler
        
     }
 
-    internal static void S_CountTimeHandler(PacketSession arg1, IPacket arg2)
-    { 
+    internal static void S_CountTimeHandler(PacketSession packetSession, IPacket packet)
+    {
+        S_CountTime count = packet as S_CountTime;
+        int second = count.remainSec;
 
+        Managers.Game.RemainSec = second;
     }
 
     internal static void S_ShotHandler(PacketSession packetSession, IPacket packet)

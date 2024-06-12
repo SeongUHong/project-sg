@@ -39,6 +39,17 @@ class PacketHandler
         room.HandleMove(session, move);
     }
 
+    internal static void C_DestroyedHandler(PacketSession packetSession, IPacket packet)
+    {
+        ClientSession session = packetSession as ClientSession;
+
+        BattleRoom room = session.BattleRoom;
+        if (room == null)
+            return;
+
+        room.DestroyPlayer(session);
+    }
+
     internal static void C_ShotHandler(PacketSession packetSession, IPacket packet)
     {
         ClientSession session = packetSession as ClientSession;

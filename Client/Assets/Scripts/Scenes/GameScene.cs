@@ -1,11 +1,14 @@
 using System;
 using System.Collections;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class GameScene : BaseScene
 {
-    
+
+    public TextMeshProUGUI CountDown;
+    int count;
 
     protected override void Init()
     {
@@ -29,6 +32,12 @@ public class GameScene : BaseScene
         Conf.Main._inGameNick.Show();
 
         Managers.Game.IsPause = false;
+
+
+        //카운트 판넬 초기화
+        CountDown_Panel countPanel = Managers.UI.MakePopUp<CountDown_Panel>();
+        countPanel.Show();
+        AddUI(countPanel);
 
     }
 

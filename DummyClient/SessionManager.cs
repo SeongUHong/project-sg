@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Timers;
 
 namespace DummyClient
 {
@@ -12,6 +13,7 @@ namespace DummyClient
         List<ServerSession> _sessions = new List<ServerSession>();
         int SessionId = 1;
         object _lock = new object();
+        int _time = 0;
 
         public ServerSession Generate()
         {
@@ -30,6 +32,9 @@ namespace DummyClient
             {
                 foreach (ServerSession session in _sessions)
                 {
+                    if (_time >= 20)
+                        session.Send(new C_Destroyed().Write());
+
                     if (!session.IsMatched)
                     {
                         RequestMatch(session);
@@ -43,17 +48,18 @@ namespace DummyClient
                         {
                             Shot(session);
                         }
-                        else if (session.ShootCount >= 3 && !session.IsHit)
-                        {
-                            foreach (ServerSession s in _sessions)
-                            {
-                                if (session != s)
-                                    Hit(session, s);
-                            }
-                        }
                         else
                         {
                             Move(session);
+                        }
+                    }
+
+                    if (_time >= 15 && !session.IsHit)
+                    {
+                        foreach (ServerSession s in _sessions)
+                        {
+                            if (session != s)
+                                Hit(session, s);
                         }
                     }
                 }
@@ -114,6 +120,12 @@ namespace DummyClient
             {
                 fireballId = fireballId
             }.Write());
+        }
+
+        public void ElapseTime(object sender, ElapsedEventArgs e)
+        {
+            _time += 1;
+            Console.WriteLine($"timer : {_time}");
         }
     }
 }
