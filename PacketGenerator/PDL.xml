@@ -42,7 +42,7 @@
 	</packet>
 	<!--제한 시간 카운트-->
 	<packet name="S_CountTime">
-		<int name="elapsedSec"/>
+		<int name="remainSec"/>
 	</packet>
 	<!--이동-->
 	<packet name="C_Move">

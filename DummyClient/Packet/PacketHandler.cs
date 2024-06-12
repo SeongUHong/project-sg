@@ -57,6 +57,6 @@ class PacketHandler
     {
         S_CountTime countTime = packet as S_CountTime;
 
-        Console.WriteLine($"Elapsed time : {countTime.elapsedSec}");
+        Console.WriteLine($"Remain time : {countTime.remainSec}");
     }
 }

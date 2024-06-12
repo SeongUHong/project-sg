@@ -11,7 +11,7 @@ namespace Server
         JobQueue _jobQueue = new JobQueue();
         List<ArraySegment<byte>> _pendingList = new List<ArraySegment<byte>>();
         ushort _fireballId = 0;
-        int _time = 0;
+        int _time = Config.GAME_TIME_LIMIT;
         object _lock = new object();
 
         public void Init(List<ClientSession> sessions)
@@ -53,13 +53,13 @@ namespace Server
 
             lock (_lock)
             {
-                _time += 1;
+                _time -= 1;
                 time = _time;
             }
 
             S_CountTime countTime = new S_CountTime()
             {
-                elapsedSec = time
+                remainSec = time
             };
 
             Broadcast(countTime.Write());

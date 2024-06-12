@@ -344,7 +344,7 @@ public class S_Gameover : IPacket
 
 public class S_CountTime : IPacket
 {
-	public int elapsedSec;
+	public int remainSec;
 
 	public ushort Protocol { get { return (ushort)PacketID.S_CountTime; } }
 
@@ -354,7 +354,7 @@ public class S_CountTime : IPacket
 
 		count += sizeof(ushort);
 		count += sizeof(ushort);
-		this.elapsedSec = BitConverter.ToInt32(segment.Array, segment.Offset + count);
+		this.remainSec = BitConverter.ToInt32(segment.Array, segment.Offset + count);
 		count += sizeof(int);
 	}
 
@@ -366,7 +366,7 @@ public class S_CountTime : IPacket
 		count += sizeof(ushort);
 		Array.Copy(BitConverter.GetBytes((ushort)PacketID.S_CountTime), 0, segment.Array, segment.Offset + count, sizeof(ushort));
 		count += sizeof(ushort);
-		Array.Copy(BitConverter.GetBytes(this.elapsedSec), 0, segment.Array, segment.Offset + count, sizeof(int));
+		Array.Copy(BitConverter.GetBytes(this.remainSec), 0, segment.Array, segment.Offset + count, sizeof(int));
 		count += sizeof(int);
 
 		Array.Copy(BitConverter.GetBytes(count), 0, segment.Array, segment.Offset, sizeof(ushort));
