@@ -125,7 +125,6 @@ namespace DummyClient
         public void ElapseTime(object sender, ElapsedEventArgs e)
         {
             _time += 1;
-            Console.WriteLine($"timer : {_time}");
         }
     }
 }

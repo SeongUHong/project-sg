@@ -12,6 +12,7 @@ namespace Server
         List<ArraySegment<byte>> _pendingList = new List<ArraySegment<byte>>();
         ushort _fireballId = 0;
         int _time = Config.GAME_TIME_LIMIT;
+        bool isStarted = false;
         object _lock = new object();
 
         public void Init(List<ClientSession> sessions)
@@ -49,6 +50,8 @@ namespace Server
         // 게임 제한시간 타이머
         void RunTimer()
         {
+            if (!isStarted) return;
+
             int time = 0;
 
             lock (_lock)
@@ -105,6 +108,9 @@ namespace Server
 
                 // 게임 시작이 가능하면 패킷 전송
                 Broadcast(new S_BroadcastGameStart().Write());
+
+                // 게임 시작 플래그 온
+                isStarted = true;
             }
         }
 
