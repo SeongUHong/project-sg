@@ -44,6 +44,9 @@ public class GameManagerEx : ManagerBase
     //게임 시작전 포즈
     bool _isPause;
 
+    //게임 남은 시간
+    int _remainSec;
+
     public GameObject Player { get { return _player; } }
     public GameObject Enemy { get { return _enemy; } }
 
@@ -62,6 +65,7 @@ public class GameManagerEx : ManagerBase
     public bool PlayerDeadFlag { get { return _playerDeadFlag; } set { _playerDeadFlag = value; } }
     public bool EnemyDeadFlag { get { return _enemyDeadFlag; } set { _enemyDeadFlag = value; } }
     public bool IsPause { get { return _isPause; } set { _isPause = value; } }
+    public int RemainSec { get { return _remainSec; } set { _remainSec = value; } }
 
     //스폰 되는 지점
     public Vector2 PlayerSpawnPos { get { return _playerSpawnPos; } }
