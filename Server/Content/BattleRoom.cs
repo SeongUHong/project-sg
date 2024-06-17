@@ -141,7 +141,7 @@ namespace Server
             {
                 posX = move.posX,
                 posY = move.posY,
-                rotZ = move.rotZ,
+                angle = move.angle,
             };
             anotherSession.Send(enemyMove.Write());
         }
@@ -166,7 +166,7 @@ namespace Server
                 fireBall.PlayerId = playerId;
                 fireBall.PosX = shot.posX;
                 fireBall.PosY = shot.posY;
-                fireBall.RotZ = shot.rotZ;
+                fireBall.RotZ = shot.angle;
 
                 _fireballs.Add(fireballId, fireBall);
             }
@@ -177,7 +177,7 @@ namespace Server
                 fireballId = fireballId,
                 posX = shot.posX,
                 posY = shot.posY,
-                rotZ = shot.rotZ,
+                angle = shot.angle,
             };
             session.Send(newShot.Write());
 
@@ -187,11 +187,11 @@ namespace Server
                 fireballId = fireballId,
                 posX = shot.posX,
                 posY = shot.posY,
-                rotZ = shot.rotZ,
+                angle = shot.angle,
             };
             anotherSession.Send(newEnemyShot.Write());
 
-            Console.WriteLine($"shoot (fireballId : {fireballId}, posX : {newShot.posX}, posY : {newShot.posY}, rotZ : {newShot.rotZ})");
+            Console.WriteLine($"shoot (fireballId : {fireballId}, posX : {newShot.posX}, posY : {newShot.posY}, rotZ : {newShot.angle})");
         }
 
         // 미사일 삭제 처리

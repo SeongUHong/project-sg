@@ -50,7 +50,7 @@ public class JoyStickHandler : MonoBehaviour, IDragHandler, IPointerDownHandler,
             C_Move move = new C_Move();
             move.posX = character.transform.position.x;
             move.posY = character.transform.position.y;
-            move.rotZ = character.transform.rotation.z;
+            move.angle = character.transform.eulerAngles.z;
             Managers.Network.Send(move.Write());
         }
     }

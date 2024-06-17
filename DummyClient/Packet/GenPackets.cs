@@ -36,7 +36,7 @@ public class S_EnemyMove : IPacket
 {
 	public float posX;
 	public float posY;
-	public float rotZ;
+	public float angle;
 
 	public ushort Protocol { get { return (ushort)PacketID.S_EnemyMove; } }
 
@@ -50,7 +50,7 @@ public class S_EnemyMove : IPacket
 		count += sizeof(float);
 		this.posY = BitConverter.ToSingle(segment.Array, segment.Offset + count);
 		count += sizeof(float);
-		this.rotZ = BitConverter.ToSingle(segment.Array, segment.Offset + count);
+		this.angle = BitConverter.ToSingle(segment.Array, segment.Offset + count);
 		count += sizeof(float);
 	}
 
@@ -66,7 +66,7 @@ public class S_EnemyMove : IPacket
 		count += sizeof(float);
 		Array.Copy(BitConverter.GetBytes(this.posY), 0, segment.Array, segment.Offset + count, sizeof(float));
 		count += sizeof(float);
-		Array.Copy(BitConverter.GetBytes(this.rotZ), 0, segment.Array, segment.Offset + count, sizeof(float));
+		Array.Copy(BitConverter.GetBytes(this.angle), 0, segment.Array, segment.Offset + count, sizeof(float));
 		count += sizeof(float);
 
 		Array.Copy(BitConverter.GetBytes(count), 0, segment.Array, segment.Offset, sizeof(ushort));
@@ -80,7 +80,7 @@ public class S_EnemyShot : IPacket
 	public int fireballId;
 	public float posX;
 	public float posY;
-	public float rotZ;
+	public float angle;
 
 	public ushort Protocol { get { return (ushort)PacketID.S_EnemyShot; } }
 
@@ -96,7 +96,7 @@ public class S_EnemyShot : IPacket
 		count += sizeof(float);
 		this.posY = BitConverter.ToSingle(segment.Array, segment.Offset + count);
 		count += sizeof(float);
-		this.rotZ = BitConverter.ToSingle(segment.Array, segment.Offset + count);
+		this.angle = BitConverter.ToSingle(segment.Array, segment.Offset + count);
 		count += sizeof(float);
 	}
 
@@ -114,7 +114,7 @@ public class S_EnemyShot : IPacket
 		count += sizeof(float);
 		Array.Copy(BitConverter.GetBytes(this.posY), 0, segment.Array, segment.Offset + count, sizeof(float));
 		count += sizeof(float);
-		Array.Copy(BitConverter.GetBytes(this.rotZ), 0, segment.Array, segment.Offset + count, sizeof(float));
+		Array.Copy(BitConverter.GetBytes(this.angle), 0, segment.Array, segment.Offset + count, sizeof(float));
 		count += sizeof(float);
 
 		Array.Copy(BitConverter.GetBytes(count), 0, segment.Array, segment.Offset, sizeof(ushort));
@@ -128,7 +128,7 @@ public class S_Shot : IPacket
 	public int fireballId;
 	public float posX;
 	public float posY;
-	public float rotZ;
+	public float angle;
 
 	public ushort Protocol { get { return (ushort)PacketID.S_Shot; } }
 
@@ -144,7 +144,7 @@ public class S_Shot : IPacket
 		count += sizeof(float);
 		this.posY = BitConverter.ToSingle(segment.Array, segment.Offset + count);
 		count += sizeof(float);
-		this.rotZ = BitConverter.ToSingle(segment.Array, segment.Offset + count);
+		this.angle = BitConverter.ToSingle(segment.Array, segment.Offset + count);
 		count += sizeof(float);
 	}
 
@@ -162,7 +162,7 @@ public class S_Shot : IPacket
 		count += sizeof(float);
 		Array.Copy(BitConverter.GetBytes(this.posY), 0, segment.Array, segment.Offset + count, sizeof(float));
 		count += sizeof(float);
-		Array.Copy(BitConverter.GetBytes(this.rotZ), 0, segment.Array, segment.Offset + count, sizeof(float));
+		Array.Copy(BitConverter.GetBytes(this.angle), 0, segment.Array, segment.Offset + count, sizeof(float));
 		count += sizeof(float);
 
 		Array.Copy(BitConverter.GetBytes(count), 0, segment.Array, segment.Offset, sizeof(ushort));
@@ -380,7 +380,7 @@ public class C_Move : IPacket
 {
 	public float posX;
 	public float posY;
-	public float rotZ;
+	public float angle;
 
 	public ushort Protocol { get { return (ushort)PacketID.C_Move; } }
 
@@ -394,7 +394,7 @@ public class C_Move : IPacket
 		count += sizeof(float);
 		this.posY = BitConverter.ToSingle(segment.Array, segment.Offset + count);
 		count += sizeof(float);
-		this.rotZ = BitConverter.ToSingle(segment.Array, segment.Offset + count);
+		this.angle = BitConverter.ToSingle(segment.Array, segment.Offset + count);
 		count += sizeof(float);
 	}
 
@@ -410,7 +410,7 @@ public class C_Move : IPacket
 		count += sizeof(float);
 		Array.Copy(BitConverter.GetBytes(this.posY), 0, segment.Array, segment.Offset + count, sizeof(float));
 		count += sizeof(float);
-		Array.Copy(BitConverter.GetBytes(this.rotZ), 0, segment.Array, segment.Offset + count, sizeof(float));
+		Array.Copy(BitConverter.GetBytes(this.angle), 0, segment.Array, segment.Offset + count, sizeof(float));
 		count += sizeof(float);
 
 		Array.Copy(BitConverter.GetBytes(count), 0, segment.Array, segment.Offset, sizeof(ushort));
@@ -423,7 +423,7 @@ public class C_Shot : IPacket
 {
 	public float posX;
 	public float posY;
-	public float rotZ;
+	public float angle;
 
 	public ushort Protocol { get { return (ushort)PacketID.C_Shot; } }
 
@@ -437,7 +437,7 @@ public class C_Shot : IPacket
 		count += sizeof(float);
 		this.posY = BitConverter.ToSingle(segment.Array, segment.Offset + count);
 		count += sizeof(float);
-		this.rotZ = BitConverter.ToSingle(segment.Array, segment.Offset + count);
+		this.angle = BitConverter.ToSingle(segment.Array, segment.Offset + count);
 		count += sizeof(float);
 	}
 
@@ -453,7 +453,7 @@ public class C_Shot : IPacket
 		count += sizeof(float);
 		Array.Copy(BitConverter.GetBytes(this.posY), 0, segment.Array, segment.Offset + count, sizeof(float));
 		count += sizeof(float);
-		Array.Copy(BitConverter.GetBytes(this.rotZ), 0, segment.Array, segment.Offset + count, sizeof(float));
+		Array.Copy(BitConverter.GetBytes(this.angle), 0, segment.Array, segment.Offset + count, sizeof(float));
 		count += sizeof(float);
 
 		Array.Copy(BitConverter.GetBytes(count), 0, segment.Array, segment.Offset, sizeof(ushort));

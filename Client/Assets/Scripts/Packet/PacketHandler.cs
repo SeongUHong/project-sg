@@ -12,9 +12,10 @@ public class PacketHandler
         enemyPosition.x = move.posX;
         enemyPosition.y = move.posY;
         Managers.Game.EnemyPosition = enemyPosition;
-        Vector3 enemyRotation = new Vector3();
-        enemyRotation.z = move.rotZ;
-        Managers.Game.EnemyRotate = enemyRotation;
+
+        Vector3 newRotation = Managers.Game.EnemyRotate; // 현재 회전 값을 가져옴
+        newRotation.z = move.angle; // z축 회전 값을 변경
+        Managers.Game.EnemyRotate = newRotation;
     }
 
     internal static void S_MatchedHandler(PacketSession packetSession, IPacket packet)
@@ -66,7 +67,7 @@ public class PacketHandler
         Vector3 _enemyShot = new Vector3();
         _enemyShot.x = enemyShot.posX;
         _enemyShot.y = enemyShot.posY;
-        _enemyShot.z = enemyShot.rotZ;
+        _enemyShot.z = enemyShot.angle;
 
         Managers.Skill.EnemyShot();
 
@@ -93,7 +94,7 @@ public class PacketHandler
         Vector3 playerShot = new Vector3();
         playerShot.x = shot.posX;
         playerShot.y = shot.posY;
-        playerShot.z = shot.rotZ;
+        playerShot.z = shot.angle;
 
         //발사허가
         Managers.Game.CanShoot = true;
