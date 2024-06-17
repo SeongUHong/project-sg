@@ -90,7 +90,9 @@ public class EnemyController : BaseController
         position = new Vector3(Managers.Game.EnemyPosition.x, Managers.Game.EnemyPosition.y, 0);
 
         transform.position = position;
+
         transform.eulerAngles = Managers.Game.EnemyRotate;
+
     }
 
 

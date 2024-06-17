@@ -62,7 +62,6 @@ public class PacketHandler
 
     internal static void S_EnemyShotHandler(PacketSession packetSession, IPacket packet)
     {
-        Debug.Log("S_Enemy");
 
         S_EnemyShot enemyShot = packet as S_EnemyShot;
         Vector3 _enemyShot = new Vector3();
@@ -86,6 +85,7 @@ public class PacketHandler
         int second = count.remainSec;
 
         Managers.Game.RemainSec = second;
+
     }
 
     internal static void S_ShotHandler(PacketSession packetSession, IPacket packet)
@@ -99,7 +99,6 @@ public class PacketHandler
         //발사허가
         Managers.Game.CanShoot = true;
 
-        Debug.Log($"S_ShotHandler");
 
         if (Managers.Game.CanShoot)
         {
@@ -132,16 +131,14 @@ public class PacketHandler
 
     internal static void S_GameoverHandler(PacketSession packetSession, IPacket packet)
     {
-        //status =1 윈, status = 2 루즈 ,stauts = 3 드로우
+        //status = 0 윈, status = 1 루즈 ,stauts = 2 드로우
         S_Gameover gameover = packet as S_Gameover;
         int status = gameover.status;
 
         Animator p_animator = Managers.Game.Player.GetComponent<Animator>();
         Animator e_animator = Managers.Game.Enemy.GetComponent<Animator>();
 
-        Debug.Log($"{status}");
-
-        if (status == 1)
+        if (status == 0)
         {
             Managers.Game.EnemyDeadFlag = true;
 
@@ -164,7 +161,7 @@ public class PacketHandler
                 }
             }
         }
-        else if (status == 2)
+        else if (status == 1)
         {
             Managers.Game.PlayerDeadFlag = true;
 
@@ -187,7 +184,7 @@ public class PacketHandler
                 }
             }
         }
-        else if(status == 3)
+        else if(status == 2 )
         {
             Managers.Game.PlayerDeadFlag = true;
             Managers.Game.EnemyDeadFlag = true;
@@ -235,8 +232,6 @@ public class PacketHandler
     {
         //게임씬로드시 C_ReadyBattle를 보내면 서버에서 이패킷이 옴 이걸 받으면 게임시작하도록 멈춰놓기
         Managers.Game.IsPause = true;
-
-        Debug.Log("S_BroadcastGameStartHandler");
     }
 
 
