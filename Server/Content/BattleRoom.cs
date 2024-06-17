@@ -12,7 +12,7 @@ namespace Server
         List<ArraySegment<byte>> _pendingList = new List<ArraySegment<byte>>();
         ushort _fireballId = 0;
         int _time = Config.GAME_TIME_LIMIT;
-        bool isStarted = false;
+        bool isInBattle = false;
         object _lock = new object();
 
         public void Init(List<ClientSession> sessions)
@@ -50,7 +50,8 @@ namespace Server
         // 게임 제한시간 타이머
         void RunTimer()
         {
-            if (!isStarted) return;
+            if (!isInBattle)
+                return;
 
             int time = 0;
 
@@ -66,6 +67,12 @@ namespace Server
             };
 
             Broadcast(countTime.Write());
+
+            if (time > 0) 
+                return;
+
+            // 시간 초과
+            Timeover();
         }
 
 
@@ -110,7 +117,7 @@ namespace Server
                 Broadcast(new S_BroadcastGameStart().Write());
 
                 // 게임 시작 플래그 온
-                isStarted = true;
+                isInBattle = true;
             }
         }
 
@@ -272,6 +279,17 @@ namespace Server
 
                 Console.WriteLine($"Player destroyed (playerId : {session.SessionId})");
             }
+        }
+
+        // 시간 초과로 인한 드로우 처리
+        public void Timeover()
+        {
+            Broadcast(new S_Gameover()
+            {
+                status = (int)Config.GAMEOVER_STATUS.DROW
+            }.Write());
+
+            Console.WriteLine($"Time over");
         }
     }
 }

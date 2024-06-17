@@ -17,6 +17,9 @@ public class LaunchSkillController : MonoBehaviour
     //방향
     Vector2 _dir;
 
+    //각도
+    Vector3 _angle;
+
     //사거리
     float _distance;
 
@@ -33,10 +36,11 @@ public class LaunchSkillController : MonoBehaviour
     Stat _playerStat;
     Stat _enemyStat;
 
-    public void SetSkillStatus(Vector2 startPos, Vector2 dir, float distance, float speed, int damage)
+    public void SetSkillStatus(Vector2 startPos, Vector2 dir,Vector3 angle, float distance, float speed, int damage)
     {
         _startPos = startPos;
         _dir = dir;
+        _angle = angle;
         _distance = distance;
         _speed = speed;
         _damage = damage;
@@ -45,7 +49,7 @@ public class LaunchSkillController : MonoBehaviour
     void Start()
     {
         rd2d = GetComponent<Rigidbody2D>();
-
+        rd2d.transform.eulerAngles = _angle;
         _playerStat = Managers.Game.Player.GetComponent<Stat>();
         _enemyStat = Managers.Game.Enemy.GetComponent<Stat>();
     }
@@ -58,6 +62,8 @@ public class LaunchSkillController : MonoBehaviour
         rd2d.AddForce(rd2d.transform.up * _speed * Time.fixedDeltaTime);
 
         rd2d.MovePosition(rd2d.position + _dir * Time.fixedDeltaTime * 2);
+
+        rd2d.transform.eulerAngles = _angle;
 
         //서버 전송용 탄환위치
         //_locate = rd2d.position;

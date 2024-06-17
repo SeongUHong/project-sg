@@ -5,8 +5,8 @@ using UnityEngine;
 
 public class SkillManager : ManagerBase
 {
-    //플레이어 위치
-    GameObject _player;
+    //탄환정보
+    GameObject _fireball;
     //탄환위치
     Vector2 _locate;
     //파이어볼id
@@ -25,7 +25,11 @@ public class SkillManager : ManagerBase
 
     public void Start()
     {
-        _player = Managers.Game.Player;
+
+    }
+
+    public void Update()
+    {
     }
 
     //인수:스킬이름, 좌표, 방향, 레이어, 스킬 타입
@@ -57,14 +61,14 @@ public class SkillManager : ManagerBase
         enemyController.OnAttack();
     }
 
-    public GameObject SkillInitiate(string skillName, int fireballid, Vector2 pos)
+    public GameObject SkillInitiate(string skillName, int fireballid, Vector2 pos, Vector3 angle)
     {
         
         GameObject skill = Managers.Resource.Instantiate($"Effects/{skillName}", null);
         skill.name = fireballid.ToString();
         LaunchSkillController skillController = Util.GetOrAddComponent<LaunchSkillController>(skill);
         Stat _stat = Managers.Game.Player.GetComponent<Stat>();
-        skillController.SetSkillStatus(pos, _dir, _stat.AttackDistance, _stat.ProjectileSpeed, _stat.Offence);
+        skillController.SetSkillStatus(pos, _dir, angle ,_stat.AttackDistance, _stat.ProjectileSpeed, _stat.Offence);
 
         skill.transform.position = pos;
 

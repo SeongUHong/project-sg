@@ -69,14 +69,16 @@ public class PacketHandler
         _enemyShot.y = enemyShot.posY;
         _enemyShot.z = enemyShot.angle;
 
+        Debug.Log($"에너미샷 앵글 : {_enemyShot.z}");
         Managers.Skill.EnemyShot();
-
-        GameObject fireball = Managers.Skill.SkillInitiate("fireballbluebig", enemyShot.fireballId, new Vector2(_enemyShot.x, _enemyShot.y));
+        Vector3 newRotation = new Vector3();
+        newRotation.z = enemyShot.angle;
+        GameObject fireball = Managers.Skill.SkillInitiate("fireballbluebig", enemyShot.fireballId, new Vector2(_enemyShot.x, _enemyShot.y), newRotation);
 
         Managers.Skill.SetFireBallID(enemyShot.fireballId);
         Managers.Skill.AddFireBall(fireball, enemyShot.fireballId);
 
-       
+        
     }
 
     internal static void S_CountTimeHandler(PacketSession packetSession, IPacket packet)
@@ -96,13 +98,16 @@ public class PacketHandler
         playerShot.y = shot.posY;
         playerShot.z = shot.angle;
 
+        Debug.Log($"플레이어샷 앵글 : {playerShot.z}");
+
         //발사허가
         Managers.Game.CanShoot = true;
 
-
+        Vector3 newRotation = new Vector3();
+        newRotation.z = shot.angle;
         if (Managers.Game.CanShoot)
         {
-            GameObject fireball = Managers.Skill.SkillInitiate("fireballredbig",shot.fireballId, new Vector2(playerShot.x,playerShot.y));
+            GameObject fireball = Managers.Skill.SkillInitiate("fireballredbig",shot.fireballId, new Vector2(playerShot.x,playerShot.y), newRotation);
             
             Managers.Skill.SetFireBallID(shot.fireballId);
             Managers.Skill.AddFireBall(fireball, shot.fireballId);
