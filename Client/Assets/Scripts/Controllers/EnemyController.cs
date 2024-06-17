@@ -102,8 +102,6 @@ public class EnemyController : BaseController
         Vector3 rotation = new Vector3(0.0f , 0.0f , aAngle * rotateSpeed);
         transform.rotation = Quaternion.Euler(rotation);
 
-
-
     }
 
 

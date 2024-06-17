@@ -31,6 +31,7 @@ public class GameManagerEx : ManagerBase
     //적플레이어 위치정보
     Vector3 _enemyPosition;
     Vector3 _enemyRotate;
+    Vector3 _enemyFlamePos;
 
     //탄환 발사 허가
     bool _canShoot;
@@ -45,7 +46,7 @@ public class GameManagerEx : ManagerBase
     bool _isPause;
 
     //게임 남은 시간
-    int _remainSec;
+    int _remainSec = 0;
 
     public GameObject Player { get { return _player; } }
     public GameObject Enemy { get { return _enemy; } }

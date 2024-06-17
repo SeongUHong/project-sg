@@ -8,6 +8,7 @@ public class GameScene : BaseScene
 {
 
     public TextMeshProUGUI CountDown;
+    CountDown_Panel countPanel;
     int count;
 
     protected override void Init()
