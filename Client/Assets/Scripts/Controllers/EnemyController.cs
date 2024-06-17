@@ -90,20 +90,7 @@ public class EnemyController : BaseController
         position = new Vector3(Managers.Game.EnemyPosition.x, Managers.Game.EnemyPosition.y, 0);
 
         transform.position = position;
-
-        rotate = Managers.Game.EnemyRotate;
-
-        //현재 보는 각도
-        /*float rad = Mathf.Atan2(Managers.Game.EnemyPosition.y, Managers.Game.EnemyPosition.x);
-        float bAngle = rad * Mathf.Rad2Deg;*/
-
-        //서버에서 받아온 각도
-        float aAngle = rotate.z * Mathf.Rad2Deg;
-        Vector3 rotation = new Vector3(0.0f , 0.0f , aAngle * rotateSpeed);
-        transform.rotation = Quaternion.Euler(rotation);
-
-
-
+        transform.eulerAngles = Managers.Game.EnemyRotate;
     }
 
 

@@ -87,7 +87,7 @@ namespace DummyClient
             {
                 posX = rand.Next(1, 10),
                 posY = rand.Next(1, 10),
-                rotZ = (float)rand.Next(0, 100) / 100f,
+                angle = (float)rand.Next(0, 100) / 100f,
             };
             session.Send(shot.Write());
 
@@ -102,7 +102,7 @@ namespace DummyClient
             {
                 posX = rand.Next(1, 10),
                 posY = rand.Next(1, 10),
-                rotZ = (float)rand.Next(0, 100) / 100f,
+                angle = (float)rand.Next(0, 100) / 100f,
             };
             session.Send(move.Write());
         }

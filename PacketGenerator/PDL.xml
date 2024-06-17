@@ -4,21 +4,21 @@
 	<packet name="S_EnemyMove">
 		<float name="posX"/>
 		<float name="posY"/>
-		<float name="rotZ"/>
+		<float name="angle"/>
 	</packet>
 	<!--적 미사일 발사-->
 	<packet name="S_EnemyShot">
 		<int name="fireballId"/>
 		<float name="posX"/>
 		<float name="posY"/>
-		<float name="rotZ"/>
+		<float name="angle"/>
 	</packet>
 	<!--미사일 발사-->
 	<packet name="S_Shot">
 		<int name="fireballId"/>
 		<float name="posX"/>
 		<float name="posY"/>
-		<float name="rotZ"/>
+		<float name="angle"/>
 	</packet>
 	<!--피격-->
 	<packet name="S_Hit">
@@ -48,13 +48,13 @@
 	<packet name="C_Move">
 		<float name="posX"/>
 		<float name="posY"/>
-		<float name="rotZ"/>
+		<float name="angle"/>
 	</packet>
 	<!--미사일 발사-->
 	<packet name="C_Shot">
 		<float name="posX"/>
 		<float name="posY"/>
-		<float name="rotZ"/>
+		<float name="angle"/>
 	</packet>
 	<!--피격-->
 	<packet name="C_Hit">

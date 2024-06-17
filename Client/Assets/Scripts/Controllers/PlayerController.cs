@@ -127,7 +127,7 @@ public class PlayerController : BaseController
                 C_Shot shot = new C_Shot();
                 shot.posX = Managers.Game.Player.transform.Find("ship2-flame").position.x;
                 shot.posY = Managers.Game.Player.transform.Find("ship2-flame").position.y;
-                shot.rotZ = Managers.Game.Player.transform.rotation.z;
+                shot.angle = Managers.Game.Player.transform.rotation.z;
                 
                 Managers.Network.Send(shot.Write());
             }
@@ -150,7 +150,7 @@ public class PlayerController : BaseController
                 C_Shot shot = new C_Shot();
                 shot.posX = Managers.Game.Player.transform.Find("ship2-flame").position.x;
                 shot.posY = Managers.Game.Player.transform.Find("ship2-flame").position.y;
-                shot.rotZ = Managers.Game.Player.transform.rotation.z;
+                shot.angle = Managers.Game.Player.transform.rotation.z;
 
                 Managers.Network.Send(shot.Write());
             }
