@@ -13,7 +13,7 @@ public class SkillManager : ManagerBase
     int _fireballid;
 
     //πﬂªÁΩ√ ∫“≤…πÊ«‚
-    Vector2 _dir;
+    Vector3 _dir;
 
     //IDµÒº≈≥ ∏Æ
     Dictionary<int, GameObject> _fireBalls = new Dictionary<int, GameObject>();
@@ -68,6 +68,11 @@ public class SkillManager : ManagerBase
         skill.name = fireballid.ToString();
         LaunchSkillController skillController = Util.GetOrAddComponent<LaunchSkillController>(skill);
         Stat _stat = Managers.Game.Player.GetComponent<Stat>();
+        if (skill.layer != 9)
+        {
+            Managers.Game.Enemy.transform.rotation = Quaternion.Euler(0, 0, angle.z);
+            _dir = Managers.Game.Enemy.transform.up;
+        }
         skillController.SetSkillStatus(pos, _dir, angle ,_stat.AttackDistance, _stat.ProjectileSpeed, _stat.Offence);
 
         skill.transform.position = pos;

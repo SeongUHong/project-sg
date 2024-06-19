@@ -15,7 +15,7 @@ public class Result_Panel : UIBase
     private Text result;
     public string wText = "You Win";
     public string lText = "You Lose";
-
+    public string dText = "Draw";
     private void Awake()
     {
         transform.gameObject.SetActive(false); // ������ ���۵Ǹ� �˾� â�� ������ �ʵ��� �Ѵ�.
@@ -30,8 +30,8 @@ public class Result_Panel : UIBase
     public void OnClick_Main()
     {
         Awake();
-        SceneManagerEx scene = Managers.Scene;
-        scene.LoadScene(Define.Scenes.MainScene);// ���ξ����� ���ư���
+        Managers.Clear();
+        SceneLoader.Instance.LoadScene("MainScene");
 
     }
     public override void Init()
@@ -51,7 +51,8 @@ public class Result_Panel : UIBase
             result.text = lText;
         else if (Managers.Game.Enemy.GetComponent<Stat>().Hp <= 0)
             result.text = wText;
-
+        else
+            result.text = dText;
 
     }
 }

@@ -41,11 +41,6 @@ public class PlayerController : BaseController
         //��Ʈ�ѷ�UI �ʱ�ȭ
         _uiScene = Managers.UI.UIScene;
 
-        /*if (_uiScene == null || _uiScene.JoyStickHandler == null)
-        {
-            Debug.Log("Not Exist Player Controller UI");
-        }*/
-
         AddAction();
 
         if (Managers.Game.IsLeft)
@@ -93,7 +88,6 @@ public class PlayerController : BaseController
     //���� ��Ÿ�� ���� ���� �÷��׸� false
     protected IEnumerator AttackCoolTime()
     {
-        //yield return new WaitForSeconds(_stat.AttackSpeed);
         yield return new WaitForSeconds(5.0f);
         
     }
@@ -123,14 +117,12 @@ public class PlayerController : BaseController
                 Managers.Skill.SpawnSkill(SKILL_NAME, Managers.Game.Player.transform.Find("ship2-flame").position,
                     Managers.Game.Player.transform.Find("ship2-flame").transform.up, _stat.AttackDistance, _stat.ProjectileSpeed, _stat.Offence, Define.Skill.Launch, Managers.Game.Player.transform);
 
-                Debug.Log($"Left Attack");
+                Transform flameTransform = Managers.Game.Player.transform.Find("ship2-flame");
 
                 C_Shot shot = new C_Shot();
-                shot.posX = Managers.Game.Player.transform.Find("ship2-flame").position.x;
-                shot.posY = Managers.Game.Player.transform.Find("ship2-flame").position.y;
-                shot.angle = Managers.Game.Player.transform.Find("ship2-flame").eulerAngles.z;
-
-                Debug.Log($"플레이어샷 발사시 앵글 : {shot.angle}");
+                shot.posX = flameTransform.position.x;
+                shot.posY = flameTransform.position.y;
+                shot.angle = flameTransform.transform.eulerAngles.z;
 
                 Managers.Network.Send(shot.Write());
             }
@@ -148,14 +140,12 @@ public class PlayerController : BaseController
                 Managers.Skill.SpawnSkill(SKILL_NAME, Managers.Game.Player_Right.transform.Find("ship2-flame").position,
                     Managers.Game.Player_Right.transform.Find("ship2-flame").transform.up, _stat.AttackDistance, _stat.ProjectileSpeed, _stat.Offence, Define.Skill.Launch, Managers.Game.Player_Right.transform);
 
-                Debug.Log($"Right Attack");
+                Transform flameTransform = Managers.Game.Player.transform.Find("ship2-flame");
 
                 C_Shot shot = new C_Shot();
-                shot.posX = Managers.Game.Player.transform.Find("ship2-flame").position.x;
-                shot.posY = Managers.Game.Player.transform.Find("ship2-flame").position.y;
-                shot.angle = Managers.Game.Player.transform.Find("ship2-flame").eulerAngles.z;
-
-                Debug.Log($"플레이어샷 발사시 앵글 : {shot.angle}");
+                shot.posX = flameTransform.position.x;
+                shot.posY = flameTransform.position.y;
+                shot.angle = flameTransform.transform.eulerAngles.z;
 
                 Managers.Network.Send(shot.Write());
             }

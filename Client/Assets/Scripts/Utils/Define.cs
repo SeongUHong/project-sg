@@ -45,7 +45,7 @@ public class Define
         Player = 7,
         Enemy = 8,
         Player_Bullet = 9,
-        Enemy_Buleet = 10,
+        Enemy_Bullet = 10,
     }
 
     public enum Skill

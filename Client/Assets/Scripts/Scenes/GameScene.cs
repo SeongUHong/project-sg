@@ -23,7 +23,6 @@ public class GameScene : BaseScene
         //씬 오브젝트 이름 변경
         gameObject.name = System.Enum.GetName(typeof(Define.Scenes), _sceneType);
 
-
         GameObject player = Managers.Game.InstantiatePlayer();
         GameObject enemy = Managers.Game.InstantiateEnemy();
 
@@ -46,7 +45,7 @@ public class GameScene : BaseScene
     {
 
         if (Managers.Game.IsPause)
-        {
+        {  
             Time.timeScale = 1;
             return;
         }

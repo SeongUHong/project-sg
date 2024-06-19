@@ -67,9 +67,7 @@ public class PacketHandler
         Vector3 _enemyShot = new Vector3();
         _enemyShot.x = enemyShot.posX;
         _enemyShot.y = enemyShot.posY;
-        _enemyShot.z = enemyShot.angle;
 
-        Debug.Log($"에너미샷 앵글 : {_enemyShot.z}");
         Managers.Skill.EnemyShot();
         Vector3 newRotation = new Vector3();
         newRotation.z = enemyShot.angle;
@@ -96,10 +94,7 @@ public class PacketHandler
         Vector3 playerShot = new Vector3();
         playerShot.x = shot.posX;
         playerShot.y = shot.posY;
-        playerShot.z = shot.angle;
-
-        Debug.Log($"플레이어샷 앵글 : {playerShot.z}");
-
+  
         //발사허가
         Managers.Game.CanShoot = true;
 
@@ -142,6 +137,8 @@ public class PacketHandler
 
         Animator p_animator = Managers.Game.Player.GetComponent<Animator>();
         Animator e_animator = Managers.Game.Enemy.GetComponent<Animator>();
+
+        Debug.Log($"{status}");
 
         if (status == 0)
         {
@@ -225,7 +222,7 @@ public class PacketHandler
                 }
             }
 
-                Managers.Game.IsPause = true;
+                //Managers.Game.IsPause = true;
         }
 
         

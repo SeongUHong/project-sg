@@ -18,10 +18,10 @@ public class LaunchSkillController : MonoBehaviour
     Vector2 _dir;
 
     //각도
-    Vector3 _angle;
+    Vector2 _angle;
 
     //사거리
-    float _distance;
+    Vector3 _distance;
 
     //투사체 속도
     float _speed;
@@ -32,16 +32,12 @@ public class LaunchSkillController : MonoBehaviour
     //대상 레이어
     int[] _layers;
 
-    //스텟
-    Stat _playerStat;
-    Stat _enemyStat;
 
-    public void SetSkillStatus(Vector2 startPos, Vector2 dir,Vector3 angle, float distance, float speed, int damage)
+    public void SetSkillStatus(Vector2 startPos, Vector2 dir,Vector2 angle, float distance, float speed, int damage)
     {
         _startPos = startPos;
         _dir = dir;
         _angle = angle;
-        _distance = distance;
         _speed = speed;
         _damage = damage;
     }
@@ -49,29 +45,14 @@ public class LaunchSkillController : MonoBehaviour
     void Start()
     {
         rd2d = GetComponent<Rigidbody2D>();
-        rd2d.transform.eulerAngles = _angle;
-        _playerStat = Managers.Game.Player.GetComponent<Stat>();
-        _enemyStat = Managers.Game.Enemy.GetComponent<Stat>();
+        
     }
 
     void Update()
     {
 
-        rd2d.velocity = rd2d.transform.up * _speed * Time.fixedDeltaTime;
-
-        rd2d.AddForce(rd2d.transform.up * _speed * Time.fixedDeltaTime);
-
         rd2d.MovePosition(rd2d.position + _dir * Time.fixedDeltaTime * 2);
 
-        rd2d.transform.eulerAngles = _angle;
-
-        //서버 전송용 탄환위치
-        //_locate = rd2d.position;
-
-
-
-        //서버 전송용 탄환ID
-        //this.name;
     }
 
     public void FixPosition(float posX,float posY, float rotZ)
@@ -131,8 +112,6 @@ public class LaunchSkillController : MonoBehaviour
             C_Hit hit = new C_Hit();
             hit.fireballId = int.Parse(this.gameObject.name);
             Managers.Network.Send(hit.Write());
-
-            
             
         }
 

@@ -78,12 +78,13 @@ public class GameManagerEx : ManagerBase
     public override void Init()
     {
         //플레이어 스폰위치
-        GameObject playerSpawnPos = GameObject.Find(Enum.GetName(typeof(Define.SceneLocateObject), Define.SceneLocateObject.PlayerSpawnSpot));
+        GameObject playerSpawnPos = GameObject.Find(Enum.GetName(typeof(Define.SceneLocateObject), Define.SceneLocateObject.PlayerSpawnSpot));      
         if (playerSpawnPos == null)
         {
             return;
         }
         _playerSpawnPos = playerSpawnPos.transform.position;
+
 
         //적플레이어 스폰위치
         GameObject enemySpawnSpot = GameObject.Find(Enum.GetName(typeof(Define.SceneLocateObject), Define.SceneLocateObject.EnemySpawnSpot));
@@ -92,36 +93,12 @@ public class GameManagerEx : ManagerBase
             return;
         }
         _enemySpawnPos = enemySpawnSpot.transform.position;
-
     }
 
 
     public GameObject InstantiatePlayer()
     {
         GameObject player = null;
-
-        /*if (Conf.Main.ChosenShip == "Player1")
-        {
-            player = Managers.Resource.Instantiate("Characters/Player1");
-            if (player == null)
-            {
-                Debug.Log("Failed Load Player");
-                //return null;
-            }
-
-        }
-        else
-        {
-            player = Managers.Resource.Instantiate("Characters/Player2");
-            if (player == null)
-            {
-                Debug.Log("Failed Load Player");
-                //return null;
-            }
-        }*/
-
-        
-        
 
         if (Managers.Game.IsLeft)
         {
@@ -150,8 +127,14 @@ public class GameManagerEx : ManagerBase
         }
         else
         {
+            Debug.Log("디버그1");
+            Debug.Log($"{PlayerSpawnPos}");
             enemy = Managers.Resource.Instantiate("Characters/Enemy_Left");
+            Debug.Log("디버그2");
+            Debug.Log($"{PlayerSpawnPos}");
             enemy.transform.position = PlayerSpawnPos;
+            Debug.Log("디버그3");
+            Debug.Log($"{PlayerSpawnPos}");
         }
 
         _enemy = enemy;
