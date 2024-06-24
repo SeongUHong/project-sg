@@ -127,18 +127,11 @@ public class GameManagerEx : ManagerBase
         }
         else
         {
-            Debug.Log("디버그1");
-            Debug.Log($"{PlayerSpawnPos}");
             enemy = Managers.Resource.Instantiate("Characters/Enemy_Left");
-            Debug.Log("디버그2");
-            Debug.Log($"{PlayerSpawnPos}");
             enemy.transform.position = PlayerSpawnPos;
-            Debug.Log("디버그3");
-            Debug.Log($"{PlayerSpawnPos}");
         }
 
         _enemy = enemy;
-
         return enemy;
     }
 
@@ -155,13 +148,11 @@ public class GameManagerEx : ManagerBase
                 basePos = PlayerSpawnPos;
 
                 spawnRange = Conf.Main.UNIT_SPAWN_RANGE;
-
                 break;
             case Define.Layer.Enemy:
                 basePos = _enemySpawnPos;
 
                 spawnRange = Conf.Main.MONSTER_SPAWN_RANGE;
-
                 break;
             default:
                 break;
@@ -182,7 +173,6 @@ public class GameManagerEx : ManagerBase
 
         //위치 설정
         go.transform.position = CreatePos(layer);
-
         return go;
     }
 

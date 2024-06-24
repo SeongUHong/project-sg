@@ -118,7 +118,7 @@ public class PacketHandler
         int fireballid = hit.fireballId;
 
         Stat _playerStat = Managers.Game.Player.GetComponent<Stat>();
-        _playerStat.OnAttacked(5);
+        _playerStat.OnAttacked(100);
 
 
         GameObject fireball = Managers.Skill.GetFireBall(fireballid);
@@ -138,8 +138,7 @@ public class PacketHandler
         Animator p_animator = Managers.Game.Player.GetComponent<Animator>();
         Animator e_animator = Managers.Game.Enemy.GetComponent<Animator>();
 
-        Debug.Log($"{status}");
-
+        
         if (status == 0)
         {
             Managers.Game.EnemyDeadFlag = true;
@@ -221,13 +220,10 @@ public class PacketHandler
                     Conf.Main._result.Show();
                 }
             }
-
-                //Managers.Game.IsPause = true;
         }
 
-        
+        Managers.Network.OnDisconnected();
 
-        
     }
 
     internal static void S_BroadcastGameStartHandler(PacketSession packetSession, IPacket packet)

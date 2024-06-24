@@ -3,7 +3,7 @@
 		{
 			"level":"1",
 			"hp":"50",
-			"offence":"5",
+			"offence":"100",
 			"defence":"0",
 			"move_speed":"10.0",
 			"attack_distance":"10.0",

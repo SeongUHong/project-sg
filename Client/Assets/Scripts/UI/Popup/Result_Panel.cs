@@ -16,6 +16,14 @@ public class Result_Panel : UIBase
     public string wText = "You Win";
     public string lText = "You Lose";
     public string dText = "Draw";
+
+    public override void Init()
+    {
+        Bind<Button>(typeof(Buttons));
+
+        BindEvent(GetButton((int)Buttons.main_btn).gameObject, (PointerEventData data) => OnClick_Main());
+        Debug.Log("리설트판넬 이닛");
+    }
     private void Awake()
     {
         transform.gameObject.SetActive(false); // ������ ���۵Ǹ� �˾� â�� ������ �ʵ��� �Ѵ�.
@@ -30,18 +38,13 @@ public class Result_Panel : UIBase
     public void OnClick_Main()
     {
         Awake();
+        Debug.Log("메인버튼클릭");
+        SceneManagerEx scene = Managers.Scene;
+        scene.LoadScene(Define.Scenes.MainScene);
         Managers.Clear();
-        SceneLoader.Instance.LoadScene("MainScene");
 
     }
-    public override void Init()
-    {
-        Bind<Button>(typeof(Buttons));
-        //Awake();
-
-        BindEvent(GetButton((int)Buttons.main_btn).gameObject, (PointerEventData data) => OnClick_Main());
-        
-    }
+    
 
     public void SetText()
     {
