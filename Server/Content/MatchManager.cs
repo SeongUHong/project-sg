@@ -11,8 +11,14 @@ namespace Server
 
         // 대기중인 플레이어들
         Dictionary<ushort, ClientSession> _waitingSessions = new Dictionary<ushort, ClientSession>();
+        // 배틀중인 플레이어들
+        Dictionary<ushort, ClientSession> _matchedSessions = new Dictionary<ushort, ClientSession>();
+        // 배틀룸
+        Dictionary<ushort, BattleRoom> _battleRooms = new Dictionary<ushort, BattleRoom>();
         Queue<ushort> _waitingQueue = new Queue<ushort>();
         JobQueue _jobQueue = new JobQueue();
+        ushort _battleRoomId = 0;
+        
         object _lock = new object();
 
         const int MATCH_INTERVAL = 2000;
@@ -45,7 +51,7 @@ namespace Server
                     return;
 
                 // 배틀룸 생성
-                BattleRoom battle = new BattleRoom();
+                BattleRoom battle = CreateBattleRoom();
                 // 배틀 초기화
                 battle.Init(sessions);
 
@@ -59,12 +65,14 @@ namespace Server
                 matched.enemyNickname = session2.Player.Nickname;
                 matched.isLeft = true;
                 session1.Send(matched.Write());
+                ChangeWaitToBattle(session1);
 
                 session2.Player.EnemyPlayerId = session1.Player.PlayerId;
                 matched = new S_Matched();
                 matched.enemyNickname = session1.Player.Nickname;
                 matched.isLeft = false;
                 session2.Send(matched.Write());
+                ChangeWaitToBattle(session2);
             }
         }
 
@@ -101,6 +109,8 @@ namespace Server
                 // 이미 매칭중인 플레이어는 제외
                 if (_waitingSessions.ContainsKey(session.SessionId))
                     return;
+                if (_matchedSessions.ContainsKey(session.SessionId))
+                    return;
 
                 ushort sessionId = session.SessionId;
 
@@ -117,17 +127,89 @@ namespace Server
         }
 
         // 대기목록에서 유저 삭제
-        // 대기 목록에서 삭제하면 배틀중인 플레이어ID로도 매칭을 진행할 수 있게 됨
-        // 때문에 배틀 종료 후 대기목록에서 지울 것
-        public void RemoveWaitPlayer(ClientSession session)
+        void RemoveWaitPlayer(ClientSession session)
         {
             lock (_lock)
             {
-                // 대기 목록에 없다면 패스
+                // 대기 목록에 없다면 세션 종료
                 if (!_waitingSessions.ContainsKey(session.SessionId))
+                {
+                    Console.WriteLine($"Failed removing waitting player (playerId : {session.SessionId})");
+                    session.Disconnect();
                     return;
+                }
 
                 _waitingSessions.Remove(session.SessionId);
+                Console.WriteLine($"waitting player removed (playerId : {session.SessionId})");
+            }
+        }
+
+        // 배틀 중인 유저 목록에 유저 추가
+        void AddBattlePlayer(ClientSession session)
+        {
+            lock (_lock)
+            {
+                _matchedSessions.Add(session.SessionId, session);
+            }
+        }
+
+        // 배틀 중인 유저 목록에서 유저 삭제
+        public void RemoveBattlePlayer(ClientSession session)
+        {
+            lock (_lock)
+            {
+                if (!_matchedSessions.ContainsKey(session.SessionId))
+                {
+                    Console.WriteLine($"Failed removing battle player (playerId : {session.SessionId})");
+                    return;
+                }
+
+                _matchedSessions.Remove(session.SessionId);
+                Console.WriteLine($"battle player removed (playerId : {session.SessionId})");
+            }
+        }
+
+        // 유저를 대기 목록에서 배틀 목록으로 옮김
+        void ChangeWaitToBattle(ClientSession session)
+        {
+            RemoveWaitPlayer(session);
+            AddBattlePlayer(session);
+        }
+
+        // 배틀룸 생성
+        BattleRoom CreateBattleRoom()
+        {
+            BattleRoom battleRoom = null;
+
+            lock (_lock)
+            {
+                ushort battleRoomId = _battleRoomId++;
+
+                battleRoom = new BattleRoom();
+                battleRoom.BattleRoomId = battleRoomId;
+
+                _battleRooms.Add(battleRoomId, battleRoom);
+            }
+
+            return battleRoom;
+        }
+
+        // 배틀룸 삭제
+        public void RemoveBattleRoom(BattleRoom battleRoom)
+        {
+            foreach (ClientSession session in battleRoom.GetSessions())
+                RemoveBattlePlayer(session);
+
+            lock (_lock)
+            {
+                if (!_battleRooms.ContainsKey(battleRoom.BattleRoomId))
+                {
+                    Console.WriteLine($"Failed removing battle room (BattleRoomId : {battleRoom.BattleRoomId})");
+                    return;
+                }
+
+                _battleRooms.Remove(battleRoom.BattleRoomId);
+                Console.WriteLine($"battle room removed (BattleRoomId : {battleRoom.BattleRoomId})");
             }
         }
     }
