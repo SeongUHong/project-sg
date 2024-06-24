@@ -15,6 +15,8 @@ namespace Server
         bool isInBattle = false;
         object _lock = new object();
 
+        public ushort BattleRoomId { get; set; }
+
         public void Init(List<ClientSession> sessions)
         {
             // 플레이어 등록
@@ -45,6 +47,13 @@ namespace Server
         {
             Push(job);
             JobTimer.Instance.Push(() => { BindJobTimer(job, interval); }, interval);
+        }
+
+        // 잡을 일정 시간 뒤에 실행
+        void ExecAfterDelay(Action job, int time)
+        {
+            JobTimer.Instance.Push(job, time);
+
         }
 
         // 게임 제한시간 타이머
@@ -119,6 +128,16 @@ namespace Server
                 // 게임 시작 플래그 온
                 isInBattle = true;
             }
+        }
+
+        public List<ClientSession> GetSessions()
+        {
+            List<ClientSession> sessions = new List<ClientSession>();
+
+            foreach (ClientSession s in _sessions.Values)
+                sessions.Add(s);
+
+            return sessions;
         }
 
         public ClientSession GetAnotherSession(ushort playerId)
@@ -261,10 +280,14 @@ namespace Server
         {
             lock (_lock)
             {
+                if (!isInBattle)
+                    return;
+
                 ClientSession anotherSession = GetAnotherSession(session.Player.EnemyPlayerId);
                 if (anotherSession == null)
                     return;
 
+                // 종료 패킷 전송 후에 연결을 끊기 위해 JobQueue에 등록
                 // 승리
                 anotherSession.Send(new S_Gameover()
                 {
@@ -274,22 +297,71 @@ namespace Server
                 // 패배
                 session.Send(new S_Gameover()
                 {
-                    status = (int)Config.GAMEOVER_STATUS.WIN
+                    status = (int)Config.GAMEOVER_STATUS.LOSE
                 }.Write());
+
+                EndBattle();
 
                 Console.WriteLine($"Player destroyed (playerId : {session.SessionId})");
             }
+
+            ExecAfterDelay(Clear, Config.DISCONNECT_SESSION_DELAY);
         }
 
         // 시간 초과로 인한 드로우 처리
         public void Timeover()
         {
+            // 종료 패킷 전송 후에 연결을 끊기 위해 JobQueue에 등록
             Broadcast(new S_Gameover()
             {
                 status = (int)Config.GAMEOVER_STATUS.DROW
             }.Write());
+            
+            EndBattle();
 
             Console.WriteLine($"Time over");
+
+            ExecAfterDelay(Clear, Config.DISCONNECT_SESSION_DELAY);
+        }
+
+        // 배틀 종료 처리
+        public void EndBattle()
+        {
+            lock (_lock)
+            {
+                isInBattle = false;
+            }
+        }
+
+        // 세션을 종료 시킴
+        public void DisconnetSessions()
+        {
+            lock (_lock)
+            {
+                foreach (ClientSession s in _sessions.Values)
+                {
+                    s.Clear();
+                    s.Disconnect();
+                }
+            }
+        }
+
+        // 참조 정리
+        public void Clear()
+        {
+            // 배틀룸 참조 해제
+            MatchManager.Instance.RemoveBattleRoom(this);
+
+            // 각 세션 참조 해제 후 종료
+            DisconnetSessions();
+
+            // 배틀룸 내부 참조 해제
+            lock (_lock)
+            {
+                _sessions.Clear();
+                _fireballs.Clear();
+                _pendingList.Clear();
+            }
         }
     }
 }

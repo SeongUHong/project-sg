@@ -20,7 +20,6 @@ namespace Server
         public override void OnDisconnected(EndPoint endPoint)
         {
             // 대기 목록에서 삭제
-            MatchManager.Instance.RemoveWaitPlayer(this);
             Console.WriteLine($"ClientSession OnDisconnected : {endPoint}, SessionId : {SessionId}");
         }
 
@@ -31,6 +30,12 @@ namespace Server
 
         public override void OnSend(int byteNum)
         {
+        }
+
+        public void Clear()
+        {
+            BattleRoom = null;
+            Player = null;
         }
     }
 }

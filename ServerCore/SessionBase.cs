@@ -130,9 +130,14 @@ namespace ServerCore
                         Console.WriteLine($"OnSendCompleted Failed {e}");
                     }
                 }
+                else if (args.SocketError == SocketError.OperationAborted
+                    && args.SocketError == SocketError.Success)
+                {
+                    Console.WriteLine($"Socket already disconnected");
+                }
                 else
                 {
-                    Console.WriteLine("Socket error");
+                    Console.WriteLine($"Socket error ({args.SocketError})");
                     Disconnect();
                 }
             }
@@ -202,9 +207,13 @@ namespace ServerCore
                     Console.WriteLine($"OnRecvCompleted Failed {e}");
                 }
             }
+            else if (args.SocketError == SocketError.OperationAborted)
+            {
+                Console.WriteLine($"Socket already disconnected");
+            }
             else
             {
-                Console.WriteLine("Socket error");
+                Console.WriteLine($"Socket error ({args.SocketError})");
                 Disconnect();
             }
         }
