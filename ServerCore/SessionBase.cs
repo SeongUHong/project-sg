@@ -68,7 +68,7 @@ namespace ServerCore
             }
         }
 
-        private void Disconnect()
+        public void Disconnect()
         {
             // 락 걸고 종료 플래그를 세움
             if (Interlocked.Exchange(ref _disconnected, 1) == 1)
