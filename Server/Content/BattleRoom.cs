@@ -12,7 +12,7 @@ namespace Server
         List<ArraySegment<byte>> _pendingList = new List<ArraySegment<byte>>();
         ushort _fireballId = 0;
         int _time = Config.GAME_TIME_LIMIT;
-        bool isInBattle = false;
+        bool _isInBattle = false;
         object _lock = new object();
 
         public ushort BattleRoomId { get; set; }
@@ -26,13 +26,6 @@ namespace Server
                 session.BattleRoom = this;
             }
 
-            // 작업 등록
-            BindJobTimer(Flush, Config.FLUSH_BATTLE_JOB_INTERVAL);
-            BindJobTimer(DeleteFireball, Config.REMOVE_FIREBALL_JOB_INTERVAL);
-
-            // 타이머 시작
-            BindJobTimer(RunTimer, Config.GAME_TIME_COUNT_INTERVAL);
-
             Console.WriteLine($"Matching completed. (playerId : {sessions[0].Player.PlayerId}, with playerId : {sessions[1].Player.PlayerId})");
         }
 
@@ -45,6 +38,9 @@ namespace Server
         // 잡을 일정 간격으로 등록
         void BindJobTimer(Action job, int interval)
         {
+            if (!_isInBattle)
+                return;
+
             Push(job);
             JobTimer.Instance.Push(() => { BindJobTimer(job, interval); }, interval);
         }
@@ -59,7 +55,7 @@ namespace Server
         // 게임 제한시간 타이머
         void RunTimer()
         {
-            if (!isInBattle)
+            if (!_isInBattle)
                 return;
 
             int time = 0;
@@ -105,6 +101,17 @@ namespace Server
             }
         }
 
+        // 반복적으로 실행하는 잡들 시작
+        public void StartJob()
+        {
+            // 작업 등록
+            BindJobTimer(Flush, Config.FLUSH_BATTLE_JOB_INTERVAL);
+            BindJobTimer(DeleteFireball, Config.REMOVE_FIREBALL_JOB_INTERVAL);
+
+            // 타이머 시작
+            BindJobTimer(RunTimer, Config.GAME_TIME_COUNT_INTERVAL);
+        }
+
         // 배틀 준비 완료 처리
         public void ReadyBattle(ClientSession session)
         {
@@ -126,8 +133,10 @@ namespace Server
                 Broadcast(new S_BroadcastGameStart().Write());
 
                 // 게임 시작 플래그 온
-                isInBattle = true;
+                _isInBattle = true;
             }
+
+            StartJob();
         }
 
         public List<ClientSession> GetSessions()
@@ -280,7 +289,7 @@ namespace Server
         {
             lock (_lock)
             {
-                if (!isInBattle)
+                if (!_isInBattle)
                     return;
 
                 ClientSession anotherSession = GetAnotherSession(session.Player.EnemyPlayerId);
@@ -329,7 +338,7 @@ namespace Server
         {
             lock (_lock)
             {
-                isInBattle = false;
+                _isInBattle = false;
             }
         }
 
