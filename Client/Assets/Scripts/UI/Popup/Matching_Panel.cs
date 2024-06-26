@@ -31,14 +31,8 @@ public class Matching_Panel : UIBase
 
     public void OnClick_Button()
     {
-
-        
         StartCoroutine(SendNickName());
-
-       //적닉네임받을때까지 대기 메서드작성
-        
-        
-        
+        Debug.Log("센드닉네임");
         
     }
 
@@ -53,6 +47,7 @@ public class Matching_Panel : UIBase
                 C_StartMatch nick = new C_StartMatch();
                 nick.nickname = Managers.Game.PlayerNick;
                 Managers.Network.Send(nick.Write());
+                Debug.Log("센드닉네임 코루틴");
                 break;
             }
 

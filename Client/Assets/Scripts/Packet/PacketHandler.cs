@@ -118,7 +118,7 @@ public class PacketHandler
         int fireballid = hit.fireballId;
 
         Stat _playerStat = Managers.Game.Player.GetComponent<Stat>();
-        _playerStat.OnAttacked(100);
+        _playerStat.OnAttacked(5);
 
 
         GameObject fireball = Managers.Skill.GetFireBall(fireballid);
@@ -138,7 +138,7 @@ public class PacketHandler
         Animator p_animator = Managers.Game.Player.GetComponent<Animator>();
         Animator e_animator = Managers.Game.Enemy.GetComponent<Animator>();
 
-        
+
         if (status == 0)
         {
             Managers.Game.EnemyDeadFlag = true;

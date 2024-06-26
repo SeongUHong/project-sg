@@ -22,7 +22,6 @@ public class Result_Panel : UIBase
         Bind<Button>(typeof(Buttons));
 
         BindEvent(GetButton((int)Buttons.main_btn).gameObject, (PointerEventData data) => OnClick_Main());
-        Debug.Log("리설트판넬 이닛");
     }
     private void Awake()
     {
@@ -41,6 +40,7 @@ public class Result_Panel : UIBase
         Debug.Log("메인버튼클릭");
         SceneManagerEx scene = Managers.Scene;
         scene.LoadScene(Define.Scenes.MainScene);
+
         Managers.Clear();
 
     }

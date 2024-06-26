@@ -30,7 +30,9 @@ namespace SmallShips
         /// </summary>
         public void DestroyObject()
         {
-            Destroy(gameObject);
+            
+            Destroy(gameObject);    
+
             Time.timeScale = 0.0f;
         }
 

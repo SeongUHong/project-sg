@@ -20,11 +20,12 @@ public class JoyStickHandler : MonoBehaviour, IDragHandler, IPointerDownHandler,
 
     private Coroutine runningCoroutine; // 부드러운 회전 코루틴
 
+    private Coroutine cMove;
 
     void Start()
     {
 
-        if(Managers.Game.Player != null)
+        if(Managers.Game.IsLeft)
         {
             character = Managers.Game.Player;
         }
@@ -38,28 +39,46 @@ public class JoyStickHandler : MonoBehaviour, IDragHandler, IPointerDownHandler,
         //적 움직임 테스트용
         //character = Managers.Game.Enemy;
 
-        StartCoroutine(C_Move());
+        cMove = StartCoroutine(C_Move());
     }
 
+    public void StopCoroutine()
+    {
+        StopCoroutine(cMove);
+    }
 
     IEnumerator C_Move()
     {
         while (true)
-        {
+         {
             yield return new WaitForSeconds(0.25f);
             C_Move move = new C_Move();
             move.posX = character.transform.position.x;
             move.posY = character.transform.position.y;
             move.angle = character.transform.eulerAngles.z;
             Managers.Network.Send(move.Write());
-        }
+         }
+
+        
     }
 
+
+     
     void Update()
     {
         if (character != null)
             character.GetComponent<Rigidbody2D>().velocity = character.transform.up * speed;
         // 캐릭터는 3의 속도로 계속 전진
+
+        if (Managers.Game.PlayerDeadFlag)
+        {
+            character = null;
+            StopCoroutine();
+        }
+        if (Managers.Game.EnemyDeadFlag)
+        {
+            speed = 0;
+        }
     }
 
 

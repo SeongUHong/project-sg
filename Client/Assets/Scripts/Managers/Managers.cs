@@ -68,10 +68,13 @@ public class Managers : MonoBehaviour
         s_instance._packet.Init();
     }
 
-    public static void Clear()
+     public static void Clear()
     {
         Pool.Clear();
         Scene.Clear();
         UI.Clear();
+
+        s_instance._game = new GameManagerEx();
+        s_instance._skill = new SkillManager();
     }
 }

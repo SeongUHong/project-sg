@@ -129,4 +129,9 @@ public class SkillManager : ManagerBase
     {
         throw new NotImplementedException();
     }
+
+    public void Clear()
+    {
+
+    }
 }
