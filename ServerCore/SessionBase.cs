@@ -131,7 +131,7 @@ namespace ServerCore
                     }
                 }
                 else if (args.SocketError == SocketError.OperationAborted
-                    && args.SocketError == SocketError.Success)
+                    || args.SocketError == SocketError.Success)
                 {
                     Console.WriteLine($"Socket already disconnected");
                 }
@@ -207,7 +207,8 @@ namespace ServerCore
                     Console.WriteLine($"OnRecvCompleted Failed {e}");
                 }
             }
-            else if (args.SocketError == SocketError.OperationAborted)
+            else if (args.SocketError == SocketError.OperationAborted
+                    || args.SocketError == SocketError.Success)
             {
                 Console.WriteLine($"Socket already disconnected");
             }
