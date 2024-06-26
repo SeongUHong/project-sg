@@ -8,8 +8,6 @@ public class GameScene : BaseScene
 {
 
     public TextMeshProUGUI CountDown;
-    CountDown_Panel countPanel;
-    int count;
 
     protected override void Init()
     {
@@ -23,10 +21,12 @@ public class GameScene : BaseScene
         //씬 오브젝트 이름 변경
         gameObject.name = System.Enum.GetName(typeof(Define.Scenes), _sceneType);
 
-        GameObject player = Managers.Game.InstantiatePlayer();
+        
         GameObject enemy = Managers.Game.InstantiateEnemy();
+        GameObject player = Managers.Game.InstantiatePlayer();
 
         Conf.Main._result = Managers.Game.Result_Panel;
+        Conf.Main._result.Init();
         Conf.Main._inGameNick = Managers.Game.InGame_NickName_Panel;
         Conf.Main._inGameNick.SetNickName();
         Conf.Main._inGameNick.Show();
