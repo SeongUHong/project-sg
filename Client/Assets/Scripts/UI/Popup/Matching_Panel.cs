@@ -31,26 +31,18 @@ public class Matching_Panel : UIBase
 
     public void OnClick_Button()
     {
-        StartCoroutine(SendNickName());
-        Debug.Log("센드닉네임");
-        
+        SendNickName();
     }
 
     //닉네임 서버에 보내기
-    IEnumerator SendNickName()
+    public void SendNickName()
     {
-        while (true)
+        if (Managers.Network.IsConnet)
         {
-            yield return new WaitForSeconds(1.0f);
-            if (Managers.Network.IsConnet)
-            {
-                C_StartMatch nick = new C_StartMatch();
-                nick.nickname = Managers.Game.PlayerNick;
-                Managers.Network.Send(nick.Write());
-                Debug.Log("센드닉네임 코루틴");
-                break;
-            }
-
+            C_StartMatch nick = new C_StartMatch();
+            nick.nickname = Managers.Game.PlayerNick;
+            Managers.Network.Send(nick.Write());
+            Debug.Log("SendNickName");
         }
     }
 

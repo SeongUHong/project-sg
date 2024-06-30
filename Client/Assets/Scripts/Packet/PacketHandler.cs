@@ -222,8 +222,9 @@ public class PacketHandler
             }
         }
 
-        Managers.Network.OnDisconnected();
-
+        // 서버와의 연결 종료
+        ServerSession session = packetSession as ServerSession;
+        session.Disconnect();
     }
 
     internal static void S_BroadcastGameStartHandler(PacketSession packetSession, IPacket packet)

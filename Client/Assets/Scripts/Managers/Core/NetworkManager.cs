@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class NetworkManager : ManagerBase
 {
-    ServerSession _session = new ServerSession();
+    ServerSession _session;
     bool _isConnect = false;
 
     public bool IsConnet { get { return _isConnect; } }
@@ -19,6 +19,8 @@ public class NetworkManager : ManagerBase
         IPEndPoint endPoint = new IPEndPoint(ipAddr, 7777);
 
         Connector connector = new Connector();
+
+        _session = new ServerSession();
 
         connector.Connect(
             endPoint,
