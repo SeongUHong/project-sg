@@ -20,7 +20,7 @@ namespace Server
         public override void OnDisconnected(EndPoint endPoint)
         {
             // 배틀 중에 종료되었을 경우
-            if (BattleRoom != null)
+            if (BattleRoom != null && BattleRoom.IsInBattle)
             {
                 BattleRoom.Giveup(this);
             }

@@ -44,6 +44,9 @@ namespace Server
         {
             lock (_lock)
             {
+                if (!_sessions.ContainsKey(session.SessionId))
+                    return;
+
                 _sessions.Remove(session.SessionId);
             }
         }

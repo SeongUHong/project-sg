@@ -16,6 +16,7 @@ namespace Server
         object _lock = new object();
 
         public ushort BattleRoomId { get; set; }
+        public bool IsInBattle { get { return _isInBattle; } }
 
         public void Init(List<ClientSession> sessions)
         {
@@ -337,6 +338,9 @@ namespace Server
         {
             lock (_lock)
             {
+                if (!_isInBattle)
+                    return;
+
                 ClientSession anotherSession = GetAnotherSession(session.Player.EnemyPlayerId);
                 if (anotherSession == null)
                     return;
@@ -379,6 +383,8 @@ namespace Server
         }
 
         // 참조 정리
+        // Gameover패킷을 보내면 클라이언트에서 세션을 종료해버리기 때문에
+        // 이 메서드를 실행하는 시점에는 이미 세션이 종료되어 있을 수 있음
         public void Clear()
         {
             // 배틀룸 참조 해제

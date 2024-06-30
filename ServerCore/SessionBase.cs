@@ -142,7 +142,7 @@ namespace ServerCore
                     || args.SocketError == SocketError.Success)
                 {
                     Console.WriteLine($"Socket already disconnected");
-                    OnDisconnected(_socket.RemoteEndPoint);
+                    Disconnect();
                 }
                 else
                 {
@@ -220,7 +220,7 @@ namespace ServerCore
                     || args.SocketError == SocketError.Success)
             {
                 Console.WriteLine($"Socket already disconnected");
-                OnDisconnected(_socket.RemoteEndPoint);
+                Disconnect();
             }
             else
             {
