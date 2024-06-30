@@ -127,7 +127,7 @@ namespace Server
         }
 
         // 대기목록에서 유저 삭제
-        void RemoveWaitPlayer(ClientSession session)
+        public void RemoveWaitPlayer(ClientSession session)
         {
             lock (_lock)
             {
@@ -142,6 +142,14 @@ namespace Server
                 _waitingSessions.Remove(session.SessionId);
                 Console.WriteLine($"waitting player removed (playerId : {session.SessionId})");
             }
+        }
+
+        public bool IsWaittingPlayer(ClientSession session)
+        {
+            if (_waitingSessions.ContainsKey(session.SessionId))
+                return true;
+
+            return false;
         }
 
         // 배틀 중인 유저 목록에 유저 추가

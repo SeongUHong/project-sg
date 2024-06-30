@@ -19,7 +19,20 @@ namespace Server
 
         public override void OnDisconnected(EndPoint endPoint)
         {
-            // 대기 목록에서 삭제
+            // 배틀 중에 종료되었을 경우
+            if (BattleRoom != null)
+            {
+                BattleRoom.Giveup(this);
+            }
+            else if (MatchManager.Instance.IsWaittingPlayer(this))
+            {
+                // 대기 목록에서 삭제
+                MatchManager.Instance.RemoveWaitPlayer(this);
+            }
+
+            // 세션 삭제
+            SessionManager.Instance.Remove(this);
+
             Console.WriteLine($"ClientSession OnDisconnected : {endPoint}, SessionId : {SessionId}");
         }
 

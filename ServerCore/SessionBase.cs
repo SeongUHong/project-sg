@@ -71,8 +71,16 @@ namespace ServerCore
         public void Disconnect()
         {
             // 락 걸고 종료 플래그를 세움
-            if (Interlocked.Exchange(ref _disconnected, 1) == 1)
-                return;
+            lock (_lock)
+            {
+                if (_disconnected == 1)
+                {
+                    Console.WriteLine($"Faild to disconnect. Socket already disconnected.");
+                    return;
+                }
+
+                _disconnected = 1;
+            }
 
             // 소켓 연결 종료
             OnDisconnected(_socket.RemoteEndPoint);
@@ -134,6 +142,7 @@ namespace ServerCore
                     || args.SocketError == SocketError.Success)
                 {
                     Console.WriteLine($"Socket already disconnected");
+                    OnDisconnected(_socket.RemoteEndPoint);
                 }
                 else
                 {
@@ -211,6 +220,7 @@ namespace ServerCore
                     || args.SocketError == SocketError.Success)
             {
                 Console.WriteLine($"Socket already disconnected");
+                OnDisconnected(_socket.RemoteEndPoint);
             }
             else
             {

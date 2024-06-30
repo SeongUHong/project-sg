@@ -296,7 +296,6 @@ namespace Server
                 if (anotherSession == null)
                     return;
 
-                // 종료 패킷 전송 후에 연결을 끊기 위해 JobQueue에 등록
                 // 승리
                 anotherSession.Send(new S_Gameover()
                 {
@@ -329,6 +328,30 @@ namespace Server
             EndBattle();
 
             Console.WriteLine($"Time over");
+
+            ExecAfterDelay(Clear, Config.DISCONNECT_SESSION_DELAY);
+        }
+
+        // 플레이어의 비정상적 종료
+        public void Giveup(ClientSession session)
+        {
+            lock (_lock)
+            {
+                ClientSession anotherSession = GetAnotherSession(session.Player.EnemyPlayerId);
+                if (anotherSession == null)
+                    return;
+
+                // 승리 패킷 전송
+                // 이미 세션이 종료됐기 때문에 패배 패킷은 보내지 않음
+                anotherSession.Send(new S_Gameover()
+                {
+                    status = (int)Config.GAMEOVER_STATUS.WIN
+                }.Write());
+
+                EndBattle();
+            }
+
+            Console.WriteLine($"Palyer Gave up (playerId : {session.SessionId})");
 
             ExecAfterDelay(Clear, Config.DISCONNECT_SESSION_DELAY);
         }
