@@ -51,7 +51,7 @@ public class JoyStickHandler : MonoBehaviour, IDragHandler, IPointerDownHandler,
     {
         while (true)
          {
-            yield return new WaitForSeconds(0.25f);
+            yield return new WaitForSeconds(0.2f);
             C_Move move = new C_Move();
             move.posX = character.transform.position.x;
             move.posY = character.transform.position.y;

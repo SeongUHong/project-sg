@@ -45,8 +45,12 @@ class PacketHandler
         Console.WriteLine("GameStart");
     }
 
-    internal static void S_GameoverHandler(PacketSession arg1, IPacket arg2)
+    internal static void S_GameoverHandler(PacketSession packetSession, IPacket packet)
     {
+        ServerSession session = packetSession as ServerSession;
+        S_Gameover gameover = packet as S_Gameover;
+
+        Console.WriteLine($"Gameover (status : {gameover.status})");
     }
 
     internal static void S_EnemyHitHandler(PacketSession arg1, IPacket arg2)

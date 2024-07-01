@@ -51,7 +51,7 @@ public class LaunchSkillController : MonoBehaviour
     void Update()
     {
 
-        rd2d.MovePosition(rd2d.position + _dir * Time.fixedDeltaTime * 2);
+        rd2d.MovePosition(rd2d.position + _dir * Time.fixedDeltaTime * 3);
 
     }
 

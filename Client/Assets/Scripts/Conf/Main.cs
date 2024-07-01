@@ -18,6 +18,12 @@ namespace Conf
         {
             ATTACK = 1,
         }
+        public enum GAMEOVER_STATUS
+        {
+            WIN,
+            LOSE,
+            DRAW,
+        }
         public static float SEND_PACKET_INTERVAL = 0.25f;
         public static float MOVE_POWER = 1.0f;
 

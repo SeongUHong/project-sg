@@ -138,89 +138,94 @@ public class PacketHandler
         Animator p_animator = Managers.Game.Player.GetComponent<Animator>();
         Animator e_animator = Managers.Game.Enemy.GetComponent<Animator>();
 
+        Result_Panel _result = Managers.Game.Result_Panel;
 
-        if (status == 0)
+        if (status == (int)Conf.Main.GAMEOVER_STATUS.WIN)
         {
             Managers.Game.EnemyDeadFlag = true;
 
             if (Managers.Game.IsLeft)
             {
-                if (Managers.Game.EnemyDeadFlag && Managers.Game.Enemy != null)
+                if (Managers.Game.Enemy != null)
                 {
                     e_animator.SetBool("expl", true);
-                    Conf.Main._result.SetText();
-                    Conf.Main._result.Show();
+                    _result.SetText(status);
+                    _result.Show();
                 }
             }
             else
             {
-                if (Managers.Game.EnemyDeadFlag && Managers.Game.Enemy_Left != null)
+                if (Managers.Game.Enemy_Left != null)
                 {
                     e_animator.SetBool("expl", true);
-                    Conf.Main._result.SetText();
-                    Conf.Main._result.Show();
+                    _result.SetText(status);
+                    _result.Show();
                 }
             }
         }
-        else if (status == 1)
+        else if (status == (int)Conf.Main.GAMEOVER_STATUS.LOSE)
         {
             Managers.Game.PlayerDeadFlag = true;
 
             if (Managers.Game.IsLeft)
             {
-                if (Managers.Game.PlayerDeadFlag && Managers.Game.Player != null)
+                if (Managers.Game.Player != null)
                 {
                     p_animator.SetBool("expl", true);
-                    Conf.Main._result.SetText();
-                    Conf.Main._result.Show();
+                    _result.SetText(status);
+                    _result.Show();
                 }
             }
             else
             {
-                if (Managers.Game.PlayerDeadFlag && Managers.Game.Player_Right != null)
+                if (Managers.Game.Player_Right != null)
                 {
                     p_animator.SetBool("expl", true);
-                    Conf.Main._result.SetText();
-                    Conf.Main._result.Show();
+                    _result.SetText(status);
+                    _result.Show();
                 }
             }
         }
-        else if(status == 2 )
+        else if(status == (int)Conf.Main.GAMEOVER_STATUS.DRAW)
         {
             Managers.Game.PlayerDeadFlag = true;
             Managers.Game.EnemyDeadFlag = true;
 
+            Debug.Log("Draw!");
+
             if (Managers.Game.IsLeft)
             {
-                if (Managers.Game.PlayerDeadFlag && Managers.Game.Player != null)
+                if (Managers.Game.Player != null)
                 {
                     p_animator.SetBool("expl", true);
-                    Conf.Main._result.SetText();
-                    Conf.Main._result.Show();
+                    _result.SetText(status);
+                    _result.Show();
                 }
-                if (Managers.Game.EnemyDeadFlag && Managers.Game.Enemy != null)
+                if (Managers.Game.Enemy != null)
                 {
                     e_animator.SetBool("expl", true);
-                    Conf.Main._result.SetText();
-                    Conf.Main._result.Show();
+                    _result.SetText(status);
+                    _result.Show();
                 }
             }
             else
             {
-                if (Managers.Game.PlayerDeadFlag && Managers.Game.Player_Right != null)
+                if (Managers.Game.Player_Right != null)
                 {
                     p_animator.SetBool("expl", true);
-                    Conf.Main._result.SetText();
-                    Conf.Main._result.Show();
+                    _result.SetText(status);
+                    _result.Show();
                 }
-                if (Managers.Game.EnemyDeadFlag && Managers.Game.Enemy_Left != null)
+                if (Managers.Game.Enemy_Left != null)
                 {
                     e_animator.SetBool("expl", true);
-                    Conf.Main._result.SetText();
-                    Conf.Main._result.Show();
+                    _result.SetText(status);
+                    _result.Show();
                 }
             }
         }
+
+        Debug.Log("S_GameoverHandler");
 
         // 서버와의 연결 종료
         ServerSession session = packetSession as ServerSession;

@@ -166,36 +166,6 @@ public class EnemyController : BaseController
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-
-        if (collision.GetComponent<Collider2D>().gameObject.layer == 9)
-        {
-            /*Debug.Log($"맞은탄환아이디 : {collision.GetComponent<Collider2D>().gameObject.transform.name}");
-            //_stat.OnAttacked(5);
-            if (_stat.Hp <= 0)
-            {
-                Managers.Game.EnemyDeadFlag = true;
-            }
-            if (Managers.Game.IsLeft)
-            {
-                if (Managers.Game.EnemyDeadFlag && Managers.Game.Enemy != null)
-                {
-                    animator.SetBool("expl", true);
-                    Conf.Main._result.SetText();
-                    Conf.Main._result.Show();
-                }
-            }
-            else
-            {
-                if (Managers.Game.EnemyDeadFlag && Managers.Game.Enemy_Left != null)
-                {
-                    animator.SetBool("expl", true);
-                    Conf.Main._result.SetText();
-                    Conf.Main._result.Show();
-                }
-            }*/
-            
-            
-        }
             
     }
 

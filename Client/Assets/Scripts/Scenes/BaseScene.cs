@@ -21,6 +21,9 @@ public abstract class BaseScene : MonoBehaviour
         {
             Managers.Resource.Instantiate("UI/EventSystem").name = "@EventSystem";
         }
+
+        //ÇØ»óµµ 
+        //Screen.SetResolution(1280, 720, true);
     }
 
     public void AddUI(UIBase ui)

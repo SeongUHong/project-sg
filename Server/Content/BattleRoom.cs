@@ -232,8 +232,6 @@ namespace Server
                 angle = shot.angle,
             };
             anotherSession.Send(newEnemyShot.Write());
-
-            Console.WriteLine($"shoot (fireballId : {fireballId}, posX : {newShot.posX}, posY : {newShot.posY}, rotZ : {newShot.angle})");
         }
 
         // 미사일 삭제 처리
@@ -246,7 +244,6 @@ namespace Server
                     if (fire.CanRemove(_time))
                     {
                         _fireballs.Remove(fire.FireballId);
-                        Console.WriteLine($"Removed fireball (fireballId : {fire.FireballId})");
                     }
                 }
             }
@@ -280,8 +277,6 @@ namespace Server
                 {
                     fireballId = hit.fireballId,
                 }.Write());
-
-                Console.WriteLine($"Hit (playerId : {session.SessionId}, fireballId : {hit.fireballId})");
             }
         }
 
@@ -320,12 +315,15 @@ namespace Server
         // 시간 초과로 인한 드로우 처리
         public void Timeover()
         {
-            // 종료 패킷 전송 후에 연결을 끊기 위해 JobQueue에 등록
-            Broadcast(new S_Gameover()
+            // 시간 초과로 Flush가 동작하지 않으므로 Broadcast 사용 불가
+            foreach (ClientSession session in _sessions.Values)
             {
-                status = (int)Config.GAMEOVER_STATUS.DROW
-            }.Write());
-            
+                session.Send(new S_Gameover()
+                {
+                    status = (int)Config.GAMEOVER_STATUS.DROW
+                }.Write());
+            }
+
             EndBattle();
 
             Console.WriteLine($"Time over");

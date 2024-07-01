@@ -18,6 +18,8 @@ public class MainScene : BaseScene
 
         Time.timeScale = 1.0f;
 
+        Screen.SetResolution(1600, 900, true);
+
     }
 
     public override void Clear()

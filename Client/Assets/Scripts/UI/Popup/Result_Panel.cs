@@ -46,13 +46,13 @@ public class Result_Panel : UIBase
     }
     
 
-    public void SetText()
+    public void SetText(int status)
     {
 
-        result = Conf.Main._result.transform.Find("Panel").transform.Find("Result_Text").transform.Find("Text").GetComponent<Text>();
-        if (Managers.Game.Player.GetComponent<Stat>().Hp <= 0)
+        result = transform.Find("Panel").transform.Find("Result_Text").transform.Find("Text").GetComponent<Text>();
+        if (status == (int)Conf.Main.GAMEOVER_STATUS.LOSE)
             result.text = lText;
-        else if (Managers.Game.Enemy.GetComponent<Stat>().Hp <= 0)
+        else if (status == (int)Conf.Main.GAMEOVER_STATUS.WIN)
             result.text = wText;
         else
             result.text = dText;
