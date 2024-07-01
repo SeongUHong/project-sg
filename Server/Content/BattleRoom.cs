@@ -320,12 +320,15 @@ namespace Server
         // 시간 초과로 인한 드로우 처리
         public void Timeover()
         {
-            // 종료 패킷 전송 후에 연결을 끊기 위해 JobQueue에 등록
-            Broadcast(new S_Gameover()
+            // 시간 초과로 Flush가 동작하지 않으므로 Broadcast 사용 불가
+            foreach (ClientSession session in _sessions.Values)
             {
-                status = (int)Config.GAMEOVER_STATUS.DROW
-            }.Write());
-            
+                session.Send(new S_Gameover()
+                {
+                    status = (int)Config.GAMEOVER_STATUS.DROW
+                }.Write());
+            }
+
             EndBattle();
 
             Console.WriteLine($"Time over");
