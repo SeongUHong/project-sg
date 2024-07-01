@@ -232,8 +232,6 @@ namespace Server
                 angle = shot.angle,
             };
             anotherSession.Send(newEnemyShot.Write());
-
-            Console.WriteLine($"shoot (fireballId : {fireballId}, posX : {newShot.posX}, posY : {newShot.posY}, rotZ : {newShot.angle})");
         }
 
         // 미사일 삭제 처리
@@ -246,7 +244,6 @@ namespace Server
                     if (fire.CanRemove(_time))
                     {
                         _fireballs.Remove(fire.FireballId);
-                        Console.WriteLine($"Removed fireball (fireballId : {fire.FireballId})");
                     }
                 }
             }
@@ -280,8 +277,6 @@ namespace Server
                 {
                     fireballId = hit.fireballId,
                 }.Write());
-
-                Console.WriteLine($"Hit (playerId : {session.SessionId}, fireballId : {hit.fireballId})");
             }
         }
 
