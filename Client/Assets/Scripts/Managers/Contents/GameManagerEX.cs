@@ -93,7 +93,7 @@ public class GameManagerEx : ManagerBase
         }
         _enemySpawnPos = enemySpawnSpot.transform.position;
 
-        Result_Panel.Init();
+
     }
 
 

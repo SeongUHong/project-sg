@@ -10,7 +10,6 @@ namespace Conf
     {
         public static float UNIT_SPAWN_RANGE = 1.0f;
         public static float MONSTER_SPAWN_RANGE = 3.0f;
-        public static Result_Panel _result;
         public static InGame_NickName_Panel _inGameNick;
         public static List<String> PLAYER_ID_LIST = new List<String>();
         public static List<String> ENEMY_ID_LIST = new List<String>();

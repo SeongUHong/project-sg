@@ -29,7 +29,6 @@ public class MatchingScene : BaseScene
         AddUI(loadingPanel);
 
 
-        Screen.SetResolution(1920, 1200, true);
     }
 
     public override void Clear()

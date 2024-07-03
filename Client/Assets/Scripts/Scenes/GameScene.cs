@@ -25,6 +25,8 @@ public class GameScene : BaseScene
         GameObject enemy = Managers.Game.InstantiateEnemy();
         GameObject player = Managers.Game.InstantiatePlayer();
 
+
+
         Conf.Main._inGameNick = Managers.Game.InGame_NickName_Panel;
         Conf.Main._inGameNick.SetNickName();
         Conf.Main._inGameNick.Show();
@@ -38,7 +40,7 @@ public class GameScene : BaseScene
         AddUI(countPanel);
 
 
-        Screen.SetResolution(1600, 900, true);
+        
     }
 
     private void Update()

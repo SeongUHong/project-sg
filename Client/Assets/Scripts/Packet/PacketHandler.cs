@@ -139,6 +139,7 @@ public class PacketHandler
         Animator e_animator = Managers.Game.Enemy.GetComponent<Animator>();
 
         Result_Panel _result = Managers.Game.Result_Panel;
+        _result.Init();
 
         if (status == (int)Conf.Main.GAMEOVER_STATUS.WIN)
         {
@@ -191,7 +192,6 @@ public class PacketHandler
             Managers.Game.PlayerDeadFlag = true;
             Managers.Game.EnemyDeadFlag = true;
 
-            Debug.Log("Draw!");
 
             if (Managers.Game.IsLeft)
             {
@@ -224,8 +224,6 @@ public class PacketHandler
                 }
             }
         }
-
-        Debug.Log("S_GameoverHandler");
 
         // 서버와의 연결 종료
         ServerSession session = packetSession as ServerSession;

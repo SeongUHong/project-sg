@@ -11,8 +11,6 @@ public class LoadingScene : BaseScene
     {
         base.Init();
 
-
-        Screen.SetResolution(1920, 1080, true);
     }
 
 

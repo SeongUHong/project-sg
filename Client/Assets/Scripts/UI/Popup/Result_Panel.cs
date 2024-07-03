@@ -37,7 +37,6 @@ public class Result_Panel : UIBase
     public void OnClick_Main()
     {
         Awake();
-        Debug.Log("메인버튼클릭");
         SceneManagerEx scene = Managers.Scene;
         scene.LoadScene(Define.Scenes.MainScene);
 
