@@ -25,17 +25,6 @@ public class JoyStickHandler : MonoBehaviour, IDragHandler, IPointerDownHandler,
     void Start()
     {
 
-        if(Managers.Game.IsLeft)
-        {
-            character = Managers.Game.Player;
-        }
-        else
-        {
-            character = Managers.Game.Player_Right;
-        }
-
-
-
         //적 움직임 테스트용
         //character = Managers.Game.Enemy;
 
@@ -66,6 +55,19 @@ public class JoyStickHandler : MonoBehaviour, IDragHandler, IPointerDownHandler,
      
     void Update()
     {
+        if (Managers.Game.IsPause == true)
+        {
+            if (Managers.Game.IsLeft)
+            {
+                character = Managers.Game.Player;
+            }
+            else
+            {
+                character = Managers.Game.Player_Right;
+            }
+
+        }
+
         if (character != null)
             character.GetComponent<Rigidbody2D>().velocity = character.transform.up * speed;
         // 캐릭터는 3의 속도로 계속 전진
