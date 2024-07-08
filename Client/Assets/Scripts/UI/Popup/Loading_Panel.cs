@@ -39,6 +39,8 @@ public class Loading_Panel : UIBase
     {
         SceneLoader.Instance.LoadScene("GameScene");
 
+        
+
     }
 
 

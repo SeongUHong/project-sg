@@ -7,6 +7,7 @@ using UnityEngine.UI;
 
 public class Matching_Panel : UIBase
 {
+
     enum Buttons
     {
         Match_Button,
@@ -32,6 +33,7 @@ public class Matching_Panel : UIBase
     public void OnClick_Button()
     {
         SendNickName();
+        GetButton((int)Buttons.Match_Button).interactable = false;
     }
 
     //닉네임 서버에 보내기
@@ -42,8 +44,14 @@ public class Matching_Panel : UIBase
             C_StartMatch nick = new C_StartMatch();
             nick.nickname = Managers.Game.PlayerNick;
             Managers.Network.Send(nick.Write());
-            Debug.Log("SendNickName");
         }
+
+        
+        GetButton((int)Buttons.Match_Button).GetComponentInChildren<Text>().text = "Now Maching";
+
+        Managers.Resource.Instantiate($"Effects/Loading_free_blue", null);
+
+        
     }
 
 
@@ -54,6 +62,8 @@ public class Matching_Panel : UIBase
         Bind<Text>(typeof(Texts));
 
         BindEvent(GetButton((int)Buttons.Match_Button).gameObject, (PointerEventData data) => OnClick_Button());
+
+        
     }
 
     public void SetPlayerNick(string nickName)
