@@ -8,6 +8,7 @@ public class GameScene : BaseScene
 {
 
     public TextMeshProUGUI CountDown;
+    Pause_Panel pausePanel;
 
     protected override void Init()
     {
@@ -39,20 +40,24 @@ public class GameScene : BaseScene
         countPanel.Show();
         AddUI(countPanel);
 
-
+        //포즈판넬 초기화
+        pausePanel = Managers.Game.Pause_Panel;
         
+
     }
 
     private void Update()
     {
 
         if (Managers.Game.IsPause)
-        {  
+        {
+            pausePanel.Awake();
             Time.timeScale = 1;
             return;
         }
         else
         {
+            pausePanel.Show();
             Time.timeScale = 0;
             return;
         }

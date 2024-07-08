@@ -56,6 +56,7 @@ public class GameManagerEx : ManagerBase
     public Result_Panel Result_Panel { get { return Managers.UI.MakePopUp<Result_Panel>();  } }
     public InGame_NickName_Panel InGame_NickName_Panel { get { return Managers.UI.MakePopUp<InGame_NickName_Panel>(); } }
 
+    public Pause_Panel Pause_Panel { get { return Managers.UI.MakePopUp<Pause_Panel>(); } }
     public string PlayerNick { get { return _playerNick; } set { _playerNick = value; } }
     public string EnemyNick { get { return _enemyNick; } set { _enemyNick = value; } }
     public bool IsLeft { get { return _isLeft; } set { _isLeft = value; } }
