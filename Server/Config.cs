@@ -6,9 +6,6 @@ namespace Server
 {
     class Config
     {
-        public const string SERVER_IP = "108.61.223.19";
-        public const int SERVER_PORT = 7777;
-
         // 배틀 중 패킷 전송 간격
         public const int FLUSH_BATTLE_JOB_INTERVAL = 250;
         // 배틀 플레이어 수

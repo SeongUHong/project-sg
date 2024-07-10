@@ -8,9 +8,6 @@ namespace Conf
 {
     public class Main
     {
-        public const string SERVER_IP = "108.61.223.19";
-        public const int SERVER_PORT = 7777;
-
         public static float UNIT_SPAWN_RANGE = 1.0f;
         public static float MONSTER_SPAWN_RANGE = 3.0f;
         public static InGame_NickName_Panel _inGameNick;
