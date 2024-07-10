@@ -13,6 +13,9 @@ public class Result_Panel : UIBase
     }
 
     private Text result;
+    public GameObject ramoon;
+    public GameObject ship_win;
+    public GameObject ship_lose;
     public string wText = "You Win";
     public string lText = "You Lose";
     public string dText = "Draw";
@@ -22,6 +25,9 @@ public class Result_Panel : UIBase
         Bind<Button>(typeof(Buttons));
 
         BindEvent(GetButton((int)Buttons.main_btn).gameObject, (PointerEventData data) => OnClick_Main());
+
+        
+        
     }
     private void Awake()
     {
@@ -50,9 +56,17 @@ public class Result_Panel : UIBase
 
         result = transform.Find("Panel").transform.Find("Result_Text").transform.Find("Text").GetComponent<Text>();
         if (status == (int)Conf.Main.GAMEOVER_STATUS.LOSE)
+        {
+            ramoon.transform.gameObject.SetActive(true);
+            ship_lose.transform.gameObject.SetActive(true);
             result.text = lText;
+        }
         else if (status == (int)Conf.Main.GAMEOVER_STATUS.WIN)
+        {
+            ramoon.transform.gameObject.SetActive(true);
+            ship_win.transform.gameObject.SetActive(true);
             result.text = wText;
+        }
         else
             result.text = dText;
 
