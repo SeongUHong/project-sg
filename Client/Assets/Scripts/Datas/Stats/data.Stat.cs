@@ -26,6 +26,8 @@ namespace data
         public float projectile_speed;
         //어택 게이지
         public float attack_gauge;
+        //맥스 어택게이지
+        public float max_attack_gauge;
     }
 
     [Serializable]

@@ -9,7 +9,8 @@
 			"attack_distance":"10.0",
 			"attack_speed":"2.0f",
 			"projectile_speed":"20.0",
-			"attack_gauge":"100.0"
+			"attack_gauge":"100.0",
+			"max_attack_gauge":"100.0"
 		},
 		{
 			"level":"2",

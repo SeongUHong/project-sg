@@ -52,7 +52,7 @@ public class Stat : MonoBehaviour
         _attackSpeed = stat.attack_speed;
         _projectileSpeed = stat.projectile_speed;
         _attackGague = stat.attack_gauge;
-        _maxAttackGague = stat.attack_gauge;
+        _maxAttackGague = stat.max_attack_gauge;
     }
 
     public void Update()
@@ -83,11 +83,10 @@ public class Stat : MonoBehaviour
 
     public virtual bool AttackGagueUp()
     {
-        if(_attackGague != 100)
+        if (_attackGague < _maxAttackGague)
         {
             _attackGague += Time.deltaTime * 10f;
         }
-
         return true;
     }
 
