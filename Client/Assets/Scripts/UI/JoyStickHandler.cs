@@ -15,7 +15,7 @@ public class JoyStickHandler : MonoBehaviour, IDragHandler, IPointerDownHandler,
 
     private Vector2 joystickVector; // 조이스틱의 방향벡터이자 플레이어에게 넘길 방향정보.
 
-    private float speed = 1f; // 캐릭터 스피드
+    private float speed = 2f; // 캐릭터 스피드
     private float rotateSpeed = 270.0f; // 회전 속도
 
     private Coroutine runningCoroutine; // 부드러운 회전 코루틴
@@ -53,7 +53,7 @@ public class JoyStickHandler : MonoBehaviour, IDragHandler, IPointerDownHandler,
 
 
      
-    void Update()
+    void FixedUpdate()
     {
         if (Managers.Game.IsPause == true)
         {
