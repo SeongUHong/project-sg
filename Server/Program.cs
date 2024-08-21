@@ -10,8 +10,15 @@ namespace Server
 
         static void Main(string[] args)
         {
-            IPAddress ipAddr = IPAddress.Parse(Config.SERVER_IP);
-            IPEndPoint endPoint = new IPEndPoint(ipAddr, Config.SERVER_PORT);
+            // Local
+            string host = Dns.GetHostName();
+            IPHostEntry ipHost = Dns.GetHostEntry(host);
+            IPAddress ipAddr = ipHost.AddressList[0];
+            IPEndPoint endPoint = new IPEndPoint(ipAddr, 7777);
+
+            // surviveinjapan.com
+            //IPAddress ipAddr = IPAddress.Parse(Config.SERVER_IP);
+            //IPEndPoint endPoint = new IPEndPoint(ipAddr, Config.SERVER_PORT);
 
             _listener.Init(endPoint, () => { return SessionManager.Instance.Generate(); });
             Console.WriteLine("Server Start Operation.");

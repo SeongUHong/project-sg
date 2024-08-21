@@ -13,8 +13,15 @@ public class NetworkManager : ManagerBase
 
     public override void Init()
     {
-        IPAddress ipAddr = IPAddress.Parse(Conf.Main.SERVER_IP);
-        IPEndPoint endPoint = new IPEndPoint(ipAddr, Conf.Main.SERVER_PORT);
+        // Local
+        string host = Dns.GetHostName();
+        IPHostEntry ipHost = Dns.GetHostEntry(host);
+        IPAddress ipAddr = ipHost.AddressList[0];
+        IPEndPoint endPoint = new IPEndPoint(ipAddr, 7777);
+
+        // surviveinjapan.com
+        //IPAddress ipAddr = IPAddress.Parse(Conf.Main.SERVER_IP);
+        //IPEndPoint endPoint = new IPEndPoint(ipAddr, Conf.Main.SERVER_PORT);
 
         Connector connector = new Connector();
         _session = new ServerSession();
