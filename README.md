@@ -1,7 +1,24 @@
 # Project Second Game
  - 二人で開発したゲーム。
+
+設定
+
+れムーンという惑星にあるラムネを争奪するための闘い
+
+勝者だけが渇をいやせる。
+
+ラムーン！
+
+라문이라는 행성에 있는 라무네를 쟁취하기위한 싸움
+
+이긴자만이 갈증을 해소할 수 있다!
+
+라무-운!
+
 ## 想定ゲームイメージ
 ![초안](https://github.com/SeongUHong/project-sg/assets/93868177/2a45fdab-f156-4eeb-80db-c85cd512e548)
+
+##　実装したゲーム画面
 
 ![image](https://github.com/user-attachments/assets/5d41192c-06e3-41a1-8bf8-c457101466f1)
 メイン画面
@@ -25,16 +42,4 @@
 ![image](https://github.com/user-attachments/assets/31de02c0-8ce0-45bd-ac99-bb520bd2df6c)
 結果画面
 
-設定
 
-れムーンという惑星にあるラムネを争奪するための闘い
-
-勝者だけが渇をいやせる。
-
-ラムーン！
-
-라문이라는 행성에 있는 라무네를 쟁취하기위한 싸움
-
-이긴자만이 갈증을 해소할 수 있다!
-
-라무-운!
